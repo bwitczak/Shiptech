@@ -1,0 +1,6 @@
+@Shiptech.Api_HostAddress = http://localhost:5290
+
+GET {{Shiptech.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
