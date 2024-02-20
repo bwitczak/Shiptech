@@ -6,22 +6,20 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands.Handlers;
 
-public class CreateIsoHandler : ICommandHandler<CreateIso>
+internal sealed class CreateIsoHandler(IIsoRepository repository, IIsoFactory factory, IIsoReadService readService)
+    : ICommandHandler<CreateIso>
 {
-    private readonly IIsoRepository _repository;
-    private readonly IIsoFactory _factory;
-    private readonly IIsoReadService _readService;
     public async Task HandleAsync(CreateIso command)
     {
         var (id, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
-    
-        if (await _readService.ExistsById(id))
+
+        if (await readService.ExistsById(id))
         {
             throw new DrawingIdAlreadyExistsException(id);
         }
 
-        var iso = _factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
+        var iso = factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
 
-        await _repository.CreateAsync(iso);
+        await repository.CreateAsync(iso);
     }
 }
