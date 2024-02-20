@@ -6,29 +6,27 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands.Handlers;
 
-public class CreateAssortmentHandler : ICommandHandler<CreateAssortment>
+internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, IAssortmentFactory factory,
+        IAssortmentReadService readService)
+    : ICommandHandler<CreateAssortment>
 {
-    private readonly IAssortmentRepository _repository;
-    private readonly IAssortmentFactory _factory;
-    private readonly IAssortmentReadService _readService;
-    
     public async Task HandleAsync(CreateAssortment command)
     {
-        var (id, position,  drawingLength,  addition,
-             technologicalAddition,  stage, d15I, d15II, d1I, d1II,
-             prefabricationQuantity,  prefabricationLength,  prefabricationWeight,
-             assemblyQuantity,  assemblyLength, assemblyWeight) = command;
-    
-        if (await _readService.ExistsById(id))
+        var (id, position, drawingLength, addition,
+            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            prefabricationQuantity, prefabricationLength, prefabricationWeight,
+            assemblyQuantity, assemblyLength, assemblyWeight) = command;
+
+        if (await readService.ExistsById(id))
         {
             throw new AssortmentIdAlreadyExistsException(id);
         }
 
-        var drawing = _factory.Create(id, position,  drawingLength,  addition,
-            technologicalAddition,  stage, d15I, d15II, d1I, d1II,
-            prefabricationQuantity,  prefabricationLength,  prefabricationWeight,
-            assemblyQuantity,  assemblyLength, assemblyWeight) ;
+        var drawing = factory.Create(id, position, drawingLength, addition,
+            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            prefabricationQuantity, prefabricationLength, prefabricationWeight,
+            assemblyQuantity, assemblyLength, assemblyWeight);
 
-        await _repository.CreateAsync(drawing);
+        await repository.CreateAsync(drawing);
     }
 }

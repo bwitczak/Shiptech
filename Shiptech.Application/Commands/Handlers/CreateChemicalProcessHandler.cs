@@ -6,23 +6,21 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands.Handlers;
 
-public class CreateChemicalProcessHandler : ICommandHandler<CreateChemicalProcess>
+internal sealed class CreateChemicalProcessHandler(IChemicalProcessRepository repository,
+        IChemicalProcessFactory factory, IChemicalProcessReadService readService)
+    : ICommandHandler<CreateChemicalProcess>
 {
-    private readonly IChemicalProcessRepository _repository;
-    private readonly IChemicalProcessFactory _factory;
-    private readonly IChemicalProcessReadService _readService;
-    
     public async Task HandleAsync(CreateChemicalProcess command)
     {
-        var (id,  chemicalProcessName ) = command;
-    
-        if (await _readService.ExistsById(id))
+        var (id, chemicalProcessName) = command;
+
+        if (await readService.ExistsById(id))
         {
             throw new AssortmentIdAlreadyExistsException(id);
         }
 
-        var drawing = _factory.Create(id,  chemicalProcessName ) ;
+        var drawing = factory.Create(id, chemicalProcessName);
 
-        await _repository.CreateAsync(drawing);
+        await repository.CreateAsync(drawing);
     }
 }

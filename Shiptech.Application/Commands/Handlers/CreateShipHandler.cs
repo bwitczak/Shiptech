@@ -6,23 +6,20 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands.Handlers;
 
-public class CreateShipHandler : ICommandHandler<CreateShip>
+internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory factory, IShipReadService readService)
+    : ICommandHandler<CreateShip>
 {
-    private readonly IShipRepository _repository;
-    private readonly IShipFactory _factory;
-    private readonly IShipReadService _readService;
-    
     public async Task HandleAsync(CreateShip command)
     {
         var (id, orderer) = command;
-        
-        if (await _readService.ExistsByOrderer(orderer))
+
+        if (await readService.ExistsByOrderer(orderer))
         {
             throw new ShipOrdererAlreadyExistsException(orderer);
         }
 
-        var ship = _factory.Create(id, orderer);
+        var ship = factory.Create(id, orderer);
 
-        await _repository.CreateAsync(ship);
+        await repository.CreateAsync(ship);
     }
 }
