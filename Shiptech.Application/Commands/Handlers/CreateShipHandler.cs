@@ -19,7 +19,6 @@ internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory
         }
 
         var ship = factory.Create(id, orderer);
-
         await repository.CreateAsync(ship);
     }
 }

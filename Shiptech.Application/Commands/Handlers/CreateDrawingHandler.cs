@@ -20,7 +20,6 @@ internal sealed class CreateDrawingHandler(IDrawingRepository repository, IDrawi
         }
 
         var drawing = factory.Create(id, drawingRevision, lot, block, section, stage, date, author);
-
         await repository.CreateAsync(drawing);
     }
 }

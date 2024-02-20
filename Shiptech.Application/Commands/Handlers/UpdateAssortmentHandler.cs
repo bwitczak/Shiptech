@@ -1,31 +1,31 @@
 using Shiptech.Application.Exceptions;
-using Shiptech.Application.Services;
 using Shiptech.Domain.Factories;
 using Shiptech.Domain.Repositories;
 using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands.Handlers;
 
-internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, IAssortmentFactory factory,
-        IAssortmentReadService readService)
-    : ICommandHandler<CreateAssortment>
+internal sealed class UpdateAssortmentHandler(IAssortmentRepository repository, IAssortmentFactory factory)
+    : ICommandHandler<UpdateAssortment>
 {
-    public async Task HandleAsync(CreateAssortment command)
+    public async Task HandleAsync(UpdateAssortment command)
     {
         var (id, position, drawingLength, addition,
             technologicalAddition, stage, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
 
-        if (await readService.ExistsById(id))
+        var assortment = await repository.GetAsync(id);
+
+        if (assortment is null)
         {
-            throw new AssortmentIdAlreadyExistsException(id);
+            throw new AssortmentNotExistsException(id);
         }
 
-        var assortment = factory.Create(id, position, drawingLength, addition,
+        var updated = factory.Create(id, position, drawingLength, addition,
             technologicalAddition, stage, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight);
-        await repository.CreateAsync(assortment);
+        await repository.UpdateAsync(updated);
     }
 }

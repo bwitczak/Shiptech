@@ -16,11 +16,10 @@ internal sealed class CreateChemicalProcessHandler(IChemicalProcessRepository re
 
         if (await readService.ExistsById(id))
         {
-            throw new AssortmentIdAlreadyExistsException(id);
+            throw new ChemicalProcessIdAlreadyExistsException(id);
         }
 
-        var drawing = factory.Create(id, chemicalProcessName);
-
-        await repository.CreateAsync(drawing);
+        var chemicalProcess = factory.Create(id, chemicalProcessName);
+        await repository.CreateAsync(chemicalProcess);
     }
 }
