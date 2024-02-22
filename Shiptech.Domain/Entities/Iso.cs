@@ -14,7 +14,12 @@ namespace Shiptech.Domain.Entities
 
         // TODO: Chemical process
 
-        internal Iso(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber, Date kzmDate)
+        private Iso()
+        {
+        }
+
+        internal Iso(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber,
+            Date kzmDate)
         {
             Id = id;
             _isoRevision = isoRevision;

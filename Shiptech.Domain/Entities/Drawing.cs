@@ -13,7 +13,12 @@ namespace Shiptech.Domain.Entities
         private Date _date;
         private Author _author;
 
-        internal Drawing(DrawingId id, Revision drawingRevision, Lot lot, Block block, Section section, Stage stage, Date date, Author author)
+        private Drawing()
+        {
+        }
+
+        internal Drawing(DrawingId id, Revision drawingRevision, Lot lot, Block block, Section section, Stage stage,
+            Date date, Author author)
         {
             Id = id;
             _drawingRevision = drawingRevision;

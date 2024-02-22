@@ -7,6 +7,10 @@ namespace Shiptech.Domain.Entities
         public ShipId Id { get; private set; }
         private Orderer _orderer;
 
+        private Ship()
+        {
+        }
+
         internal Ship(ShipId id, Orderer orderer)
         {
             Id = id;

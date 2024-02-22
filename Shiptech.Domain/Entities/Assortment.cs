@@ -21,9 +21,15 @@ namespace Shiptech.Domain.Entities
         private AssemblyLength _assemblyLength;
         private AssemblyWeight _assemblyWeight;
 
+        private Assortment()
+        {
+        }
+
         internal Assortment(AssortmentId id, Position position, DrawingLength drawingLength, Addition addition,
-            TechnologicalAddition technologicalAddition, AssortmentStage stage, D15I d15I, D15II d15II, D1I d1I, D1II d1II,
-            PrefabricationQuantity prefabricationQuantity, PrefabricationLength prefabricationLength, PrefabricationWeight prefabricationWeight,
+            TechnologicalAddition technologicalAddition, AssortmentStage stage, D15I d15I, D15II d15II, D1I d1I,
+            D1II d1II,
+            PrefabricationQuantity prefabricationQuantity, PrefabricationLength prefabricationLength,
+            PrefabricationWeight prefabricationWeight,
             AssemblyQuantity assemblyQuantity, AssemblyLength assemblyLength, AssemblyWeight assemblyWeight)
         {
             Id = id;
