@@ -11,6 +11,7 @@ namespace Shiptech.Domain.Entities
         private Atest _atest;
         private KzmNumber _kzmNumber;
         private Date _kzmDate;
+        private IEnumerable<Assortment> _assortments;
 
         // TODO: Chemical process
 

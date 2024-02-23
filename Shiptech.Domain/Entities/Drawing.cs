@@ -12,6 +12,7 @@ namespace Shiptech.Domain.Entities
         private Stage _stage;
         private Date _date;
         private Author _author;
+        private IEnumerable<Iso> _isos;
 
         private Drawing()
         {
