@@ -17,6 +17,6 @@ internal sealed class DeleteDrawingHandler
             throw new DrawingNotExistsException(command.Id);
         }
 
-        await repository.DeleteAsync(command.Id);
+        await repository.DeleteAsync(drawing);
     }
 }

@@ -15,6 +15,6 @@ internal sealed class DeleteShipHandler(IShipRepository repository) : ICommandHa
             throw new ShipNotExistsException(command.Id);
         }
 
-        await repository.DeleteAsync(command.Id);
+        await repository.DeleteAsync(ship);
     }
 }

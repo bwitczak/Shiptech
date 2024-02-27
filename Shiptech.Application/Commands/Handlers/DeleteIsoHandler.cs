@@ -16,6 +16,6 @@ internal sealed class DeleteIsoHandler(IIsoRepository repository) : ICommandHand
             throw new IsoNotExistsException(command.Id);
         }
 
-        await repository.DeleteAsync(command.Id);
+        await repository.DeleteAsync(iso);
     }
 }

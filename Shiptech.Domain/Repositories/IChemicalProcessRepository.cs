@@ -8,6 +8,6 @@ namespace Shiptech.Domain.Repositories
         Task<ChemicalProcess?> GetAsync(ChemicalProcessId id);
         Task CreateAsync(ChemicalProcess chemicalProcess);
         Task UpdateAsync(ChemicalProcess chemicalProcess);
-        Task DeleteAsync(ChemicalProcessId id);
+        Task DeleteAsync(ChemicalProcess chemicalProcess);
     }
 }

@@ -8,6 +8,6 @@ namespace Shiptech.Domain.Repositories
         Task<Iso?> GetAsync(IsoId id);
         Task CreateAsync(Iso iso);
         Task UpdateAsync(Iso iso);
-        Task DeleteAsync(IsoId id);
+        Task DeleteAsync(Iso iso);
     }
 }

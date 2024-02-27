@@ -15,6 +15,6 @@ internal sealed class DeleteAssortmentHandler(IAssortmentRepository repository) 
             throw new AssortmentNotExistsException(command.Id);
         }
 
-        await repository.DeleteAsync(command.Id);
+        await repository.DeleteAsync(assortment);
     }
 }

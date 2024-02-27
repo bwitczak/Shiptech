@@ -8,6 +8,6 @@ namespace Shiptech.Domain.Repositories
         Task<Drawing?> GetAsync(DrawingId id);
         Task CreateAsync(Drawing drawing);
         Task UpdateAsync(Drawing drawing);
-        Task DeleteAsync(DrawingId id);
+        Task DeleteAsync(Drawing drawing);
     }
 }
