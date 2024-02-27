@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shiptech.Shared.Abstractions.Commands;
 using Shiptech.Shared.Abstractions.Queries;
@@ -14,12 +15,21 @@ namespace Shiptech.Shared
 
             return services;
         }
-        
+
         public static IServiceCollection AddQueriesAbstraction(this IServiceCollection services)
         {
             services.AddSingleton<IQueryDispatcher, QueryDispatcher>();
 
             return services;
+        }
+
+        public static TOptions GetOptions<TOptions>(this IConfiguration configuration, string sectionName)
+            where TOptions : new()
+        {
+            var options = new TOptions();
+            configuration.GetSection(sectionName).Bind(options);
+
+            return options;
         }
     }
 }
