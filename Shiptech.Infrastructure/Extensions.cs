@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,14 +27,14 @@ namespace Shiptech.Infrastructure
             services.AddDbContext<ReadDbContext>(context => { context.UseNpgsql(databaseOptions.ConnectionString); });
             services.AddDbContext<WriteDbContext>(context => { context.UseNpgsql(databaseOptions.ConnectionString); });
 
-            // --> Repositories
+            // Repositories
             services.AddScoped<IShipRepository, ShipRepository>();
             services.AddScoped<IDrawingRepository, DrawingRepository>();
             services.AddScoped<IIsoRepository, IsoRepository>();
             services.AddScoped<IAssortmentRepository, AssortmentRepository>();
             services.AddScoped<IChemicalProcessRepository, ChemicalProcessRepository>();
 
-            // --> Services
+            // Services
             services.AddScoped<IShipReadService, ShipService>();
             services.AddScoped<IDrawingReadService, DrawingService>();
             services.AddScoped<IIsoReadService, IsoService>();
@@ -49,6 +50,16 @@ namespace Shiptech.Infrastructure
             services.AddScoped<IQueryHandler<GetShip, ShipDto>, GetShipHandler>();
 
             return services;
+        }
+
+        public static void ApplyMigrations(this IApplicationBuilder app)
+        {
+            using IServiceScope scope = app.ApplicationServices.CreateScope();
+
+            using ReadDbContext dbContext =
+                scope.ServiceProvider.GetRequiredService<ReadDbContext>();
+
+            dbContext.Database.Migrate();
         }
     }
 }
