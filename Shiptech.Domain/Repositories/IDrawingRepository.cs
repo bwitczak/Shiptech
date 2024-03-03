@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Repositories
 {
     public interface IDrawingRepository
     {
-        Task<Drawing> GetAsync(DrawingId id);
+        Task<Drawing?> GetAsync(DrawingId id);
         Task CreateAsync(Drawing drawing);
         Task UpdateAsync(Drawing drawing);
         Task DeleteAsync(DrawingId id);
