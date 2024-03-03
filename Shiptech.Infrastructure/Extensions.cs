@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,6 +8,7 @@ using Shiptech.Application.Dtos;
 using Shiptech.Application.Queries;
 using Shiptech.Application.Services;
 using Shiptech.Domain.Repositories;
+using Shiptech.Infrastructure.AutoMapper;
 using Shiptech.Infrastructure.EF.Contexts;
 using Shiptech.Infrastructure.EF.Options;
 using Shiptech.Infrastructure.EF.Repositories;
@@ -26,6 +28,14 @@ namespace Shiptech.Infrastructure
             var databaseOptions = configuration.GetOptions<DatabaseOptions>("Database");
             services.AddDbContext<ReadDbContext>(context => { context.UseNpgsql(databaseOptions.ConnectionString); });
             services.AddDbContext<WriteDbContext>(context => { context.UseNpgsql(databaseOptions.ConnectionString); });
+            
+            // AutoMapper
+            var mapperConfig = new MapperConfiguration(x =>
+            {
+                x.AddProfile(new MappingProfile());   
+            });
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             // Repositories
             services.AddScoped<IShipRepository, ShipRepository>();
