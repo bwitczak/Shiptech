@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Dtos;
 using Shiptech.Application.Queries;
@@ -7,13 +8,13 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Infrastructure.Queries.Handlers;
 
-internal sealed class GetAllShipsHandler(ReadDbContext context) : IQueryHandler<GetAllShips, IEnumerable<ShipDto>>
+internal sealed class GetAllShipsHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetAllShips, IEnumerable<ShipWithNoRelationsDto>>
 {
     private readonly DbSet<ShipReadModel> _ships = context.Ship;
 
-    public async Task<IEnumerable<ShipDto>> HandleAsync(GetAllShips query)
+    public async Task<IEnumerable<ShipWithNoRelationsDto>> HandleAsync(GetAllShips query)
     {
-        return await _ships.Select(x => x.AsDto())
+        return await _ships.Select(x => mapper.Map<ShipWithNoRelationsDto>(x))
             .AsNoTracking().ToListAsync();
     }
 }

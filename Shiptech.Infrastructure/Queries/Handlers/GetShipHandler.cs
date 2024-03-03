@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Dtos;
 using Shiptech.Application.Queries;
@@ -7,7 +8,7 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Infrastructure.Queries.Handlers;
 
-internal sealed class GetShipHandler(ReadDbContext context) : IQueryHandler<GetShip, ShipDto?>
+internal sealed class GetShipHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetShip, ShipDto?>
 {
     private readonly DbSet<ShipReadModel> _ships = context.Ship;
 
@@ -15,7 +16,7 @@ internal sealed class GetShipHandler(ReadDbContext context) : IQueryHandler<GetS
     {
         return await _ships
             .Where(x => x.Id == query.Id)
-            .Select(x => x.AsDto())
+            .Select(x => mapper.Map<ShipDto>(x))
             .AsNoTracking()
             .SingleOrDefaultAsync();
     }
