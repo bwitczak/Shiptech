@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Shiptech.Application.Commands;
 using Shiptech.Application.Commands.Handlers;
+using Shiptech.Application.Middlewares;
 using Shiptech.Domain.Factories;
 using Shiptech.Shared;
 using Shiptech.Shared.Abstractions.Commands;
@@ -11,6 +13,9 @@ namespace Shiptech.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            // Middlewares
+            services.AddScoped<ExceptionMiddleware>();
+            
             // Commands
             services.AddCommandsAbstraction();
 
@@ -45,6 +50,13 @@ namespace Shiptech.Application
             // Policies
 
             return services;
+        }
+        
+        public static IApplicationBuilder UseApplication(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<ExceptionMiddleware>();
+            
+            return app;
         }
     }
 }
