@@ -7,6 +7,7 @@ using Shiptech.Domain.ValueObjects;
 
 namespace Shiptech.Infrastructure.EF.Configurations;
 
+// TODO: Set varchar lengths
 internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeConfiguration<Drawing>,
     IEntityTypeConfiguration<Iso>, IEntityTypeConfiguration<Assortment>, IEntityTypeConfiguration<ChemicalProcess>
 {
@@ -17,6 +18,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(x => x.Id)
             .HasConversion(x => x.Value, x => new ShipId(x));
 
+        // TODO: Remove Orderer field
         builder.Property(typeof(Orderer), "_orderer")
             .HasConversion(ordererConverter)
             .HasColumnName("Orderer")
