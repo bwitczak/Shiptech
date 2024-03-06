@@ -16,7 +16,7 @@ internal sealed class CreateDrawingHandler(IDrawingRepository repository, IDrawi
     
         if (await readService.ExistsById(id))
         {
-            throw new DrawingIdAlreadyExistsException(id);
+            throw new DrawingAlreadyExistsException(id);
         }
 
         var drawing = factory.Create(id, drawingRevision, lot, block, section, stage, date, author);

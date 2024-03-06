@@ -19,7 +19,7 @@ internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, 
 
         if (await readService.ExistsById(id))
         {
-            throw new AssortmentIdAlreadyExistsException(id);
+            throw new AssortmentAlreadyExistsException(id);
         }
 
         var assortment = factory.Create(id, position, drawingLength, addition,

@@ -15,7 +15,7 @@ internal sealed class CreateIsoHandler(IIsoRepository repository, IIsoFactory fa
 
         if (await readService.ExistsById(id))
         {
-            throw new IsoIdAlreadyExistsException(id);
+            throw new IsoAlreadyExistsException(id);
         }
 
         var iso = factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);

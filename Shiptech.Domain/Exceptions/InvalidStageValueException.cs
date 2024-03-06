@@ -3,7 +3,7 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Domain.Exceptions
 {
-    public class InvalidStageValueException : ShiptechException
+    public class InvalidStageValueException : BaseException
     {
         public InvalidStageValueException(StageEnum value) : base(
             $"Invalid stage value: given {value}, required one of (NONE, ODP, ODS, ODI)")

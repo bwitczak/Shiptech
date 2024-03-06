@@ -2,9 +2,9 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Application.Exceptions;
 
-public class ChemicalProcessNotExistsException : ShiptechException
+public class ChemicalProcessNotExistsException : NotFoundException
 {
-    public ChemicalProcessNotExistsException(string id) : base($"Not found: given {id} not exists in database")
+    public ChemicalProcessNotExistsException(string id) : base(id)
     {
     }
 }

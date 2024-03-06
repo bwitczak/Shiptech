@@ -2,7 +2,7 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Domain.Exceptions
 {
-    public class InvalidTechnologicalAdditionValueException : ShiptechException
+    public class InvalidTechnologicalAdditionValueException : BaseException
     {
         public InvalidTechnologicalAdditionValueException(int? value) : base($"Invalid technological addition: given {value}, required X > 0")
         {

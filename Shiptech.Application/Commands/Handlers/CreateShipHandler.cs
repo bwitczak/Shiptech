@@ -15,7 +15,7 @@ internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory
 
         if (await readService.ExistsByOrderer(orderer))
         {
-            throw new ShipOrdererAlreadyExistsException(orderer);
+            throw new ShipOrdererAlreadyExistsException("Orderer",orderer);
         }
 
         var ship = factory.Create(id, orderer);
