@@ -4,24 +4,24 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record Position
     {
-        public string Value { get; }
+        public char Value { get; }
 
-        public Position(string value)
+        public Position(char value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (char.IsLetter(value))
             {
                 throw new EmptyOrNullPositionException();
             }
 
-            if (value.Length != 1)
-            {
-                throw new InvalidPositionLengthException(value);
-            }
+            // if (value.Length != 1)
+            // {
+            //     throw new InvalidPositionLengthException(value);
+            // }
 
             Value = value;
         }
 
-        public static implicit operator string(Position position) => position.Value;
-        public static implicit operator Position(string position) => new(position);
+        public static implicit operator char(Position position) => position.Value;
+        public static implicit operator Position(char position) => new(position);
     }
 }

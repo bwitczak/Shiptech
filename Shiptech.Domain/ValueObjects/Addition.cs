@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record Addition
     {
-        public int? Value { get; }
+        public short? Value { get; }
 
-        public Addition(int? value)
+        public Addition(short? value)
         {
             if (value is < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int?(Addition addition) => addition.Value;
-        public static implicit operator Addition(int? addition) => new(addition);
+        public static implicit operator short?(Addition addition) => addition.Value;
+        public static implicit operator Addition(short? addition) => new(addition);
     }
 }

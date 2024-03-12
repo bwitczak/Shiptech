@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record PrefabricationQuantity
     {
-        public int Value { get; }
+        public short Value { get; }
 
-        public PrefabricationQuantity(int value)
+        public PrefabricationQuantity(short value)
         {
             if (value < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int(PrefabricationQuantity prefabricationQuantity) => prefabricationQuantity.Value;
-        public static implicit operator PrefabricationQuantity(int prefabricationQuantity) => new(prefabricationQuantity);
+        public static implicit operator short(PrefabricationQuantity prefabricationQuantity) => prefabricationQuantity.Value;
+        public static implicit operator PrefabricationQuantity(short prefabricationQuantity) => new(prefabricationQuantity);
     }
 }

@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Exceptions
 {
     public class InvalidAssemblyQuantityValueException : ShiptechException
     {
-        public InvalidAssemblyQuantityValueException(int value) : base($"Invalid assembly quantity value: given {value}, required X > 0")
+        public InvalidAssemblyQuantityValueException(short value) : base($"Invalid assembly quantity value: given {value}, required X > 0")
         {
         }
     }

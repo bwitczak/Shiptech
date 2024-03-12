@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record PrefabricationLength
     {
-        public int Value { get; }
+        public short Value { get; }
 
-        public PrefabricationLength(int value)
+        public PrefabricationLength(short value)
         {
             if (value < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int(PrefabricationLength prefabricationLength) => prefabricationLength.Value;
-        public static implicit operator PrefabricationLength(int prefabricationLength) => new(prefabricationLength);
+        public static implicit operator short(PrefabricationLength prefabricationLength) => prefabricationLength.Value;
+        public static implicit operator PrefabricationLength(short prefabricationLength) => new(prefabricationLength);
     }
 }

@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record AssemblyLength
     {
-        public int Value { get; }
+        public short Value { get; }
 
-        public AssemblyLength(int value)
+        public AssemblyLength(short value)
         {
             if (value < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int(AssemblyLength assemblyLength) => assemblyLength.Value;
-        public static implicit operator AssemblyLength(int assemblyLength) => new(assemblyLength);
+        public static implicit operator short(AssemblyLength assemblyLength) => assemblyLength.Value;
+        public static implicit operator AssemblyLength(short assemblyLength) => new(assemblyLength);
     }
 }

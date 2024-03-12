@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Exceptions
 {
     public class InvalidTechnologicalAdditionValueException : ShiptechException
     {
-        public InvalidTechnologicalAdditionValueException(int? value) : base($"Invalid technological addition: given {value}, required X > 0")
+        public InvalidTechnologicalAdditionValueException(short? value) : base($"Invalid technological addition: given {value}, required X > 0")
         {
         }
     }

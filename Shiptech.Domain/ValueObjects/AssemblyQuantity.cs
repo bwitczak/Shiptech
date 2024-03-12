@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record AssemblyQuantity
     {
-        public int Value { get; }
+        public short Value { get; }
 
-        public AssemblyQuantity(int value)
+        public AssemblyQuantity(short value)
         {
             if (value < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int(AssemblyQuantity assemblyQuantity) => assemblyQuantity.Value;
-        public static implicit operator AssemblyQuantity(int assemblyQuantity) => new(assemblyQuantity);
+        public static implicit operator short(AssemblyQuantity assemblyQuantity) => assemblyQuantity.Value;
+        public static implicit operator AssemblyQuantity(short assemblyQuantity) => new(assemblyQuantity);
     }
 }

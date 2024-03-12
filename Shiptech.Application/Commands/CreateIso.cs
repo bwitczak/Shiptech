@@ -3,5 +3,5 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands;
 
-public record CreateIso(string Id, string IsoRevision, string System, string Class, AtestEnum Atest, string KzmNumber,
-    string KzmDate) : ICommand;
+public record CreateIso(string Id, char IsoRevision, string System, string Class, AtestEnum Atest, string KzmNumber,
+    DateTime KzmDate) : ICommand;

@@ -4,19 +4,19 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record AssortmentStage
     {
-        public string? Value { get; }
+        public char? Value { get; }
 
-        public AssortmentStage(string? value)
+        public AssortmentStage(char? value)
         {
-            if (!value!.Equals("1") && !value!.Equals("2") && !value!.Equals("3"))
-            {
-                throw new InvalidAssortmentStageValueException(value);
-            }
+            // if (value is not null && !char.IsDigit(value))
+            // {
+            //     throw new InvalidAssortmentStageValueException(value);
+            // }
 
             Value = value;
         }
 
-        public static implicit operator string?(AssortmentStage assortmentStage) => assortmentStage.Value;
-        public static implicit operator AssortmentStage(string? assortmentStage) => new(assortmentStage);
+        public static implicit operator char?(AssortmentStage assortmentStage) => assortmentStage.Value;
+        public static implicit operator AssortmentStage(char? assortmentStage) => new(assortmentStage);
     }
 }

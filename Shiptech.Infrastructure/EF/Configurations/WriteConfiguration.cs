@@ -30,14 +30,14 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Drawing> builder)
     {
-        var drawingRevisionConverter = new ValueConverter<Revision, string>(x => x.Value, x => new Revision(x));
+        var drawingRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var lotConverter = new ValueConverter<Lot, string>(x => x.Value, x => new Lot(x));
         var blockConverter = new ValueConverter<Block, string>(x => x.Value, x => new Block(x));
         var sectionConverter = new ValueConverter<Section, string>(x => x.Value, x => new Section(x));
         var stageConverter =
             new ValueConverter<Stage, string>(x => x.Value.ToString(),
                 x => (StageEnum)Enum.Parse(typeof(StageEnum), x));
-        var dateConverter = new ValueConverter<Date, string>(x => x.Value, x => new Date(x));
+        var dateConverter = new ValueConverter<Date, DateTime>(x => (DateTime) x.Value!, x => new Date(x));
         var authorConverter = new ValueConverter<Author, string>(x => x.Value, x => new Author(x));
 
         builder.Property(x => x.Id)
@@ -46,33 +46,33 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(Revision), "_drawingRevision")
             .HasConversion(drawingRevisionConverter)
             .HasColumnName("DrawingRevision")
-            .HasColumnType("varchar")
+            .HasColumnType("char(1)")
             .IsRequired();
 
         builder.Property(typeof(Lot), "_lot")
             .HasConversion(lotConverter)
             .HasColumnName("Lot")
-            .HasColumnType("varchar");
+            .HasColumnType("char(3)");
 
         builder.Property(typeof(Block), "_block")
             .HasConversion(blockConverter)
             .HasColumnName("Block")
-            .HasColumnType("varchar");
+            .HasColumnType("char(3)");
 
         builder.Property(typeof(Section), "_section")
             .HasConversion(sectionConverter)
             .HasColumnName("Section")
-            .HasColumnType("varchar");
+            .HasColumnType("char(4)");
 
         builder.Property(typeof(Stage), "_stage")
             .HasConversion(stageConverter)
             .HasColumnName("Stage")
-            .HasColumnType("varchar");
+            .HasColumnType("char(3)");
 
         builder.Property(typeof(Date), "_date")
             .HasConversion(dateConverter)
             .HasColumnName("Date")
-            .HasColumnType("varchar")
+            .HasColumnType("timestamp")
             .IsRequired();
 
         builder.Property(typeof(Author), "_author")
@@ -88,14 +88,14 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Iso> builder)
     {
-        var isoRevisionConverter = new ValueConverter<Revision, string>(x => x.Value, x => new Revision(x));
+        var isoRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var isoSystemConverter = new ValueConverter<IsoSystem, string>(x => x.Value, x => new IsoSystem(x));
         var classConverter = new ValueConverter<Class, string>(x => x.Value, x => new Class(x));
         var atestConverter =
             new ValueConverter<Atest, string>(x => x.Value.ToString(),
                 x => (Atest)Enum.Parse(typeof(Atest), x));
         var kzmNumberConverter = new ValueConverter<KzmNumber, string>(x => x.Value, x => new KzmNumber(x));
-        var kzmDateConverter = new ValueConverter<Date, string>(x => x.Value, x => new Date(x));
+        var kzmDateConverter = new ValueConverter<Date, DateTime?>(x => x.Value, x => new Date(x));
 
         builder.Property(x => x.Id)
             .HasConversion(x => x.Value, x => new IsoId(x));
@@ -103,7 +103,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(Revision), "_drawingRevision")
             .HasConversion(isoRevisionConverter)
             .HasColumnName("DrawingRevision")
-            .HasColumnType("varchar")
+            .HasColumnType("char(1)")
             .IsRequired();
 
         builder.Property(typeof(IsoSystem), "_system")
@@ -115,7 +115,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(Class), "_class")
             .HasConversion(classConverter)
             .HasColumnName("Class")
-            .HasColumnType("varchar")
+            .HasColumnType("char(6)")
             .IsRequired();
 
         builder.Property(typeof(Atest), "_atest")
@@ -126,12 +126,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(KzmNumber), "_kzmNumber")
             .HasConversion(kzmNumberConverter)
             .HasColumnName("KzmNumber")
-            .HasColumnType("varchar");
+            .HasColumnType("char(6)");
 
         builder.Property(typeof(Date), "_kzmDate")
             .HasConversion(kzmDateConverter)
             .HasColumnName("KzmDate")
-            .HasColumnType("varchar");
+            .HasColumnType("timestamp");
 
         // TODO: Add chemical process (required)
 
@@ -142,42 +142,42 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Assortment> builder)
     {
-        var positionConverter = new ValueConverter<Position, string>(x => x.Value, x => new Position(x));
+        var positionConverter = new ValueConverter<Position, char>(x => x.Value, x => new Position(x));
         var drawingLengthConverter =
-            new ValueConverter<DrawingLength, int?>(x => x.Value, x => new DrawingLength(x));
+            new ValueConverter<DrawingLength, short?>(x => x.Value, x => new DrawingLength(x));
         var additionConverter =
-            new ValueConverter<Addition, int?>(x => x.Value, x => new Addition(x));
+            new ValueConverter<Addition, short?>(x => x.Value, x => new Addition(x));
         var technologicalAdditionConverter =
-            new ValueConverter<TechnologicalAddition, int?>(x => x.Value,
+            new ValueConverter<TechnologicalAddition, short?>(x => x.Value,
                 x => new TechnologicalAddition(x));
         var assortmentStageConverter =
-            new ValueConverter<AssortmentStage, string>(x => x.Value, x => new AssortmentStage(x));
+            new ValueConverter<AssortmentStage, char?>(x => x.Value, x => new AssortmentStage(x));
         var d15IConverter =
-            new ValueConverter<D15I, int?>(x => x.Value,
+            new ValueConverter<D15I, short?>(x => x.Value,
                 x => new D15I(x));
         var d15IIConverter =
-            new ValueConverter<D15II, int?>(x => x.Value,
+            new ValueConverter<D15II, short?>(x => x.Value,
                 x => new D15II(x));
         var d1IConverter =
-            new ValueConverter<D1I, int?>(x => x.Value,
+            new ValueConverter<D1I, short?>(x => x.Value,
                 x => new D1I(x));
         var d1IIConverter =
-            new ValueConverter<D1II, int?>(x => x.Value,
+            new ValueConverter<D1II, short?>(x => x.Value,
                 x => new D1II(x));
         var prefabricationQuantityConverter =
-            new ValueConverter<PrefabricationQuantity, int>(x => x.Value,
+            new ValueConverter<PrefabricationQuantity, short>(x => x.Value,
                 x => new PrefabricationQuantity(x));
         var prefabricationLengthConverter =
-            new ValueConverter<PrefabricationLength, int>(x => x.Value,
+            new ValueConverter<PrefabricationLength, short>(x => x.Value,
                 x => new PrefabricationLength(x));
         var prefabricationWeightConverter =
             new ValueConverter<PrefabricationWeight, double>(x => x.Value,
                 x => new PrefabricationWeight(x));
         var assemblyQuantityConverter =
-            new ValueConverter<AssemblyQuantity, int>(x => x.Value,
+            new ValueConverter<AssemblyQuantity, short>(x => x.Value,
                 x => new AssemblyQuantity(x));
         var assemblyLengthConverter =
-            new ValueConverter<AssemblyLength, int>(x => x.Value,
+            new ValueConverter<AssemblyLength, short>(x => x.Value,
                 x => new AssemblyLength(x));
         var assemblyWeightConverter =
             new ValueConverter<AssemblyWeight, double>(x => x.Value,
@@ -189,30 +189,28 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(Position), "_position")
             .HasConversion(positionConverter)
             .HasColumnName("Position")
-            .HasColumnType("varchar")
+            .HasColumnType("char(1)")
             .IsRequired();
 
         builder.Property(typeof(DrawingLength), "_drawingLength")
             .HasConversion(drawingLengthConverter)
             .HasColumnName("DrawingLength")
-            .HasColumnType("integer");
+            .HasColumnType("smallint");
 
         builder.Property(typeof(Addition), "_addition")
             .HasConversion(additionConverter)
             .HasColumnName("Addition")
-            .HasColumnType("integer");
-        ;
+            .HasColumnType("smallint");
 
         builder.Property(typeof(TechnologicalAddition), "_technologicalAddition")
             .HasConversion(technologicalAdditionConverter)
             .HasColumnName("TechnologicalAddition")
-            .HasColumnType("integer");
-        ;
+            .HasColumnType("smallint");
 
         builder.Property(typeof(AssortmentStage), "_stage")
             .HasConversion(assortmentStageConverter)
             .HasColumnName("Stage")
-            .HasColumnType("varchar");
+            .HasColumnType("char(1)");
 
         builder.Property(typeof(D15I), "_d15I")
             .HasConversion(d15IConverter)
@@ -237,37 +235,37 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(PrefabricationQuantity), "_prefabricationQuantity")
             .HasConversion(prefabricationQuantityConverter)
             .HasColumnName("PrefabricationQuantity")
-            .HasColumnType("integer")
+            .HasColumnType("smallint")
             .IsRequired();
 
         builder.Property(typeof(PrefabricationLength), "_prefabricationLength")
             .HasConversion(prefabricationLengthConverter)
             .HasColumnName("PrefabricationLength")
-            .HasColumnType("integer")
+            .HasColumnType("smallint")
             .IsRequired();
 
         builder.Property(typeof(PrefabricationWeight), "_prefabricationWeight")
             .HasConversion(prefabricationWeightConverter)
             .HasColumnName("PrefabricationWeight")
-            .HasColumnType("real")
+            .HasColumnType("decimal(5,3)")
             .IsRequired();
 
         builder.Property(typeof(AssemblyQuantity), "_assemblyQuantity")
             .HasConversion(assemblyQuantityConverter)
             .HasColumnName("AssemblyQuantity")
-            .HasColumnType("integer")
+            .HasColumnType("smallint")
             .IsRequired();
 
         builder.Property(typeof(AssemblyLength), "_assemblyLength")
             .HasConversion(assemblyLengthConverter)
             .HasColumnName("AssemblyLength")
-            .HasColumnType("integer")
+            .HasColumnType("smallint")
             .IsRequired();
 
         builder.Property(typeof(AssemblyWeight), "_assemblyWeight")
             .HasConversion(assemblyWeightConverter)
             .HasColumnName("AssemblyWeight")
-            .HasColumnType("real")
+            .HasColumnType("decimal(5,3)")
             .IsRequired();
 
         builder.ToTable("Assortments");

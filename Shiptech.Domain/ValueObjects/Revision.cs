@@ -4,24 +4,24 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record Revision
     {
-        public string Value { get; }
+        public char Value { get; }
 
-        public Revision(string value)
+        public Revision(char value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (char.IsDigit(value) || char.IsLetter(value))
             {
                 throw new EmptyOrNullRevisionException();
             }
 
-            if (value.Length != 1)
-            {
-                throw new InvalidRevisionLengthException(value);
-            }
+            // if (value.Length != 1)
+            // {
+            //     throw new InvalidRevisionLengthException(value);
+            // }
 
             Value = value;
         }
 
-        public static implicit operator string(Revision revision) => revision.Value;
-        public static implicit operator Revision(string revision) => new(revision);
+        public static implicit operator char(Revision revision) => revision.Value;
+        public static implicit operator Revision(char revision) => new(revision);
     }
 }

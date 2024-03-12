@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Exceptions
 {
     public class InvalidPositionLengthException : ShiptechException
     {
-        public InvalidPositionLengthException(string value) : base($"Invalid position length: given {value}, required 1 char")
+        public InvalidPositionLengthException(char value) : base($"Invalid position length: given {value}, required 1 char")
         {
         }
     }

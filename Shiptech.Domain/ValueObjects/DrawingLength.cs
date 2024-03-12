@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record DrawingLength
     {
-        public int? Value { get; }
+        public short? Value { get; }
 
-        public DrawingLength(int? value)
+        public DrawingLength(short? value)
         {
             if (value is < 0)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int?(DrawingLength drawingLength) => drawingLength.Value;
-        public static implicit operator DrawingLength(int? drawingLength) => new(drawingLength);
+        public static implicit operator short?(DrawingLength drawingLength) => drawingLength.Value;
+        public static implicit operator DrawingLength(short? drawingLength) => new(drawingLength);
     }
 }

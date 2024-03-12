@@ -5,12 +5,12 @@ namespace Shiptech.Infrastructure.EF.Models;
 internal class DrawingReadModel
 {
     public string Id { get; set; }
-    public string DrawingRevision { get; set; }
+    public char DrawingRevision { get; set; }
     public string? Lot { get; set; }
     public string? Block { get; set; }
     public string? Section { get; set; }
     public StageEnum? Stage { get; set; }
-    public string Date { get; set; } // TODO: Change string to DateTime
+    public DateTime Date { get; set; }
     public string Author { get; set; }
     public ShipReadModel Ship { get; set; }
     public ICollection<IsoReadModel> Isos { get; set; }

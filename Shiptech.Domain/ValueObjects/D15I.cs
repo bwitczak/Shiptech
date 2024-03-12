@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record D15I
     {
-        public int? Value { get; }
+        public short? Value { get; }
 
-        public D15I(int? value)
+        public D15I(short? value)
         {
             if (value is < 0 or > 90)
             {
@@ -16,7 +16,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator int?(D15I d15I) => d15I.Value;
-        public static implicit operator D15I(int? d15I) => new(d15I);
+        public static implicit operator short?(D15I d15I) => d15I.Value;
+        public static implicit operator D15I(short? d15I) => new(d15I);
     }
 }

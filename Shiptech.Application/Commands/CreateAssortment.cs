@@ -2,7 +2,7 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands;
 
-public record CreateAssortment(string Id, string Position, int DrawingLength, int Addition,
-    int TechnologicalAddition, string Stage, int D15I, int D15Ii, int D1I, int D1Ii,
-    int PrefabricationQuantity, int PrefabricationLength, double PrefabricationWeight,
-    int AssemblyQuantity, int AssemblyLength, double AssemblyWeight) : ICommand;
+public record CreateAssortment(string Id, char Position, short DrawingLength, short Addition,
+    short TechnologicalAddition, char Stage, short D15I, short D15Ii, short D1I, short D1Ii,
+    short PrefabricationQuantity, short PrefabricationLength, double PrefabricationWeight,
+    short AssemblyQuantity, short AssemblyLength, double AssemblyWeight) : ICommand;

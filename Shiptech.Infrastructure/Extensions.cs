@@ -66,8 +66,8 @@ namespace Shiptech.Infrastructure
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-            using ReadDbContext dbContext =
-                scope.ServiceProvider.GetRequiredService<ReadDbContext>();
+            using WriteDbContext dbContext =
+                scope.ServiceProvider.GetRequiredService<WriteDbContext>();
 
             dbContext.Database.Migrate();
         }

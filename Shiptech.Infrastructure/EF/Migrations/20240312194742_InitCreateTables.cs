@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -15,7 +16,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    ChemicalProcessName = table.Column<string>(type: "text", nullable: false)
+                    ChemicalProcessName = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -27,7 +28,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Orderer = table.Column<string>(type: "text", nullable: false)
+                    Orderer = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,14 +40,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    DrawingRevision = table.Column<string>(type: "text", nullable: false),
-                    Lot = table.Column<string>(type: "text", nullable: true),
-                    Block = table.Column<string>(type: "text", nullable: true),
-                    Section = table.Column<string>(type: "text", nullable: true),
-                    Stage = table.Column<int>(type: "integer", nullable: true),
-                    Date = table.Column<string>(type: "text", nullable: false),
-                    Author = table.Column<string>(type: "text", nullable: false),
-                    ShipId = table.Column<string>(type: "text", nullable: false)
+                    ShipId = table.Column<string>(type: "text", nullable: true),
+                    Author = table.Column<string>(type: "varchar", nullable: false),
+                    Block = table.Column<string>(type: "char(3)", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
+                    Lot = table.Column<string>(type: "char(3)", nullable: false),
+                    Section = table.Column<string>(type: "char(4)", nullable: false),
+                    Stage = table.Column<string>(type: "char(3)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,8 +56,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         name: "FK_Drawings_Ships_ShipId",
                         column: x => x.ShipId,
                         principalTable: "Ships",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -64,13 +64,13 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    IsoRevision = table.Column<string>(type: "text", nullable: false),
-                    System = table.Column<string>(type: "text", nullable: false),
-                    Class = table.Column<string>(type: "text", nullable: false),
-                    Atest = table.Column<int>(type: "integer", nullable: true),
-                    KzmNumber = table.Column<string>(type: "text", nullable: true),
-                    KzmDate = table.Column<string>(type: "text", nullable: true),
-                    DrawingId = table.Column<string>(type: "text", nullable: false)
+                    DrawingId = table.Column<string>(type: "text", nullable: true),
+                    Atest = table.Column<string>(type: "varchar", nullable: false),
+                    Class = table.Column<string>(type: "char(6)", nullable: false),
+                    DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
+                    KzmDate = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    KzmNumber = table.Column<string>(type: "char(6)", nullable: false),
+                    System = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,8 +79,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         name: "FK_Isos_Drawings_DrawingId",
                         column: x => x.DrawingId,
                         principalTable: "Drawings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -88,22 +87,22 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Position = table.Column<string>(type: "text", nullable: false),
-                    DrawingLength = table.Column<int>(type: "integer", nullable: true),
-                    Addition = table.Column<int>(type: "integer", nullable: true),
-                    TechnologicalAddition = table.Column<int>(type: "integer", nullable: true),
-                    Stage = table.Column<string>(type: "text", nullable: true),
-                    D15I = table.Column<int>(type: "integer", nullable: true),
-                    D15II = table.Column<int>(type: "integer", nullable: true),
-                    D1I = table.Column<int>(type: "integer", nullable: true),
-                    D1II = table.Column<int>(type: "integer", nullable: true),
-                    PrefabricationQuantity = table.Column<int>(type: "integer", nullable: false),
-                    PrefabricationLength = table.Column<int>(type: "integer", nullable: false),
-                    PrefabricationWeight = table.Column<double>(type: "double precision", nullable: false),
-                    AssemblyQuantity = table.Column<int>(type: "integer", nullable: false),
-                    AssemblyLength = table.Column<int>(type: "integer", nullable: false),
-                    AssemblyWeight = table.Column<double>(type: "double precision", nullable: false),
-                    IsoId = table.Column<string>(type: "text", nullable: false)
+                    IsoId = table.Column<string>(type: "text", nullable: true),
+                    Addition = table.Column<short>(type: "smallint", nullable: false),
+                    AssemblyLength = table.Column<short>(type: "smallint", nullable: false),
+                    AssemblyQuantity = table.Column<short>(type: "smallint", nullable: false),
+                    AssemblyWeight = table.Column<double>(type: "numeric(5,3)", nullable: false),
+                    D15I = table.Column<short>(type: "smallint", nullable: false),
+                    D15II = table.Column<short>(type: "smallint", nullable: false),
+                    D1I = table.Column<short>(type: "smallint", nullable: false),
+                    D1II = table.Column<short>(type: "smallint", nullable: false),
+                    DrawingLength = table.Column<short>(type: "smallint", nullable: false),
+                    Position = table.Column<char>(type: "char(1)", nullable: false),
+                    PrefabricationLength = table.Column<short>(type: "smallint", nullable: false),
+                    PrefabricationQuantity = table.Column<short>(type: "smallint", nullable: false),
+                    PrefabricationWeight = table.Column<double>(type: "numeric(5,3)", nullable: false),
+                    Stage = table.Column<char>(type: "char(1)", nullable: false),
+                    TechnologicalAddition = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,8 +111,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         name: "FK_Assortments_Isos_IsoId",
                         column: x => x.IsoId,
                         principalTable: "Isos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
