@@ -37,7 +37,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var stageConverter =
             new ValueConverter<Stage, string>(x => x.Value.ToString(),
                 x => (StageEnum)Enum.Parse(typeof(StageEnum), x));
-        var dateConverter = new ValueConverter<Date, DateTime>(x => (DateTime) x.Value!, x => new Date(x));
+        var dateConverter = new ValueConverter<CreationDate, DateTime>(x => (DateTime) x.Value!, x => new CreationDate(x));
         var authorConverter = new ValueConverter<Author, string>(x => x.Value, x => new Author(x));
 
         builder.Property(x => x.Id)
@@ -69,9 +69,9 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnName("Stage")
             .HasColumnType("char(3)");
 
-        builder.Property(typeof(Date), "_date")
+        builder.Property(typeof(CreationDate), "_creationDate")
             .HasConversion(dateConverter)
-            .HasColumnName("Date")
+            .HasColumnName("CreationDate")
             .HasColumnType("timestamp")
             .IsRequired();
 
@@ -95,7 +95,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             new ValueConverter<Atest, string>(x => x.Value.ToString(),
                 x => (Atest)Enum.Parse(typeof(Atest), x));
         var kzmNumberConverter = new ValueConverter<KzmNumber, string>(x => x.Value, x => new KzmNumber(x));
-        var kzmDateConverter = new ValueConverter<Date, DateTime?>(x => x.Value, x => new Date(x));
+        var kzmDateConverter = new ValueConverter<KzmDate, DateTime?>(x => x.Value, x => new KzmDate(x));
 
         builder.Property(x => x.Id)
             .HasConversion(x => x.Value, x => new IsoId(x));
@@ -128,7 +128,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnName("KzmNumber")
             .HasColumnType("char(6)");
 
-        builder.Property(typeof(Date), "_kzmDate")
+        builder.Property(typeof(KzmDate), "_kzmDate")
             .HasConversion(kzmDateConverter)
             .HasColumnName("KzmDate")
             .HasColumnType("timestamp");

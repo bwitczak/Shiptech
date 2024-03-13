@@ -43,7 +43,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     ShipId = table.Column<string>(type: "text", nullable: true),
                     Author = table.Column<string>(type: "varchar", nullable: false),
                     Block = table.Column<string>(type: "char(3)", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     Lot = table.Column<string>(type: "char(3)", nullable: false),
                     Section = table.Column<string>(type: "char(4)", nullable: false),
@@ -68,7 +68,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Atest = table.Column<string>(type: "varchar", nullable: false),
                     Class = table.Column<string>(type: "char(6)", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
-                    KzmDate = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    KzmDate = table.Column<DateTime>(type: "timestamp", nullable: true),
                     KzmNumber = table.Column<string>(type: "char(6)", nullable: false),
                     System = table.Column<string>(type: "varchar", nullable: false)
                 },

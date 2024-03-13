@@ -6,7 +6,7 @@ namespace Shiptech.Domain.ValueObjects
     {
         public string? Value { get; }
 
-        public KzmNumber(string value)
+        public KzmNumber(string? value)
         {
             if (value != null && value.Length != 6)
             {
@@ -17,6 +17,6 @@ namespace Shiptech.Domain.ValueObjects
         }
 
         public static implicit operator string?(KzmNumber kzmNumber) => kzmNumber.Value;
-        public static implicit operator KzmNumber(string kzmNumber) => new(kzmNumber);
+        public static implicit operator KzmNumber(string? kzmNumber) => new(kzmNumber);
     }
 }

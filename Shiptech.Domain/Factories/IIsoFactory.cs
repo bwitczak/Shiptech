@@ -5,6 +5,6 @@ namespace Shiptech.Domain.Factories
 {
     public interface IIsoFactory
     {
-        Iso Create(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber, Date kzmDate);
+        Iso Create(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber, KzmDate kzmKzmDate);
     }
 }

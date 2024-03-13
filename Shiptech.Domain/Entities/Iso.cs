@@ -10,7 +10,7 @@ namespace Shiptech.Domain.Entities
         private Class _class;
         private Atest _atest;
         private KzmNumber _kzmNumber;
-        private Date _kzmDate;
+        private KzmDate _kzmKzmDate;
         private IEnumerable<Assortment> _assortments;
 
         // TODO: Chemical process
@@ -20,7 +20,7 @@ namespace Shiptech.Domain.Entities
         }
 
         internal Iso(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber,
-            Date kzmDate)
+            KzmDate kzmKzmDate)
         {
             Id = id;
             _isoRevision = isoRevision;
@@ -28,7 +28,7 @@ namespace Shiptech.Domain.Entities
             _class = @class;
             _atest = atest;
             _kzmNumber = kzmNumber;
-            _kzmDate = kzmDate;
+            _kzmKzmDate = kzmKzmDate;
         }
     }
 }

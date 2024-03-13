@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Factories
 {
     public sealed class IsoFactory : IIsoFactory
     {
-        public Iso Create(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber, Date kzmDate)
-            => new(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
+        public Iso Create(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber, KzmDate kzmKzmDate)
+            => new(id, isoRevision, system, @class, atest, kzmNumber, kzmKzmDate);
     }
 }

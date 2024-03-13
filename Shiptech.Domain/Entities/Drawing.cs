@@ -10,7 +10,7 @@ namespace Shiptech.Domain.Entities
         private Block _block;
         private Section _section;
         private Stage _stage;
-        private Date _date;
+        private CreationDate _creationDate;
         private Author _author;
         private IEnumerable<Iso> _isos;
 
@@ -19,7 +19,7 @@ namespace Shiptech.Domain.Entities
         }
 
         internal Drawing(DrawingId id, Revision drawingRevision, Lot lot, Block block, Section section, Stage stage,
-            Date date, Author author)
+            CreationDate creationDate, Author author)
         {
             Id = id;
             _drawingRevision = drawingRevision;
@@ -27,7 +27,7 @@ namespace Shiptech.Domain.Entities
             _block = block;
             _section = section;
             _stage = stage;
-            _date = date;
+            _creationDate = creationDate;
             _author = author;
         }
     }

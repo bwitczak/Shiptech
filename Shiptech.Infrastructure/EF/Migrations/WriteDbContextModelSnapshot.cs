@@ -130,9 +130,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(3)")
                         .HasColumnName("Block");
 
-                    b.Property<DateTime>("_date")
+                    b.Property<DateTime>("_creationDate")
                         .HasColumnType("timestamp")
-                        .HasColumnName("Date");
+                        .HasColumnName("CreationDate");
 
                     b.Property<char>("_drawingRevision")
                         .HasColumnType("char(1)")
@@ -182,7 +182,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(1)")
                         .HasColumnName("DrawingRevision");
 
-                    b.Property<DateTime>("_kzmDate")
+                    b.Property<DateTime?>("_kzmDate")
                         .HasColumnType("timestamp")
                         .HasColumnName("KzmDate");
 

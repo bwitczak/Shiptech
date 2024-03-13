@@ -4,9 +4,9 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record Block
     {
-        public string Value { get; }
+        public string? Value { get; }
 
-        public Block(string value)
+        public Block(string? value)
         {
             if (int.TryParse(value, out var number))
             {
@@ -19,7 +19,7 @@ namespace Shiptech.Domain.ValueObjects
             Value = value;
         }
 
-        public static implicit operator string(Block block) => block.Value;
-        public static implicit operator Block(string block) => new(block);
+        public static implicit operator string?(Block block) => block.Value;
+        public static implicit operator Block(string? block) => new(block);
     }
 }
