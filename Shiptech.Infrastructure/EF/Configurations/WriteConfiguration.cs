@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shiptech.Domain.Consts;
 using Shiptech.Domain.Entities;
 using Shiptech.Domain.ValueObjects;
+using Shiptech.Infrastructure.EF.Models.Consts;
 
 namespace Shiptech.Infrastructure.EF.Configurations;
 
@@ -31,12 +32,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
     public void Configure(EntityTypeBuilder<Drawing> builder)
     {
         var drawingRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
-        var lotConverter = new ValueConverter<Lot, string>(x => x.Value, x => new Lot(x));
-        var blockConverter = new ValueConverter<Block, string>(x => x.Value, x => new Block(x));
-        var sectionConverter = new ValueConverter<Section, string>(x => x.Value, x => new Section(x));
-        var stageConverter =
-            new ValueConverter<Stage, string>(x => x.Value.ToString(),
-                x => (StageEnum)Enum.Parse(typeof(StageEnum), x));
+        var lotConverter = new ValueConverter<Lot, string?>(x => x.Value, x => new Lot(x));
+        var blockConverter = new ValueConverter<Block, string?>(x => x.Value, x => new Block(x));
+        var sectionConverter = new ValueConverter<Section, string?>(x => x.Value, x => new Section(x));
+        var stageConverter = new ValueConverter<Stage, string?>(
+            x => x.Value,
+            x => ConvertStage(x));
         var dateConverter = new ValueConverter<CreationDate, DateTime>(x => (DateTime) x.Value!, x => new CreationDate(x));
         var authorConverter = new ValueConverter<Author, string>(x => x.Value, x => new Author(x));
 
@@ -92,9 +93,9 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var isoSystemConverter = new ValueConverter<IsoSystem, string>(x => x.Value, x => new IsoSystem(x));
         var classConverter = new ValueConverter<Class, string>(x => x.Value, x => new Class(x));
         var atestConverter =
-            new ValueConverter<Atest, string>(x => x.Value.ToString(),
-                x => (Atest)Enum.Parse(typeof(Atest), x));
-        var kzmNumberConverter = new ValueConverter<KzmNumber, string>(x => x.Value, x => new KzmNumber(x));
+            new ValueConverter<Atest, string?>(x => x.Value,
+                x => ConvertAtest(x));
+        var kzmNumberConverter = new ValueConverter<KzmNumber, string?>(x => x.Value, x => new KzmNumber(x));
         var kzmDateConverter = new ValueConverter<KzmDate, DateTime?>(x => x.Value, x => new KzmDate(x));
 
         builder.Property(x => x.Id)
@@ -288,5 +289,26 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
         builder.ToTable("ChemicalProcesses");
         builder.HasKey(x => x.Id);
+    }
+    
+    private static string? ConvertAtest(string? x)
+    {
+        return x switch
+        {
+            AtestConsts.Yes => AtestConsts.Yes,
+            AtestConsts.No => AtestConsts.No,
+            _ => StageConsts.None
+        };
+    }
+    
+    private static string? ConvertStage(string? x)
+    {
+        return x switch
+        {
+            StageConsts.Odi => StageConsts.Odi,
+            StageConsts.Odp => StageConsts.Odi,
+            StageConsts.Ods => StageConsts.Ods,
+            _ => StageConsts.None
+        };
     }
 }

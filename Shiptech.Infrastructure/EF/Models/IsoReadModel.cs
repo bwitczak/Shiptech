@@ -8,7 +8,7 @@ internal class IsoReadModel
     public char IsoRevision { get; set; }
     public string System { get; set; }
     public string Class { get; set; }
-    public AtestEnum? Atest { get; set; }
+    public string? Atest { get; set; }
     public string? KzmNumber { get; set; }
     public DateTime? KzmDate { get; set; }
     public DrawingReadModel Drawing { get; set; }

@@ -5,19 +5,19 @@ namespace Shiptech.Domain.ValueObjects
 {
     public record Stage
     {
-        public StageEnum Value { get; }
+        public string? Value { get; }
 
-        public Stage(StageEnum value)
+        public Stage(string? value)
         {
-            if (!value.HasFlag(value))
-            {
-                throw new InvalidStageValueException(value);
-            }
+            // if (!value.HasFlag(value))
+            // {
+            //     throw new InvalidStageValueException(value);
+            // }
 
             Value = value;
         }
 
-        public static implicit operator StageEnum(Stage stage) => stage.Value;
-        public static implicit operator Stage(StageEnum stage) => new(stage);
+        public static implicit operator string?(Stage stage) => stage.Value;
+        public static implicit operator Stage(string? stage) => new(stage);
     }
 }

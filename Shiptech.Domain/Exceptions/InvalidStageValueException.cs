@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Exceptions
 {
     public class InvalidStageValueException : ShiptechException
     {
-        public InvalidStageValueException(StageEnum value) : base(
+        public InvalidStageValueException(string value) : base(
             $"Invalid stage value: given {value}, required one of (NONE, ODP, ODS, ODI)")
         {
         }
