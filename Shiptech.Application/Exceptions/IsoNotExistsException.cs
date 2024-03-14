@@ -2,9 +2,9 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Application.Exceptions;
 
-public class IsoNotExistsException : ShiptechException
+internal sealed class IsoNotExistsException : ShiptechException
 {
-    public IsoNotExistsException(string id) : base($"Not found: given {id} not exists in database")
+    internal IsoNotExistsException(string id) : base($"Not found: given {id} not exists in database")
     {
     }
 }

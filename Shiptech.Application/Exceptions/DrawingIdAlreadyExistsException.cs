@@ -2,9 +2,9 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Application.Exceptions;
 
-public class DrawingIdAlreadyExistsException : ShiptechException
+internal sealed class DrawingIdAlreadyExistsException : ShiptechException
 {
-    public DrawingIdAlreadyExistsException(string id) : base($"Already exists: given {id} exists in database")
+    internal DrawingIdAlreadyExistsException(string id) : base($"Already exists: given {id} exists in database")
     {
     }
 }

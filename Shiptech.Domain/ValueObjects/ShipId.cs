@@ -1,5 +1,3 @@
-using Shiptech.Domain.Exceptions;
-
 namespace Shiptech.Domain.ValueObjects;
 
 public record ShipId(string Value)

@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Shiptech.Domain.ValueObjects
 {
     public record CreationDate(DateTime Value)

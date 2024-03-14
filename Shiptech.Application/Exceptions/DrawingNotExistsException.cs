@@ -2,9 +2,9 @@ using Shiptech.Shared.Abstractions.Exceptions;
 
 namespace Shiptech.Application.Exceptions;
 
-public class DrawingNotExistsException : ShiptechException
+internal sealed class DrawingNotExistsException : ShiptechException
 {
-    public DrawingNotExistsException(string id) : base($"Not found: given {id} not exists in database")
+    internal DrawingNotExistsException(string id) : base($"Not found: given {id} not exists in database")
     {
     }
 }

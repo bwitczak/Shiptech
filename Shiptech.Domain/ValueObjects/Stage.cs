@@ -1,6 +1,3 @@
-using Shiptech.Domain.Consts;
-using Shiptech.Domain.Exceptions;
-
 namespace Shiptech.Domain.ValueObjects
 {
     public record Stage(string? Value)
