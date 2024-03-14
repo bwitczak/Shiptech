@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidDrawingIdFormatException : ShiptechException
+    internal sealed class InvalidDrawingIdFormatException : ValidationFailure
     {
-        internal InvalidDrawingIdFormatException(string value) : base($"Invalid drawing ID format: given {value}, required XXX-XXX")
+        internal InvalidDrawingIdFormatException(string id) : base(nameof(id),$"Niepoprawny format nazwy rysunku {id}! Wymagany format XXX-XXX")
         {
         }
     }

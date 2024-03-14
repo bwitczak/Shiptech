@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions;
 
-internal sealed class EmptyOrNullChemicalProcessNameException : ShiptechException
+internal sealed class EmptyOrNullChemicalProcessNameException : ValidationFailure
 {
-    internal EmptyOrNullChemicalProcessNameException() : base("Chemical process name cannot be empty and null")
+    internal EmptyOrNullChemicalProcessNameException() : base("chemicalProcessName",$"Nazwa procesu chemicznego nie może być pusta!")
     {
     }
 }

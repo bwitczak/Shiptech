@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullIsoIdException : ShiptechException
+    internal sealed class EmptyOrNullIsoIdException : ValidationFailure
     {
-        internal EmptyOrNullIsoIdException() : base("Iso ID cannot be empty and null")
+        internal EmptyOrNullIsoIdException() : base("id",$"Nazwa izometryka nie może być pusta!")
         {
         }
     }

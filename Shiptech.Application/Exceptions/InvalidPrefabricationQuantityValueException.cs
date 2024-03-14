@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidPrefabricationQuantityValueException : ShiptechException
+    internal sealed class InvalidPrefabricationQuantityValueException : ValidationFailure
     {
-        internal InvalidPrefabricationQuantityValueException(short value) : base($"Invalid prefabrication quantity value: given {value}, required X > 0")
+        internal InvalidPrefabricationQuantityValueException(short prefabricationQuantity) : base(nameof(prefabricationQuantity),$"Ilość prefabrykacji {prefabricationQuantity} jest < 0!")
         {
         }
     }

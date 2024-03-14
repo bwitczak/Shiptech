@@ -1,11 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidStageValueException : ShiptechException
+    internal sealed class InvalidStageValueException : ValidationFailure
     {
-        internal InvalidStageValueException(string value) : base(
-            $"Invalid stage value: given {value}, required one of (NONE, ODP, ODS, ODI)")
+        internal InvalidStageValueException(string stage) : base(nameof(stage),$"Niepoprawna sekcja {stage}! Wymagane ODP/ODS/ODI/Puste")
         {
         }
     }

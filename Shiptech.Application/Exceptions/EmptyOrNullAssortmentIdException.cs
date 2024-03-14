@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullAssortmentIdException : ShiptechException
+    internal sealed class EmptyOrNullAssortmentIdException : ValidationFailure
     {
-        internal EmptyOrNullAssortmentIdException() : base("Assortment ID cannot be empty and null")
+        internal EmptyOrNullAssortmentIdException() : base("id",$"Nazwa asortymentu nie może być pusta!")
         {
         }
     }

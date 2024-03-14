@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidAssemblyLengthValueException : ShiptechException
+    internal sealed class InvalidAssemblyLengthValueException : ValidationFailure
     {
-        internal InvalidAssemblyLengthValueException(short value) : base($"Invalid assembly length value: given {value}, required X > 0")
+        internal InvalidAssemblyLengthValueException(short assemblyLength) : base(nameof(assemblyLength),$"Długość montażu {assemblyLength}mm jest < 0!")
         {
         }
     }

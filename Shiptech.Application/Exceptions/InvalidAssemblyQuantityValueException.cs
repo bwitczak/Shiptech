@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidAssemblyQuantityValueException : ShiptechException
+    internal sealed class InvalidAssemblyQuantityValueException : ValidationFailure
     {
-        internal InvalidAssemblyQuantityValueException(short value) : base($"Invalid assembly quantity value: given {value}, required X > 0")
+        internal InvalidAssemblyQuantityValueException(short assemblyQuantity) : base(nameof(assemblyQuantity),$"Ilość montażowa {assemblyQuantity} jest < 0!")
         {
         }
     }

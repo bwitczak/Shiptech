@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidAssemblyWeightValueException : ShiptechException
+    internal sealed class InvalidAssemblyWeightValueException : ValidationFailure
     {
-        internal InvalidAssemblyWeightValueException(double value) : base($"Invalid assembly weight value: given {value}, required X > 0")
+        internal InvalidAssemblyWeightValueException(double assemblyWeight) : base(nameof(assemblyWeight),$"Waga montażowa {assemblyWeight}kg jest < 0!")
         {
         }
     }

@@ -1,11 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidKzmNumberLengthException : ShiptechException
+    internal sealed class InvalidKzmNumberLengthException : ValidationFailure
     {
-        internal InvalidKzmNumberLengthException(string value) : base(
-            $"Invalid Kzm number length: given {value}, required X = 6 chars")
+        internal InvalidKzmNumberLengthException(string kzmNumber) : base(nameof(kzmNumber),$"Niepoprawny format numeru KZM {kzmNumber}! Wymagane 6 znaków")
         {
         }
     }

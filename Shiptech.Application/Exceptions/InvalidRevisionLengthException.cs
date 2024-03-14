@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidRevisionLengthException : ShiptechException
+    internal sealed class InvalidRevisionLengthException : ValidationFailure
     {
-        internal InvalidRevisionLengthException(char value) : base($"Invalid revision length: given {value}, required 1 char")
+        internal InvalidRevisionLengthException(char revision) : base(nameof(revision),$"Niepoprawna rewizja {revision}! Wymagany 1 znak")
         {
         }
     }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullOrdererException : ShiptechException
+    internal sealed class EmptyOrNullOrdererException : ValidationFailure
     {
-        internal EmptyOrNullOrdererException() : base("Orderer cannot be empty and null")
+        internal EmptyOrNullOrdererException() : base("orderer",$"Nazwa zamawiającego nie może być pusta!")
         {
         }
     }

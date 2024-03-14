@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullAuthorException : ShiptechException
+    internal sealed class EmptyOrNullAuthorException : ValidationFailure
     {
-        internal EmptyOrNullAuthorException() : base("Author cannot be empty and null")
+        internal EmptyOrNullAuthorException() : base("author",$"Autor nie może być pusty!")
         {
         }
     }

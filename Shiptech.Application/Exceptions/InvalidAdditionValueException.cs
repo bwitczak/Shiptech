@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidAdditionValueException : ShiptechException
+    internal sealed class InvalidAdditionValueException : ValidationFailure
     {
-        internal InvalidAdditionValueException(short? value) : base($"Invalid addition: given {value}, required X > 0")
+        internal InvalidAdditionValueException(short? addition) : base(nameof(addition),$"Naddatek {addition}mm jest < 0!")
         {
         }
     }

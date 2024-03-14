@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullDrawingIdException : ShiptechException
+    internal sealed class EmptyOrNullDrawingIdException : ValidationFailure
     {
-        internal EmptyOrNullDrawingIdException() : base("Drawing ID cannot be empty and null")
+        internal EmptyOrNullDrawingIdException() : base("id",$"Nazwa rysunku nie może być pusta!")
         {
         }
     }

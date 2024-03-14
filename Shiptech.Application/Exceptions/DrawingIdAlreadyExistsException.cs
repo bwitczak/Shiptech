@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions;
 
-internal sealed class DrawingIdAlreadyExistsException : ShiptechException
+internal sealed class DrawingIdAlreadyExistsException : ValidationFailure
 {
-    internal DrawingIdAlreadyExistsException(string id) : base($"Already exists: given {id} exists in database")
+    internal DrawingIdAlreadyExistsException(string id) : base(nameof(id),$"{id} istnieje w bazie!")
     {
     }
 }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions;
 
-internal sealed class AssortmentIdAlreadyExistsException : ShiptechException
+internal sealed class AssortmentIdAlreadyExistsException : ValidationFailure
 {
-    internal AssortmentIdAlreadyExistsException(string id) : base($"Already exists: given {id} exists in database")
+    internal AssortmentIdAlreadyExistsException(string id) : base(nameof(id),$"{id} już istnieje w bazie!")
     {
     }
 }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidPrefabricationLengthValueException : ShiptechException
+    internal sealed class InvalidPrefabricationLengthValueException : ValidationFailure
     {
-        internal InvalidPrefabricationLengthValueException(short value) : base($"Invalid prefabrication length value: given {value}, required X > 0")
+        internal InvalidPrefabricationLengthValueException(short prefabricationLength) : base(nameof(prefabricationLength),$"Długość prefabrykacji {prefabricationLength}mm jest < 0!")
         {
         }
     }

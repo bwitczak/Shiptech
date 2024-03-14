@@ -1,11 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidD15IIValueException : ShiptechException
+    internal sealed class InvalidD15IIValueException : ValidationFailure
     {
-        internal InvalidD15IIValueException(short? value) : base(
-            $"Invalid D15II value: given {value}, required X > 0 and X < 90")
+        internal InvalidD15IIValueException(short? d15II) : base(nameof(d15II),$"Niepoprawny kąt 1.5D {d15II}! Wymagane > 0 oraz <= 90")
         {
         }
     }

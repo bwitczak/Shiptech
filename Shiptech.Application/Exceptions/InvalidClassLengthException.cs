@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidClassLengthException : ShiptechException
+    internal sealed class InvalidClassLengthException : ValidationFailure
     {
-        internal InvalidClassLengthException(string value) : base($"Invalid class length: given {value}, required 6 char")
+        internal InvalidClassLengthException(string @class) : base("class",$"Nie poprawna klasa {@class}! Wymagane 6 znaków")
         {
         }
     }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullRevisionException : ShiptechException
+    internal sealed class EmptyOrNullRevisionException : ValidationFailure
     {
-        internal EmptyOrNullRevisionException() : base("Revision cannot be empty and null")
+        internal EmptyOrNullRevisionException() : base("revision",$"Nazwa rewizji nie może być pusta!")
         {
         }
     }

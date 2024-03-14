@@ -1,11 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidLotValueException : ShiptechException
+    internal sealed class InvalidLotValueException : ValidationFailure
     {
-        internal InvalidLotValueException(string value) : base(
-            $"Invalid lot value: given {value}, required X > 99 and X < 1000")
+        internal InvalidLotValueException(string lot) : base(nameof(lot),$"Niepoprawny lot {lot}! Wymagane > 99 oraz < 1000")
         {
         }
     }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidTechnologicalAdditionValueException : ShiptechException
+    internal sealed class InvalidTechnologicalAdditionValueException : ValidationFailure
     {
-        internal InvalidTechnologicalAdditionValueException(short? value) : base($"Invalid technological addition: given {value}, required X > 0")
+        internal InvalidTechnologicalAdditionValueException(short? technologicalAddition) : base(nameof(technologicalAddition), $"Długość technologicznego naddatku {technologicalAddition}mm jest < 0!")
         {
         }
     }

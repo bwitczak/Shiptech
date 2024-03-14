@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullClassException : ShiptechException
+    internal sealed class EmptyOrNullClassException : ValidationFailure
     {
-        internal EmptyOrNullClassException() : base("Class cannot be empty and null")
+        internal EmptyOrNullClassException() : base("class",$"Nazwa klasy nie może być pusta!")
         {
         }
     }

@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions;
 
-internal sealed class AssortmentNotExistsException : ShiptechException
+internal sealed class AssortmentNotExistsException : ValidationFailure
 {
-    internal AssortmentNotExistsException(string id) : base($"Not found: given {id} not exists in database")
+    internal AssortmentNotExistsException(string id) : base(nameof(id),$"{id} nie istnieje w bazie!")
     {
     }
 }

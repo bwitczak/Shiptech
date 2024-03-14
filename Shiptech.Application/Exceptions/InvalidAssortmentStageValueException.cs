@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class InvalidAssortmentStageValueException : ShiptechException
+    internal sealed class InvalidAssortmentStageValueException : ValidationFailure
     {
-        internal InvalidAssortmentStageValueException(char? value) : base($"Invalid AssortmentStage: given {value}, required 1, 2 or 3")
+        internal InvalidAssortmentStageValueException(char? assortmentStage) : base(nameof(assortmentStage),$"Niepoprawna faza {assortmentStage}! Wymagane 1, 2 or 3")
         {
         }
     }

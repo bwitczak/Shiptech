@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions
 {
-    internal sealed class EmptyOrNullShipIdException : ShiptechException
+    internal sealed class EmptyOrNullShipIdException : ValidationFailure
     {
-        internal EmptyOrNullShipIdException() : base("Ship ID cannot be empty and null")
+        internal EmptyOrNullShipIdException() : base("id",$"Nazwa statku nie może być pusta!")
         {
         }
     }

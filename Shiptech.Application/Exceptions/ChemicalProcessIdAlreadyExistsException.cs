@@ -1,10 +1,10 @@
-using Shiptech.Shared.Abstractions.Exceptions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Exceptions;
 
-internal sealed class ChemicalProcessIdAlreadyExistsException : ShiptechException
+internal sealed class ChemicalProcessIdAlreadyExistsException : ValidationFailure
 {
-    internal ChemicalProcessIdAlreadyExistsException(string id) : base($"Already exists: given {id} exists in database")
+    internal ChemicalProcessIdAlreadyExistsException(string id) : base(nameof(id), $"{id} już istnieje w bazie!")
     {
     }
 }
