@@ -4,6 +4,7 @@ using Shiptech.Application.Commands;
 using Shiptech.Application.Dtos;
 using Shiptech.Application.Queries;
 using Shiptech.Application.Services;
+using Shiptech.Application.Validators.Iso;
 using Shiptech.Application.Validators.Ship;
 using Shiptech.Shared.Abstractions.Commands;
 using Shiptech.Shared.Abstractions.Queries;
@@ -12,44 +13,44 @@ namespace Shiptech.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ShipController : ControllerBase
+public class IsoController : ControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
-    private readonly IShipReadService _readService;
+    private readonly IIsoReadService _readService;
 
-    public ShipController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, IShipReadService readService)
+    public IsoController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, IIsoReadService readService)
     {
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
         _readService = readService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<ShipDto>> Get([FromRoute] GetShip query)
-    {
-        var result = await _queryDispatcher.QueryAsync(query);
-
-        if (result is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(result);
-    }
-
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll([FromQuery] GetAllShips query)
-    {
-        var result = await _queryDispatcher.QueryAsync(query);
-
-        return Ok(result);
-    }
+    // [HttpGet("{id}")]
+    // public async Task<ActionResult<IsoDto>> Get([FromRoute] GetIso query)
+    // {
+    //     var result = await _queryDispatcher.QueryAsync(query);
+    //
+    //     if (result is null)
+    //     {
+    //         return NotFound();
+    //     }
+    //
+    //     return Ok(result);
+    // }
+    //
+    // [HttpGet]
+    // public async Task<ActionResult<IEnumerable<IsoDto>>> GetAll([FromQuery] GetAllIsos query)
+    // {
+    //     var result = await _queryDispatcher.QueryAsync(query);
+    //
+    //     return Ok(result);
+    // }
 
     [HttpPost]
-    public async Task<IResult> Post([FromBody] CreateShip command)
+    public async Task<IResult> Post([FromBody] CreateIso command)
     {
-        var validator = new CreateShipValidator(_readService);
+        var validator = new CreateIsoValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)
@@ -63,9 +64,9 @@ public class ShipController : ControllerBase
     }
     
     [HttpPut]
-    public async Task<IResult> Put([FromBody] UpdateShip command)
+    public async Task<IResult> Put([FromBody] UpdateIso command)
     {
-        var validator = new UpdateShipValidator(_readService);
+        var validator = new UpdateIsoValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)
@@ -79,9 +80,9 @@ public class ShipController : ControllerBase
     }
     
     [HttpDelete("{id}")]
-    public async Task<IResult> Delete([FromRoute] DeleteShip command)
+    public async Task<IResult> Delete([FromRoute] DeleteIso command)
     {
-        var validator = new DeleteShipValidator(_readService);
+        var validator = new DeleteIsoValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)

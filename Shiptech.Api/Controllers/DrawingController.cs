@@ -4,6 +4,7 @@ using Shiptech.Application.Commands;
 using Shiptech.Application.Dtos;
 using Shiptech.Application.Queries;
 using Shiptech.Application.Services;
+using Shiptech.Application.Validators.Drawing;
 using Shiptech.Application.Validators.Ship;
 using Shiptech.Shared.Abstractions.Commands;
 using Shiptech.Shared.Abstractions.Queries;
@@ -12,44 +13,44 @@ namespace Shiptech.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ShipController : ControllerBase
+public class DrawingController : ControllerBase
 {
     private readonly ICommandDispatcher _commandDispatcher;
     private readonly IQueryDispatcher _queryDispatcher;
-    private readonly IShipReadService _readService;
+    private readonly IDrawingReadService _readService;
 
-    public ShipController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, IShipReadService readService)
+    public DrawingController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, IDrawingReadService readService)
     {
         _commandDispatcher = commandDispatcher;
         _queryDispatcher = queryDispatcher;
         _readService = readService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<ShipDto>> Get([FromRoute] GetShip query)
-    {
-        var result = await _queryDispatcher.QueryAsync(query);
-
-        if (result is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(result);
-    }
-
+    // [HttpGet("{id}")]
+    // public async Task<ActionResult<DrawingDto>> Get([FromRoute] GetDrawing query)
+    // {
+    //     var result = await _queryDispatcher.QueryAsync(query);
+    //
+    //     if (result is null)
+    //     {
+    //         return NotFound();
+    //     }
+    //
+    //     return Ok(result);
+    // }
+    //
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll([FromQuery] GetAllShips query)
+    public async Task<ActionResult<IEnumerable<DrawingDto>>> GetPaged([FromQuery] GetPagedDrawings query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
-
+    
         return Ok(result);
     }
 
     [HttpPost]
-    public async Task<IResult> Post([FromBody] CreateShip command)
+    public async Task<IResult> Post([FromBody] CreateDrawing command)
     {
-        var validator = new CreateShipValidator(_readService);
+        var validator = new CreateDrawingValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)
@@ -63,9 +64,9 @@ public class ShipController : ControllerBase
     }
     
     [HttpPut]
-    public async Task<IResult> Put([FromBody] UpdateShip command)
+    public async Task<IResult> Put([FromBody] UpdateDrawing command)
     {
-        var validator = new UpdateShipValidator(_readService);
+        var validator = new UpdateDrawingValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)
@@ -79,9 +80,9 @@ public class ShipController : ControllerBase
     }
     
     [HttpDelete("{id}")]
-    public async Task<IResult> Delete([FromRoute] DeleteShip command)
+    public async Task<IResult> Delete([FromRoute] DeleteDrawing command)
     {
-        var validator = new DeleteShipValidator(_readService);
+        var validator = new DeleteDrawingValidator(_readService);
         var result = await validator.ValidateAsync(command);
 
         if (!result.IsValid)
