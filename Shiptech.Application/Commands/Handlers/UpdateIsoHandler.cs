@@ -12,10 +12,10 @@ internal sealed class UpdateIsoHandler(IIsoRepository repository, IIsoFactory fa
         var (id, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
         var iso = await repository.GetAsync(id);
 
-        if (iso is null)
-        {
-            throw new IsoNotExistsException(id);
-        }
+        // if (iso is null)
+        // {
+        //     throw new IsoNotExistsException(id);
+        // }
 
         var updated = factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
         await repository.UpdateAsync(updated);

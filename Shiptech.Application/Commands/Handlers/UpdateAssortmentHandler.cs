@@ -17,10 +17,10 @@ internal sealed class UpdateAssortmentHandler(IAssortmentRepository repository, 
 
         var assortment = await repository.GetAsync(id);
 
-        if (assortment is null)
-        {
-            throw new AssortmentNotExistsException(id);
-        }
+        // if (assortment is null)
+        // {
+        //     throw new AssortmentNotExistsException(id);
+        // }
 
         var updated = factory.Create(id, position, drawingLength, addition,
             technologicalAddition, stage, d15I, d15II, d1I, d1II,

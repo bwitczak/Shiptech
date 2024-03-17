@@ -14,11 +14,6 @@ internal sealed class CreateChemicalProcessHandler(IChemicalProcessRepository re
     {
         var (id, chemicalProcessName) = command;
 
-        if (await readService.ExistsById(id))
-        {
-            throw new ChemicalProcessIdAlreadyExistsException(id);
-        }
-
         var chemicalProcess = factory.Create(id, chemicalProcessName);
         await repository.CreateAsync(chemicalProcess);
     }

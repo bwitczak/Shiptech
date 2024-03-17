@@ -17,11 +17,6 @@ internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, 
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
 
-        if (await readService.ExistsById(id))
-        {
-            throw new AssortmentIdAlreadyExistsException(id);
-        }
-
         var assortment = factory.Create(id, position, drawingLength, addition,
             technologicalAddition, stage, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,

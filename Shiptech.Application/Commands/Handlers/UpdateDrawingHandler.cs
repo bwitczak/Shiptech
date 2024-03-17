@@ -14,10 +14,10 @@ internal sealed class UpdateDrawingHandler
 
         var drawing = await repository.GetAsync(id);
 
-        if (drawing is null)
-        {
-            throw new DrawingNotExistsException(id);
-        }
+        // if (drawing is null)
+        // {
+        //     throw new DrawingIdNotExistsException(id);
+        // }
 
         var updated = factory.Create(id, drawingRevision, lot, block, section, stage, date, author);
         await repository.UpdateAsync(updated);

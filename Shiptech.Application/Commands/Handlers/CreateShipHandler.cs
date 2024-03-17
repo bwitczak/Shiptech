@@ -12,12 +12,7 @@ internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory
     public async Task HandleAsync(CreateShip command)
     {
         var (id, orderer) = command;
-
-        if (await readService.ExistsByOrderer(orderer))
-        {
-            throw new ShipOrdererAlreadyExistsException(orderer);
-        }
-
+        
         var ship = factory.Create(id, orderer);
         await repository.CreateAsync(ship);
     }

@@ -11,11 +11,6 @@ internal sealed class DeleteChemicalProcessHandler
     {
         var chemicalProcess = await repository.GetAsync(command.Id);
 
-        if (chemicalProcess is null)
-        {
-            throw new ChemicalProcessNotExistsException(command.Id);
-        }
-
         await repository.DeleteAsync(chemicalProcess);
     }
 }

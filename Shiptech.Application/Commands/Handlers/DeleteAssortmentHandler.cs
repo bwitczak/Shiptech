@@ -10,11 +10,6 @@ internal sealed class DeleteAssortmentHandler(IAssortmentRepository repository) 
     {
         var assortment = await repository.GetAsync(command.Id);
 
-        if (assortment is null)
-        {
-            throw new AssortmentNotExistsException(command.Id);
-        }
-
         await repository.DeleteAsync(assortment);
     }
 }

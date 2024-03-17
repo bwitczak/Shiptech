@@ -13,11 +13,6 @@ internal sealed class CreateIsoHandler(IIsoRepository repository, IIsoFactory fa
     {
         var (id, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
 
-        if (await readService.ExistsById(id))
-        {
-            throw new IsoIdAlreadyExistsException(id);
-        }
-
         var iso = factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
         await repository.CreateAsync(iso);
     }

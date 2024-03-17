@@ -14,10 +14,10 @@ internal sealed class UpdateChemicalProcessHandler(IChemicalProcessRepository re
         var (id, chemicalProcessName) = command;
         var chemicalProcess = await repository.GetAsync(id);
 
-        if (chemicalProcess is null)
-        {
-            throw new ChemicalProcessNotExistsException(id);
-        }
+        // if (chemicalProcess is null)
+        // {
+        //     throw new ChemicalProcessNotExistsException(id);
+        // }
 
         var updated = factory.Create(id, chemicalProcessName);
         await repository.UpdateAsync(updated);
