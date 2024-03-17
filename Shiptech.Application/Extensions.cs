@@ -1,6 +1,8 @@
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Shiptech.Application.Commands;
 using Shiptech.Application.Commands.Handlers;
+using Shiptech.Application.Validators.Ship;
 using Shiptech.Domain.Factories;
 using Shiptech.Shared;
 using Shiptech.Shared.Abstractions.Commands;
@@ -11,6 +13,9 @@ namespace Shiptech.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            // Validation
+            services.AddValidatorsFromAssemblyContaining<CreateShipValidator>();
+            
             // Commands
             services.AddCommandsAbstraction();
 
