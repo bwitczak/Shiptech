@@ -10,7 +10,7 @@ internal class DrawingReadModel
     public string? Block { get; set; }
     public string? Section { get; set; }
     public string? Stage { get; set; }
-    public DateTime Date { get; set; }
+    public DateTime CreationDate { get; set; }
     public string Author { get; set; }
     public ShipReadModel Ship { get; set; }
     public ICollection<IsoReadModel> Isos { get; set; }

@@ -13,5 +13,8 @@ public class MappingProfile : Profile
         
         CreateMap<ShipWithNoRelationsDto, ShipReadModel>();
         CreateMap<ShipReadModel, ShipWithNoRelationsDto>();
+        
+        CreateMap<DrawingWithNoRelationsDto, DrawingReadModel>();
+        CreateMap<DrawingReadModel, DrawingWithNoRelationsDto>();
     }
 }
