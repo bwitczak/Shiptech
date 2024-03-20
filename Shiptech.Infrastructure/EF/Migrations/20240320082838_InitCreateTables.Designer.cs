@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(WriteDbContext))]
-    [Migration("20240313104345_InitCreateTables")]
+    [Migration("20240320082838_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -176,6 +176,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Atest");
 
+                    b.Property<string>("_chemicalProcessId")
+                        .HasColumnType("text");
+
                     b.Property<string>("_class")
                         .IsRequired()
                         .HasColumnType("char(6)")
@@ -202,6 +205,8 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DrawingId");
+
+                    b.HasIndex("_chemicalProcessId");
 
                     b.ToTable("Isos", (string)null);
                 });
@@ -240,6 +245,12 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     b.HasOne("Shiptech.Domain.Entities.Drawing", null)
                         .WithMany("_isos")
                         .HasForeignKey("DrawingId");
+
+                    b.HasOne("Shiptech.Domain.Entities.ChemicalProcess", "_chemicalProcess")
+                        .WithMany()
+                        .HasForeignKey("_chemicalProcessId");
+
+                    b.Navigation("_chemicalProcess");
                 });
 
             modelBuilder.Entity("Shiptech.Domain.Entities.Drawing", b =>

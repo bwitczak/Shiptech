@@ -134,10 +134,9 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnName("KzmDate")
             .HasColumnType("timestamp");
 
-        // TODO: Add chemical process (required)
-
         builder.ToTable("Isos");
         builder.HasKey(x => x.Id);
+        builder.HasOne(typeof(ChemicalProcess), "_chemicalProcess");
         builder.HasMany(typeof(Assortment), "_assortments");
     }
 

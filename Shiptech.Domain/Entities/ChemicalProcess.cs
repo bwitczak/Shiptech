@@ -6,6 +6,7 @@ public class ChemicalProcess
 {
     public ChemicalProcessId Id { get; private set; }
     private ChemicalProcessName _chemicalProcessName;
+    private IEnumerable<ChemicalProcess> _chemicalProcesses;
 
     private ChemicalProcess()
     {

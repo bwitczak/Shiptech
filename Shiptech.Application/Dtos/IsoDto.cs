@@ -9,7 +9,6 @@ public class IsoDto
     public bool? Atest { get; set; }
     public string? KzmNumber { get; set; }
     public string? KzmDate { get; set; }
+    public ChemicalProcessDto ChemicalProcess { get; set; }
     public IEnumerable<AssortmentDto> Assortments { get; set; }
-
-    // TODO: Add ChemicalProcess
 }

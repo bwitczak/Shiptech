@@ -12,7 +12,6 @@ internal class IsoReadModel
     public string? KzmNumber { get; set; }
     public DateTime? KzmDate { get; set; }
     public DrawingReadModel Drawing { get; set; }
+    public ChemicalProcessReadModel ChemicalProcess { get; set; }
     public ICollection<AssortmentReadModel> Assortments { get; set; }
-
-    // TODO: Add ChemicalProcess
 }

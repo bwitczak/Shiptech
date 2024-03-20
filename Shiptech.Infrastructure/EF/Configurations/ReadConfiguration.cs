@@ -48,5 +48,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.ToTable("ChemicalProcesses");
         builder.HasKey(x => x.Id);
+        builder.HasMany(x => x.Isos)
+            .WithOne(x => x.ChemicalProcess);
     }
 }

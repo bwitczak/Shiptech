@@ -66,6 +66,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     DrawingId = table.Column<string>(type: "text", nullable: true),
                     Atest = table.Column<string>(type: "varchar", nullable: false),
+                    _chemicalProcessId = table.Column<string>(type: "text", nullable: true),
                     Class = table.Column<string>(type: "char(6)", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     KzmDate = table.Column<DateTime>(type: "timestamp", nullable: true),
@@ -75,6 +76,11 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Isos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Isos_ChemicalProcesses__chemicalProcessId",
+                        column: x => x._chemicalProcessId,
+                        principalTable: "ChemicalProcesses",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Isos_Drawings_DrawingId",
                         column: x => x.DrawingId,
@@ -128,6 +134,11 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "IX_Isos_DrawingId",
                 table: "Isos",
                 column: "DrawingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Isos__chemicalProcessId",
+                table: "Isos",
+                column: "_chemicalProcessId");
         }
 
         /// <inheritdoc />
@@ -137,10 +148,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Assortments");
 
             migrationBuilder.DropTable(
-                name: "ChemicalProcesses");
+                name: "Isos");
 
             migrationBuilder.DropTable(
-                name: "Isos");
+                name: "ChemicalProcesses");
 
             migrationBuilder.DropTable(
                 name: "Drawings");
