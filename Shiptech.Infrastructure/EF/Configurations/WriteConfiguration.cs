@@ -101,7 +101,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(x => x.Id)
             .HasConversion(x => x.Value, x => new IsoId(x));
 
-        builder.Property(typeof(Revision), "_drawingRevision")
+        builder.Property(typeof(Revision), "_isoRevision")
             .HasConversion(isoRevisionConverter)
             .HasColumnName("DrawingRevision")
             .HasColumnType("char(1)")
