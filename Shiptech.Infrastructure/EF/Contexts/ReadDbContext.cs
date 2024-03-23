@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Shiptech.Domain.Entities;
 using Shiptech.Infrastructure.EF.Configurations;
 using Shiptech.Infrastructure.EF.Models;
 
@@ -11,6 +12,7 @@ internal sealed class ReadDbContext : DbContext
     public DbSet<IsoReadModel> Iso { get; set; }
     public DbSet<AssortmentReadModel> Assortment { get; set; }
     public DbSet<ChemicalProcessReadModel> ChemicalProcess { get; set; }
+    public DbSet<AssortmentDictionaryReadModel> AssortmentDictionary { get; set; }
 
     public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
     {
@@ -24,5 +26,6 @@ internal sealed class ReadDbContext : DbContext
         modelBuilder.ApplyConfiguration<IsoReadModel>(configuration);
         modelBuilder.ApplyConfiguration<AssortmentReadModel>(configuration);
         modelBuilder.ApplyConfiguration<ChemicalProcessReadModel>(configuration);
+        modelBuilder.ApplyConfiguration<AssortmentDictionaryReadModel>(configuration);
     }
 }

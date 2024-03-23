@@ -6,7 +6,7 @@ namespace Shiptech.Infrastructure.EF.Configurations;
 
 internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEntityTypeConfiguration<DrawingReadModel>,
     IEntityTypeConfiguration<IsoReadModel>, IEntityTypeConfiguration<AssortmentReadModel>,
-    IEntityTypeConfiguration<ChemicalProcessReadModel>
+    IEntityTypeConfiguration<ChemicalProcessReadModel>, IEntityTypeConfiguration<AssortmentDictionaryReadModel>
 {
     public void Configure(EntityTypeBuilder<ShipReadModel> builder)
     {
@@ -199,5 +199,64 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.Isos)
             .WithOne(x => x.ChemicalProcess);
+    }
+
+    public void Configure(EntityTypeBuilder<AssortmentDictionaryReadModel> builder)
+    {
+        // TODO: Set custom ID type
+        builder.Property(x => x.Id)
+            .HasColumnName("Id")
+            .IsRequired();
+        
+        builder.Property(x => x.Name)
+            .HasColumnName("Name")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
+        builder.Property(x => x.Distinguishing)
+            .HasColumnName("Distinguishing")
+            .HasColumnType("char(6)")
+            .IsRequired();
+        
+        builder.Property(x => x.Unit)
+            .HasColumnName("Unit")
+            .HasColumnType("char(4)")
+            .IsRequired();
+        
+        builder.Property(x => x.Amount)
+            .HasColumnName("Amount")
+            .HasColumnType("decimal(5,3)")
+            .IsRequired();
+        
+        builder.Property(x => x.Weight)
+            .HasColumnName("Weight")
+            .HasColumnType("decimal(5,3)")
+            .IsRequired();
+
+        builder.Property(x => x.Material)
+            .HasColumnName("Material")
+            .HasColumnType("varchar");
+        
+        builder.Property(x => x.Kind)
+            .HasColumnName("Kind")
+            .HasColumnType("varchar");
+        
+        builder.Property(x => x.Length)
+            .HasColumnName("Length")
+            .HasColumnType("smallint");
+        
+        builder.Property(x => x.RO)
+            .HasColumnName("RO")
+            .HasColumnType("varchar")
+            .IsRequired();
+
+        builder.Property(x => x.Comment)
+            .HasColumnName("Comment")
+            .HasColumnType("varchar");
+        
+        builder.ToTable("AssortmentDictionary");
+        builder.HasKey(x => x.Id);
+        builder.HasMany(x => x.Assortments)
+            .WithOne(x => x.AssortmentDictionary);
     }
 }
