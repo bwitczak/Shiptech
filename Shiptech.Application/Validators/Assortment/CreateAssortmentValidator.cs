@@ -59,20 +59,20 @@ public class CreateAssortmentValidator : AbstractValidator<CreateAssortment>
             .WithErrorCode("ASSORTMENT_400_TECHNOLOGICAL_D15I")
             .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15I}! Wymagane > 0 oraz <= 90");
         
-        RuleFor(x => x.D15Ii)
+        RuleFor(x => x.D15II)
             .Must(x => x is > 0 and <= 90)
             .WithErrorCode("ASSORTMENT_400_TECHNOLOGICAL_D15II")
-            .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15Ii}! Wymagane > 0 oraz <= 90");
+            .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15II}! Wymagane > 0 oraz <= 90");
         
         RuleFor(x => x.D1I)
             .Must(x => x is > 0 and <= 90)
             .WithErrorCode("ASSORTMENT_400_TECHNOLOGICAL_D1I")
             .WithMessage(x => $"Niepoprawny kąt 1D {x.D1I}! Wymagane > 0 oraz <= 90");
         
-        RuleFor(x => x.D1Ii)
+        RuleFor(x => x.D1II)
             .Must(x => x is > 0 and <= 90)
             .WithErrorCode("ASSORTMENT_400_TECHNOLOGICAL_D1II")
-            .WithMessage(x => $"Niepoprawny kąt 1D {x.D1Ii}! Wymagane > 0 oraz <= 90");
+            .WithMessage(x => $"Niepoprawny kąt 1D {x.D1II}! Wymagane > 0 oraz <= 90");
 
         RuleFor(x => x.PrefabricationQuantity)
             .NotNull()

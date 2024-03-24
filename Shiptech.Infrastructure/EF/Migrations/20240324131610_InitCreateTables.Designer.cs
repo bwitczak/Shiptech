@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240324130459_InitCreateTables")]
+    [Migration("20240324131610_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
