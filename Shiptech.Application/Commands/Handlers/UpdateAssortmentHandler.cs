@@ -11,7 +11,7 @@ internal sealed class UpdateAssortmentHandler(IAssortmentRepository repository, 
     public async Task HandleAsync(UpdateAssortment command)
     {
         var (id, position, drawingLength, addition,
-            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
 
@@ -23,7 +23,7 @@ internal sealed class UpdateAssortmentHandler(IAssortmentRepository repository, 
         // }
 
         var updated = factory.Create(id, position, drawingLength, addition,
-            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight);
         await repository.UpdateAsync(updated);

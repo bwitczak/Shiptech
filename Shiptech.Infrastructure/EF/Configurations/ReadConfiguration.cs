@@ -138,6 +138,10 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnName("Stage")
             .HasColumnType("char(1)");
         
+        builder.Property(x => x.Comment)
+            .HasColumnName("Comment")
+            .HasColumnType("varchar");
+        
         builder.Property(x => x.D15I)
             .HasColumnName("D15I")
             .HasColumnType("smallint");

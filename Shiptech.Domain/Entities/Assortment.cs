@@ -10,6 +10,7 @@ namespace Shiptech.Domain.Entities
         private Addition _addition;
         private TechnologicalAddition _technologicalAddition;
         private AssortmentStage _stage;
+        private Comment _comment;
         private D15I _d15I;
         private D15II _d15II;
         private D1I _d1I;
@@ -21,16 +22,14 @@ namespace Shiptech.Domain.Entities
         private AssemblyLength _assemblyLength;
         private AssemblyWeight _assemblyWeight;
 
-        private Assortment()
+        private Assortment(Comment comment)
         {
         }
 
         internal Assortment(AssortmentId id, Position position, DrawingLength drawingLength, Addition addition,
-            TechnologicalAddition technologicalAddition, AssortmentStage stage, D15I d15I, D15II d15II, D1I d1I,
-            D1II d1II,
-            PrefabricationQuantity prefabricationQuantity, PrefabricationLength prefabricationLength,
-            PrefabricationWeight prefabricationWeight,
-            AssemblyQuantity assemblyQuantity, AssemblyLength assemblyLength, AssemblyWeight assemblyWeight)
+            TechnologicalAddition technologicalAddition, AssortmentStage stage, Comment comment, D15I d15I, D15II d15II, 
+            D1I d1I, D1II d1II, PrefabricationQuantity prefabricationQuantity, PrefabricationLength prefabricationLength,
+            PrefabricationWeight prefabricationWeight, AssemblyQuantity assemblyQuantity, AssemblyLength assemblyLength, AssemblyWeight assemblyWeight)
         {
             Id = id;
             _position = position;
@@ -38,6 +37,7 @@ namespace Shiptech.Domain.Entities
             _addition = addition;
             _technologicalAddition = technologicalAddition;
             _stage = stage;
+            _comment = comment;
             _d15I = d15I;
             _d15II = d15II;
             _d1I = d1I;
@@ -48,6 +48,7 @@ namespace Shiptech.Domain.Entities
             _assemblyQuantity = assemblyQuantity;
             _assemblyLength = assemblyLength;
             _assemblyWeight = assemblyWeight;
+           
         }
     }
 }

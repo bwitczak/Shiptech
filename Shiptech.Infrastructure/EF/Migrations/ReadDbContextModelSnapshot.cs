@@ -103,6 +103,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Comment");
+
                     b.Property<short?>("D15I")
                         .HasColumnType("smallint")
                         .HasColumnName("D15I");

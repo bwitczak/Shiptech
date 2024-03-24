@@ -152,6 +152,9 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
                 x => new TechnologicalAddition(x));
         var assortmentStageConverter =
             new ValueConverter<AssortmentStage, char?>(x => x.Value, x => new AssortmentStage(x));
+        var commentConverter =
+            new ValueConverter<Comment, string?>(x => x.Value,
+                x => new Comment(x));
         var d15IConverter =
             new ValueConverter<D15I, short?>(x => x.Value,
                 x => new D15I(x));
@@ -211,6 +214,11 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasConversion(assortmentStageConverter)
             .HasColumnName("Stage")
             .HasColumnType("char(1)");
+        
+        builder.Property(typeof(Comment), "_comment")
+            .HasConversion(commentConverter)
+            .HasColumnName("Comment")
+            .HasColumnType("varchar");
 
         builder.Property(typeof(D15I), "_d15I")
             .HasConversion(d15IConverter)

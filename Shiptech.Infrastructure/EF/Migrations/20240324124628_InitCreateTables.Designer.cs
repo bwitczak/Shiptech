@@ -12,8 +12,8 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240323094746_AddAssortmentDictionaryTable")]
-    partial class AddAssortmentDictionaryTable
+    [Migration("20240324124628_InitCreateTables")]
+    partial class InitCreateTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     b.Property<string>("AssortmentDictionaryId")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Comment");
 
                     b.Property<short?>("D15I")
                         .HasColumnType("smallint")

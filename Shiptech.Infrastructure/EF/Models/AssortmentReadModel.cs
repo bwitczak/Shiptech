@@ -8,6 +8,7 @@ internal class AssortmentReadModel
     public short? Addition { get; set; }
     public short? TechnologicalAddition { get; set; }
     public string? Stage { get; set; }
+    public string? Comment { get; set; }
     public short? D15I { get; set; }
     public short? D15II { get; set; }
     public short? D1I { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAssortmentDictionaryTable : Migration
+    public partial class InitCreateTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -122,6 +122,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Addition = table.Column<short>(type: "smallint", nullable: true),
                     TechnologicalAddition = table.Column<short>(type: "smallint", nullable: true),
                     Stage = table.Column<string>(type: "char(1)", nullable: true),
+                    Comment = table.Column<string>(type: "varchar", nullable: true),
                     D15I = table.Column<short>(type: "smallint", nullable: true),
                     D15II = table.Column<short>(type: "smallint", nullable: true),
                     D1I = table.Column<short>(type: "smallint", nullable: true),

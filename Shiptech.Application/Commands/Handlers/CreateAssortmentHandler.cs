@@ -13,12 +13,12 @@ internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, 
     public async Task HandleAsync(CreateAssortment command)
     {
         var (id, position, drawingLength, addition,
-            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
 
         var assortment = factory.Create(id, position, drawingLength, addition,
-            technologicalAddition, stage, d15I, d15II, d1I, d1II,
+            technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight);
         await repository.CreateAsync(assortment);
