@@ -26,6 +26,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
         builder.ToTable("Ships");
         builder.HasKey(x => x.Id);
+        builder.HasIndex("_orderer").IsUnique();
         builder.HasMany(typeof(Drawing), "_drawings");
     }
 

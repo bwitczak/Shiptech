@@ -19,7 +19,7 @@ internal sealed class ShipRepository() : IShipRepository
 
     public async Task<Ship?> GetAsync(ShipId id)
     {
-        return await _ships.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id.Value);
+        return await _ships.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Ship ship)

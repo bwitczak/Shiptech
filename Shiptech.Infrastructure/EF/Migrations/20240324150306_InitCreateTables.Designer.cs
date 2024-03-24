@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240324131610_InitCreateTables")]
+    [Migration("20240324150306_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -23,6 +23,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", b =>
@@ -213,9 +214,8 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(4)")
                         .HasColumnName("Section");
 
-                    b.Property<string>("ShipId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("ShipId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Stage")
                         .HasColumnType("char(3)")
@@ -279,9 +279,11 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.ShipReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("Orderer")
                         .IsRequired()
@@ -289,6 +291,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnName("Orderer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Orderer")
+                        .IsUnique();
 
                     b.ToTable("Ships", (string)null);
                 });

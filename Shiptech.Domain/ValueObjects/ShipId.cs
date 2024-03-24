@@ -1,7 +1,7 @@
 namespace Shiptech.Domain.ValueObjects;
 
-public record ShipId(string Value)
+public record ShipId(Guid Value)
 {
-    public static implicit operator string(ShipId shipId) => shipId.Value;
-    public static implicit operator ShipId(string shipId) => new(shipId);
+    public static implicit operator Guid(ShipId shipId) => shipId.Value;
+    public static implicit operator ShipId(Guid shipId) => new(shipId);
 }

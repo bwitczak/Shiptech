@@ -11,6 +11,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
+
             migrationBuilder.CreateTable(
                 name: "AssortmentDictionary",
                 columns: table => new
@@ -48,7 +51,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Ships",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Orderer = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
@@ -68,7 +71,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Stage = table.Column<string>(type: "char(3)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Author = table.Column<string>(type: "varchar", nullable: false),
-                    ShipId = table.Column<string>(type: "text", nullable: false)
+                    ShipId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,6 +180,12 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "IX_Isos_DrawingId",
                 table: "Isos",
                 column: "DrawingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ships_Orderer",
+                table: "Ships",
+                column: "Orderer",
+                unique: true);
         }
 
         /// <inheritdoc />

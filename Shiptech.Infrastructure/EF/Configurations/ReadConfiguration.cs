@@ -13,6 +13,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
         // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasDefaultValueSql("uuid_generate_v4()")
             .IsRequired();
         
         builder.Property(x => x.Orderer)
@@ -22,6 +23,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
 
         builder.ToTable("Ships");
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Orderer).IsUnique();
         builder.HasMany(x => x.Drawings)
             .WithOne(x => x.Ship);
     }
