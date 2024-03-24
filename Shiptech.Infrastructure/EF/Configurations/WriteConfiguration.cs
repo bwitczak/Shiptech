@@ -144,11 +144,11 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
     {
         var positionConverter = new ValueConverter<Position, char>(x => x.Value, x => new Position(x));
         var drawingLengthConverter =
-            new ValueConverter<DrawingLength, short?>(x => x.Value, x => new DrawingLength(x));
+            new ValueConverter<DrawingLength, ushort?>(x => x.Value, x => new DrawingLength(x));
         var additionConverter =
-            new ValueConverter<Addition, short?>(x => x.Value, x => new Addition(x));
+            new ValueConverter<Addition, ushort?>(x => x.Value, x => new Addition(x));
         var technologicalAdditionConverter =
-            new ValueConverter<TechnologicalAddition, short?>(x => x.Value,
+            new ValueConverter<TechnologicalAddition, ushort?>(x => x.Value,
                 x => new TechnologicalAddition(x));
         var assortmentStageConverter =
             new ValueConverter<AssortmentStage, char?>(x => x.Value, x => new AssortmentStage(x));
@@ -156,31 +156,31 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             new ValueConverter<Comment, string?>(x => x.Value,
                 x => new Comment(x));
         var d15IConverter =
-            new ValueConverter<D15I, short?>(x => x.Value,
+            new ValueConverter<D15I, ushort?>(x => x.Value,
                 x => new D15I(x));
         var d15IIConverter =
-            new ValueConverter<D15II, short?>(x => x.Value,
+            new ValueConverter<D15II, ushort?>(x => x.Value,
                 x => new D15II(x));
         var d1IConverter =
-            new ValueConverter<D1I, short?>(x => x.Value,
+            new ValueConverter<D1I, ushort?>(x => x.Value,
                 x => new D1I(x));
         var d1IIConverter =
-            new ValueConverter<D1II, short?>(x => x.Value,
+            new ValueConverter<D1II, ushort?>(x => x.Value,
                 x => new D1II(x));
         var prefabricationQuantityConverter =
-            new ValueConverter<PrefabricationQuantity, short>(x => x.Value,
+            new ValueConverter<PrefabricationQuantity, ushort>(x => x.Value,
                 x => new PrefabricationQuantity(x));
         var prefabricationLengthConverter =
-            new ValueConverter<PrefabricationLength, short>(x => x.Value,
+            new ValueConverter<PrefabricationLength, ushort>(x => x.Value,
                 x => new PrefabricationLength(x));
         var prefabricationWeightConverter =
             new ValueConverter<PrefabricationWeight, double>(x => x.Value,
                 x => new PrefabricationWeight(x));
         var assemblyQuantityConverter =
-            new ValueConverter<AssemblyQuantity, short>(x => x.Value,
+            new ValueConverter<AssemblyQuantity, ushort>(x => x.Value,
                 x => new AssemblyQuantity(x));
         var assemblyLengthConverter =
-            new ValueConverter<AssemblyLength, short>(x => x.Value,
+            new ValueConverter<AssemblyLength, ushort>(x => x.Value,
                 x => new AssemblyLength(x));
         var assemblyWeightConverter =
             new ValueConverter<AssemblyWeight, double>(x => x.Value,

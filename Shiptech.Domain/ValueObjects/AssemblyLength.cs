@@ -1,8 +1,8 @@
 namespace Shiptech.Domain.ValueObjects
 {
-    public record AssemblyLength(short Value)
+    public record AssemblyLength(ushort Value)
     {
-        public static implicit operator short(AssemblyLength assemblyLength) => assemblyLength.Value;
-        public static implicit operator AssemblyLength(short assemblyLength) => new(assemblyLength);
+        public static implicit operator ushort(AssemblyLength assemblyLength) => assemblyLength.Value;
+        public static implicit operator AssemblyLength(ushort assemblyLength) => new(assemblyLength);
     }
 }

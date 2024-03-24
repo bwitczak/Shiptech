@@ -1,8 +1,8 @@
 namespace Shiptech.Domain.ValueObjects
 {
-    public record D15I(short? Value)
+    public record D15I(ushort? Value)
     {
-        public static implicit operator short?(D15I d15I) => d15I.Value;
-        public static implicit operator D15I(short? d15I) => new(d15I);
+        public static implicit operator ushort?(D15I d15I) => d15I.Value;
+        public static implicit operator D15I(ushort? d15I) => new(d15I);
     }
 }

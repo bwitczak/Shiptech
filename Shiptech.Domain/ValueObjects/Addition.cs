@@ -1,8 +1,8 @@
 namespace Shiptech.Domain.ValueObjects
 {
-    public record Addition(short? Value)
+    public record Addition(ushort? Value)
     {
-        public static implicit operator short?(Addition addition) => addition.Value;
-        public static implicit operator Addition(short? addition) => new(addition);
+        public static implicit operator ushort?(Addition addition) => addition.Value;
+        public static implicit operator Addition(ushort? addition) => new(addition);
     }
 }
