@@ -1,12 +1,13 @@
 using FluentValidation;
 using Shiptech.Application.Commands;
+using Shiptech.Application.Queries;
 using Shiptech.Application.Services;
 
 namespace Shiptech.Application.Validators.Drawing;
 
-public class DeleteDrawingValidator : AbstractValidator<DeleteDrawing>
+public class GetDrawingValidator : AbstractValidator<GetDrawing>
 {
-    public DeleteDrawingValidator(IDrawingReadService service)
+    public GetDrawingValidator(IDrawingReadService service)
     {
         RuleFor(x => x.Id)
             .NotNull()

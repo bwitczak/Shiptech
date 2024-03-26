@@ -26,27 +26,6 @@ public class AssortmentController : ControllerBase
         _readService = readService;
     }
 
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<AssortmentDto>> Get([FromRoute] GetAssortment query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     if (result is null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(result);
-    // }
-    //
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<AssortmentDto>>> GetAll([FromQuery] GetAllAssortments query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     return Ok(result);
-    // }
-
     [HttpPost]
     public async Task<IResult> Post([FromBody] CreateAssortment command)
     {

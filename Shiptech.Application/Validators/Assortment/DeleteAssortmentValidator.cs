@@ -13,8 +13,8 @@ public class DeleteAssortmentValidator : AbstractValidator<DeleteAssortment>
             .NotEmpty()
             .WithErrorCode("ASSORTMENT_400_ID")
             .WithMessage("Nazwa asortymentu nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("ASSORTMENT_409_ID");
+            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
+            .WithErrorCode("ASSORTMENT_404_ID");
     }
 }

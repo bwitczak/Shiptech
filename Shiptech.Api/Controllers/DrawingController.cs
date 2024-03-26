@@ -26,19 +26,22 @@ public class DrawingController : ControllerBase
         _readService = readService;
     }
 
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<DrawingDto>> Get([FromRoute] GetDrawing query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     if (result is null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(result);
-    // }
-    //
+    [HttpGet("{id}")]
+    public async Task<IResult> Get([FromRoute] GetDrawing query)
+    {
+        var validator = new GetDrawingValidator(_readService);
+        var result = await validator.ValidateAsync(query);
+
+        if (!result.IsValid)
+        {
+            return Results.ValidationProblem(result.ToDictionary());
+        }
+        
+        var drawing = await _queryDispatcher.QueryAsync(query);
+
+        return Results.Ok(drawing);
+    }
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<DrawingDto>>> GetPaged([FromQuery] GetPagedDrawings query)
     {

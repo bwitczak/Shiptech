@@ -26,27 +26,6 @@ public class IsoController : ControllerBase
         _readService = readService;
     }
 
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<IsoDto>> Get([FromRoute] GetIso query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     if (result is null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(result);
-    // }
-    //
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<IsoDto>>> GetAll([FromQuery] GetAllIsos query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     return Ok(result);
-    // }
-
     [HttpPost]
     public async Task<IResult> Post([FromBody] CreateIso command)
     {

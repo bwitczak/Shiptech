@@ -26,16 +26,19 @@ public class ShipController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ShipDto>> Get([FromRoute] GetShip query)
+    public async Task<IResult> Get([FromRoute] GetShip query)
     {
-        var result = await _queryDispatcher.QueryAsync(query);
+        var validator = new GetShipValidator(_readService);
+        var result = await validator.ValidateAsync(query);
 
-        if (result is null)
+        if (!result.IsValid)
         {
-            return NotFound();
+            return Results.ValidationProblem(result.ToDictionary());
         }
+        
+        var ship = await _queryDispatcher.QueryAsync(query);
 
-        return Ok(result);
+        return Results.Ok(ship);
     }
 
     [HttpGet]

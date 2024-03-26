@@ -26,27 +26,6 @@ public class ChemicalProcessController : ControllerBase
         _readService = readService;
     }
 
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<ChemicalProcessDto>> Get([FromRoute] GetChemicalProcess query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     if (result is null)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     return Ok(result);
-    // }
-    //
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<ChemicalProcessDto>>> GetAll([FromQuery] GetAllChemicalProcesss query)
-    // {
-    //     var result = await _queryDispatcher.QueryAsync(query);
-    //
-    //     return Ok(result);
-    // }
-
     [HttpPost]
     public async Task<IResult> Post([FromBody] CreateChemicalProcess command)
     {
