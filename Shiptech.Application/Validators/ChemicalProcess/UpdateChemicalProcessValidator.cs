@@ -13,9 +13,9 @@ public class UpdateChemicalProcessValidator : AbstractValidator<UpdateChemicalPr
             .NotEmpty()
             .WithErrorCode("CHEMICAL_PROCESS_400_ID")
             .WithMessage("Kod procesu chemicznego nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("CHEMICAL_PROCESS_409_ID");
+            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
+            .WithErrorCode("CHEMICAL_PROCESS_404_ID");
 
         RuleFor(x => x.ChemicalProcessName)
             .NotNull()

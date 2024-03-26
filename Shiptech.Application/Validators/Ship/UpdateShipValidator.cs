@@ -14,9 +14,9 @@ public class UpdateShipValidator : AbstractValidator<UpdateShip>
             .NotEmpty()
             .WithErrorCode("SHIP_400_ID")
             .WithMessage("Nazwa statku nie może być pusta!")
-            .Must((x, id) => x.Id == id)
-            .WithErrorCode("SHIP_400_ID")
-            .WithMessage(x =>$"{x.Id} nie istnieje w bazie!");
+            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
+            .WithErrorCode("SHIP_404_ID");
 
         RuleFor(x => x.Orderer)
             .NotNull()

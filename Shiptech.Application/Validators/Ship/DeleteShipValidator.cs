@@ -13,8 +13,8 @@ public class DeleteShipValidator : AbstractValidator<DeleteShip>
             .NotEmpty()
             .WithErrorCode("SHIP_400_ID")
             .WithMessage("Nazwa statku nie może być pusta!")
-            .Must((x, id) => x.Id == id)
-            .WithErrorCode("SHIP_400_ID")
+            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .WithErrorCode("SHIP_404_ID")
             .WithMessage(x =>$"{x.Id} nie istnieje w bazie!");
     }
 }

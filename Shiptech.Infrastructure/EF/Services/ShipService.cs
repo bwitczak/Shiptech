@@ -14,6 +14,11 @@ internal sealed class ShipService() : IShipReadService
         _ships = context.Ship;
     }
 
+    public async Task<bool> ExistsById(Guid id)
+    {
+        return await _ships.AnyAsync(x => x.Id == id);
+    }
+
     public async Task<bool> ExistsByOrderer(string orderer)
     {
         return await _ships.AnyAsync(x => x.Orderer == orderer);

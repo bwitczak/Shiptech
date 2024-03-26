@@ -15,8 +15,8 @@ public class UpdateDrawingValidator : AbstractValidator<UpdateDrawing>
             .WithErrorCode("DRAWING_400_ID")
             .WithMessage("Nazwa rysunku nie może być pusta!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("DRAWING_409_ID");
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
+            .WithErrorCode("DRAWING_404_ID");
         
         RuleFor(x => x.DrawingRevision)
             .NotNull()

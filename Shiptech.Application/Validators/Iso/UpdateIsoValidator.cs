@@ -14,9 +14,9 @@ public class UpdateIsoValidator : AbstractValidator<UpdateIso>
             .NotEmpty()
             .WithErrorCode("ISO_400_ID")
             .WithMessage("Nazwa izometryka nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("ISO_409_ID");
+            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
+            .WithErrorCode("ISO_404_ID");
         
         RuleFor(x => x.IsoRevision)
             .NotNull()
