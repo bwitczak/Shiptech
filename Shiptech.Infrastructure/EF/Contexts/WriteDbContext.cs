@@ -25,5 +25,6 @@ internal sealed class WriteDbContext : DbContext
         modelBuilder.ApplyConfiguration<Iso>(configuration);
         modelBuilder.ApplyConfiguration<Assortment>(configuration);
         modelBuilder.ApplyConfiguration<ChemicalProcess>(configuration);
+        modelBuilder.ApplyConfiguration<AssortmentDictionary>(configuration);
     }
 }

@@ -9,7 +9,8 @@ using Shiptech.Infrastructure.EF.Models.Consts;
 namespace Shiptech.Infrastructure.EF.Configurations;
 
 internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeConfiguration<Drawing>,
-    IEntityTypeConfiguration<Iso>, IEntityTypeConfiguration<Assortment>, IEntityTypeConfiguration<ChemicalProcess>
+    IEntityTypeConfiguration<Iso>, IEntityTypeConfiguration<Assortment>, IEntityTypeConfiguration<ChemicalProcess>,
+    IEntityTypeConfiguration<AssortmentDictionary>
 {
     public void Configure(EntityTypeBuilder<Ship> builder)
     {
@@ -279,6 +280,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
         builder.ToTable("Assortments");
         builder.HasKey(x => x.Id);
+        builder.HasOne(typeof(AssortmentDictionary), "_standardNumber");
     }
 
     public void Configure(EntityTypeBuilder<ChemicalProcess> builder)
@@ -299,6 +301,81 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.HasKey(x => x.Id);
     }
     
+    public void Configure(EntityTypeBuilder<AssortmentDictionary> builder)
+    {
+        var nameConverter = new ValueConverter<AssortmentDictionaryName, string>(x => x.Value, x => new AssortmentDictionaryName(x));
+        var distinguishingConverter = new ValueConverter<Distinguishing, string>(x => x.Value, x => new Distinguishing(x));
+        var unitConverter = new ValueConverter<Unit, string>(
+            x => x.Value,
+            x => ConvertUnit(x));
+        var amountConverter = new ValueConverter<AssortmentDictionaryAmount, double>(x => x.Value, x => new AssortmentDictionaryAmount(x));
+        var weightConverter = new ValueConverter<AssortmentDictionaryWeight, double>(x => x.Value, x => new AssortmentDictionaryWeight(x));
+        var materialConverter = new ValueConverter<AssortmentDictionaryMaterial, string?>(x => x.Value, x => new AssortmentDictionaryMaterial(x));
+        var kindConverter = new ValueConverter<AssortmentDictionaryKind, string?>(x => x.Value, x => new AssortmentDictionaryKind(x));
+        var lengthConverter = new ValueConverter<AssortmentDictionaryLength, ushort>(x => x.Value, x => new AssortmentDictionaryLength(x));
+        var roConverter = new ValueConverter<RO, string>(x => x.Value, x => new RO(x));
+        var commentConverter = new ValueConverter<Comment, string?>(x => x.Value, x => new Comment(x));
+        
+        builder.Property(x => x.Id)
+            .HasConversion(x => x.Value, x => new AssortmentDictionaryId(x));
+
+        builder.Property(typeof(AssortmentDictionaryName), "_name")
+            .HasConversion(nameConverter)
+            .HasColumnName("Name")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
+        builder.Property(typeof(Distinguishing), "_distinguishing")
+            .HasConversion(distinguishingConverter)
+            .HasColumnName("Distinguishing")
+            .HasColumnType("char(6)")
+            .IsRequired();
+        
+        builder.Property(typeof(Unit), "_unit")
+            .HasConversion(unitConverter)
+            .HasColumnName("Unit")
+            .HasColumnType("char(4)")
+            .IsRequired();
+        
+        builder.Property(typeof(AssortmentDictionaryAmount), "_amount")
+            .HasConversion(amountConverter)
+            .HasColumnName("Amount")
+            .HasColumnType("decimal(5,3)")
+            .IsRequired();
+        
+        builder.Property(typeof(AssortmentDictionaryWeight), "_weight")
+            .HasConversion(weightConverter)
+            .HasColumnName("Weight")
+            .HasColumnType("decimal(5,3)")
+            .IsRequired();
+        
+        builder.Property(typeof(AssortmentDictionaryMaterial), "_material")
+            .HasConversion(materialConverter)
+            .HasColumnName("Material")
+            .HasColumnType("varchar");
+        
+        builder.Property(typeof(AssortmentDictionaryKind), "_kind")
+            .HasConversion(kindConverter)
+            .HasColumnName("Kind")
+            .HasColumnType("varchar");
+        
+        builder.Property(typeof(AssortmentDictionaryLength), "_length")
+            .HasConversion(lengthConverter)
+            .HasColumnName("Length")
+            .HasColumnType("smallint");
+        
+        builder.Property(typeof(RO), "_ro")
+            .HasConversion(roConverter)
+            .HasColumnName("RO")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
+        builder.Property(typeof(Comment), "_comment")
+            .HasConversion(commentConverter)
+            .HasColumnName("Comment")
+            .HasColumnType("varchar");
+    }
+    
     private static string? ConvertAtest(string? x)
     {
         return x switch
@@ -317,6 +394,16 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             StageConsts.Odp => StageConsts.Odi,
             StageConsts.Ods => StageConsts.Ods,
             _ => StageConsts.None
+        };
+    }
+    
+    private static string ConvertUnit(string x)
+    {
+        return x switch
+        {
+            UnitConsts.Kg => UnitConsts.Kg,
+            UnitConsts.Szt => UnitConsts.Szt,
+            _ => ""
         };
     }
 }

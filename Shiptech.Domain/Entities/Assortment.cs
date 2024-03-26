@@ -21,6 +21,7 @@ namespace Shiptech.Domain.Entities
         private AssemblyQuantity _assemblyQuantity;
         private AssemblyLength _assemblyLength;
         private AssemblyWeight _assemblyWeight;
+        private AssortmentDictionary _standardNumber;
 
         private Assortment(Comment comment)
         {
