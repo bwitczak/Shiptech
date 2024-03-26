@@ -19,7 +19,7 @@ internal sealed class AssortmentRepository() : IAssortmentRepository
     
     public async Task<Assortment?> GetAsync(AssortmentId id)
     {
-        return await _assortments.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id.Value);
+        return await _assortments.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Assortment assortment)

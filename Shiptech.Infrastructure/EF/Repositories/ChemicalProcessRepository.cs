@@ -19,7 +19,7 @@ internal sealed class ChemicalProcessRepository() : IChemicalProcessRepository
 
     public async Task<ChemicalProcess?> GetAsync(ChemicalProcessId id)
     {
-        return await _chemicalProcesses.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id.Value);
+        return await _chemicalProcesses.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(ChemicalProcess chemicalProcess)

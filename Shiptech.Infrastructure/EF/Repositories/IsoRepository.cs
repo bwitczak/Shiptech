@@ -19,7 +19,7 @@ internal sealed class IsoRepository() : IIsoRepository
 
     public async Task<Iso?> GetAsync(IsoId id)
     {
-        return await _isos.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id.Value);
+        return await _isos.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Iso iso)

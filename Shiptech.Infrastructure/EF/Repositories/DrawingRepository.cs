@@ -19,7 +19,7 @@ internal sealed class DrawingRepository() : IDrawingRepository
 
     public async Task<Drawing?> GetAsync(DrawingId id)
     {
-        return await _drawings.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id.Value);
+        return await _drawings.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task CreateAsync(Drawing drawing)
