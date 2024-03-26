@@ -32,7 +32,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
             {
                 if (!int.TryParse(x, out var number))
                 {
-                    return true;
+                    return false;
                 }
                 
                 return number is >= 100 and <= 999;
@@ -45,7 +45,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
             {
                 if (!int.TryParse(x, out var number))
                 {
-                    return true;
+                    return false;
                 }
                 
                 return number is >= 100 and <= 999;
