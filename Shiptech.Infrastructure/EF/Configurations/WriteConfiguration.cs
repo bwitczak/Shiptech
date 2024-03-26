@@ -14,10 +14,14 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 {
     public void Configure(EntityTypeBuilder<Ship> builder)
     {
+        var idConverter = new ValueConverter<ShipId, Guid>(x => x.Value, x => new ShipId(x));
         var ordererConverter = new ValueConverter<Orderer, string>(x => x.Value, x => new Orderer(x));
 
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new ShipId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
 
         builder.Property(typeof(Orderer), "_orderer")
             .HasConversion(ordererConverter)
@@ -33,6 +37,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Drawing> builder)
     {
+        var idConverter = new ValueConverter<DrawingId, string>(x => x.Value, x => new DrawingId(x));
         var drawingRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var lotConverter = new ValueConverter<Lot, string?>(x => x.Value, x => new Lot(x));
         var blockConverter = new ValueConverter<Block, string?>(x => x.Value, x => new Block(x));
@@ -42,9 +47,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             x => ConvertStage(x));
         var dateConverter = new ValueConverter<CreationDate, DateTime>(x => (DateTime) x.Value!, x => new CreationDate(x));
         var authorConverter = new ValueConverter<Author, string>(x => x.Value, x => new Author(x));
-
+        
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new DrawingId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("varchar")
+            .IsRequired();
 
         builder.Property(typeof(Revision), "_drawingRevision")
             .HasConversion(drawingRevisionConverter)
@@ -91,6 +99,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Iso> builder)
     {
+        var idConverter = new ValueConverter<IsoId, string>(x => x.Value, x => new IsoId(x));
         var isoRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var isoSystemConverter = new ValueConverter<IsoSystem, string>(x => x.Value, x => new IsoSystem(x));
         var classConverter = new ValueConverter<Class, string>(x => x.Value, x => new Class(x));
@@ -101,7 +110,10 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var kzmDateConverter = new ValueConverter<KzmDate, DateTime?>(x => x.Value, x => new KzmDate(x));
 
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new IsoId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("varchar")
+            .IsRequired();
 
         builder.Property(typeof(Revision), "_isoRevision")
             .HasConversion(isoRevisionConverter)
@@ -144,6 +156,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Assortment> builder)
     {
+        var idConverter = new ValueConverter<AssortmentId, string>(x => x.Value, x => new AssortmentId(x));
         var positionConverter = new ValueConverter<Position, char>(x => x.Value, x => new Position(x));
         var drawingLengthConverter =
             new ValueConverter<DrawingLength, ushort?>(x => x.Value, x => new DrawingLength(x));
@@ -189,7 +202,10 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
                 x => new AssemblyWeight(x));
 
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new AssortmentId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("varchar")
+            .IsRequired();
 
         builder.Property(typeof(Position), "_position")
             .HasConversion(positionConverter)
@@ -285,11 +301,15 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<ChemicalProcess> builder)
     {
+        var idConverter = new ValueConverter<ChemicalProcessId, string>(x => x.Value, x => new ChemicalProcessId(x));
         var chemicalProcessNameConverter =
             new ValueConverter<ChemicalProcessName, string>(x => x.Value, x => new ChemicalProcessName(x));
 
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new ChemicalProcessId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("varchar")
+            .IsRequired();
 
         builder.Property(typeof(ChemicalProcessName), "_chemicalProcessName")
             .HasConversion(chemicalProcessNameConverter)
@@ -303,6 +323,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
     
     public void Configure(EntityTypeBuilder<AssortmentDictionary> builder)
     {
+        var idConverter = new ValueConverter<AssortmentDictionaryId, string>(x => x.Value, x => new AssortmentDictionaryId(x));
         var nameConverter = new ValueConverter<AssortmentDictionaryName, string>(x => x.Value, x => new AssortmentDictionaryName(x));
         var distinguishingConverter = new ValueConverter<Distinguishing, string>(x => x.Value, x => new Distinguishing(x));
         var unitConverter = new ValueConverter<Unit, string>(
@@ -317,7 +338,10 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var commentConverter = new ValueConverter<Comment, string?>(x => x.Value, x => new Comment(x));
         
         builder.Property(x => x.Id)
-            .HasConversion(x => x.Value, x => new AssortmentDictionaryId(x));
+            .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("varchar")
+            .IsRequired();
 
         builder.Property(typeof(AssortmentDictionaryName), "_name")
             .HasConversion(nameConverter)
