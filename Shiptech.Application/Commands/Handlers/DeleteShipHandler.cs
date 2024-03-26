@@ -1,4 +1,3 @@
-using Shiptech.Application.Exceptions;
 using Shiptech.Domain.Repositories;
 using Shiptech.Shared.Abstractions.Commands;
 

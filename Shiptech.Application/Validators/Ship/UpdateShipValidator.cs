@@ -1,7 +1,6 @@
 using FluentValidation;
 using FluentValidation.Results;
 using Shiptech.Application.Commands;
-using Shiptech.Application.Exceptions;
 using Shiptech.Application.Services;
 
 namespace Shiptech.Application.Validators.Ship;

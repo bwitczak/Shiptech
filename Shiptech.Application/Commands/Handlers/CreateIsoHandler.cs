@@ -1,4 +1,3 @@
-using Shiptech.Application.Exceptions;
 using Shiptech.Application.Services;
 using Shiptech.Domain.Factories;
 using Shiptech.Domain.Repositories;

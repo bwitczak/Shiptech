@@ -1,4 +1,3 @@
-using Shiptech.Application.Exceptions;
 using Shiptech.Domain.Factories;
 using Shiptech.Domain.Repositories;
 using Shiptech.Shared.Abstractions.Commands;
@@ -14,13 +13,6 @@ internal sealed class UpdateAssortmentHandler(IAssortmentRepository repository, 
             technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
-
-        var assortment = await repository.GetAsync(id);
-
-        // if (assortment is null)
-        // {
-        //     throw new AssortmentNotExistsException(id);
-        // }
 
         var updated = factory.Create(id, position, drawingLength, addition,
             technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,

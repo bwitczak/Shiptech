@@ -1,4 +1,3 @@
-using Shiptech.Application.Exceptions;
 using Shiptech.Domain.Factories;
 using Shiptech.Domain.Repositories;
 using Shiptech.Shared.Abstractions.Commands;
@@ -12,12 +11,6 @@ internal sealed class UpdateChemicalProcessHandler(IChemicalProcessRepository re
     public async Task HandleAsync(UpdateChemicalProcess command)
     {
         var (id, chemicalProcessName) = command;
-        var chemicalProcess = await repository.GetAsync(id);
-
-        // if (chemicalProcess is null)
-        // {
-        //     throw new ChemicalProcessNotExistsException(id);
-        // }
 
         var updated = factory.Create(id, chemicalProcessName);
         await repository.UpdateAsync(updated);
