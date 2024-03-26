@@ -4,7 +4,8 @@ namespace Shiptech.Domain.Entities
 {
     public class Iso
     {
-        public IsoId Id { get; private set; }
+        public Id Id { get; private set; }
+        private IsoName _name;
         private Revision _isoRevision;
         private IsoSystem _system;
         private Class _class;
@@ -18,10 +19,11 @@ namespace Shiptech.Domain.Entities
         {
         }
 
-        internal Iso(IsoId id, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber,
+        internal Iso(Id id, IsoName name, Revision isoRevision, IsoSystem system, Class @class, Atest atest, KzmNumber kzmNumber,
             KzmDate kzmKzmDate)
         {
             Id = id;
+            _name = name;
             _isoRevision = isoRevision;
             _system = system;
             _class = @class;

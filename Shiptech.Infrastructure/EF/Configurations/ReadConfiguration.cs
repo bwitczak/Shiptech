@@ -10,9 +10,9 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
 {
     public void Configure(EntityTypeBuilder<ShipReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
             .HasDefaultValueSql("uuid_generate_v4()")
             .IsRequired();
         
@@ -22,17 +22,22 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .IsRequired();
 
         builder.ToTable("Ships");
-        builder.HasKey(x => x.Id);
-        builder.HasIndex(x => x.Orderer).IsUnique();
+        builder.HasKey(x => x.Orderer);
         builder.HasMany(x => x.Drawings)
             .WithOne(x => x.Ship);
     }
 
     public void Configure(EntityTypeBuilder<DrawingReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .HasDefaultValueSql("uuid_generate_v4()")
+            .IsRequired();
+        
+        builder.Property(x => x.Name)
+            .HasColumnName("Name")
+            .HasColumnType("varchar")
             .IsRequired();
         
         builder.Property(x => x.DrawingRevision)
@@ -74,9 +79,15 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
 
     public void Configure(EntityTypeBuilder<IsoReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .HasDefaultValueSql("uuid_generate_v4()")
+            .IsRequired();
+        
+        builder.Property(x => x.Name)
+            .HasColumnName("Name")
+            .HasColumnType("varchar")
             .IsRequired();
         
         builder.Property(x => x.IsoRevision)
@@ -107,16 +118,22 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnType("timestamp");
         
         builder.ToTable("Isos");
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Name);
         builder.HasMany(x => x.Assortments)
             .WithOne(x => x.Iso);
     }
 
     public void Configure(EntityTypeBuilder<AssortmentReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .HasDefaultValueSql("uuid_generate_v4()")
+            .IsRequired();
+        
+        builder.Property(x => x.Name)
+            .HasColumnName("Name")
+            .HasColumnType("varchar")
             .IsRequired();
         
         builder.Property(x => x.Position)
@@ -191,27 +208,39 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .IsRequired();
         
         builder.ToTable("Assortments");
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Name);
     }
 
     public void Configure(EntityTypeBuilder<ChemicalProcessReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .HasDefaultValueSql("uuid_generate_v4()")
+            .IsRequired();
+        
+        builder.Property(x => x.ChemicalProcessCode)
+            .HasColumnName("ChemicalProcessCode")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
+        builder.Property(x => x.ChemicalProcessName)
+            .HasColumnName("ChemicalProcessName")
+            .HasColumnType("varchar")
             .IsRequired();
         
         builder.ToTable("ChemicalProcesses");
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.ChemicalProcessCode);
         builder.HasMany(x => x.Isos)
             .WithOne(x => x.ChemicalProcess);
     }
 
     public void Configure(EntityTypeBuilder<AssortmentDictionaryReadModel> builder)
     {
-        // TODO: Set custom ID type
         builder.Property(x => x.Id)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .HasDefaultValueSql("uuid_generate_v4()")
             .IsRequired();
         
         builder.Property(x => x.Name)
@@ -261,7 +290,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnType("varchar");
         
         builder.ToTable("AssortmentDictionary");
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.Name);
         builder.HasMany(x => x.Assortments)
             .WithOne(x => x.AssortmentDictionary);
     }

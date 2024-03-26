@@ -5,6 +5,6 @@ namespace Shiptech.Domain.Factories
 {
     public interface IDrawingFactory
     {
-        Drawing Create(DrawingId id, Revision drawingRevision, Lot lot, Block block, Section section, Stage stage, CreationDate kzmDate, Author author);
+        Drawing Create(Id id, DrawingName name, Revision drawingRevision, Lot lot, Block block, Section section, Stage stage, CreationDate kzmDate, Author author);
     }
 }
