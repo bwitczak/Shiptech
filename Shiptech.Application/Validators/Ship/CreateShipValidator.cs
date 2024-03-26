@@ -9,12 +9,6 @@ public class CreateShipValidator : AbstractValidator<CreateShip>
 {
     public CreateShipValidator(IShipReadService service)
     {
-        RuleFor(x => x.Id)
-            .NotNull()
-            .NotEmpty()
-            .WithErrorCode("SHIP_400_ID")
-            .WithMessage("Nazwa statku nie może być pusta!");
-
         RuleFor(x => x.Orderer)
             .NotNull()
             .NotEmpty()
