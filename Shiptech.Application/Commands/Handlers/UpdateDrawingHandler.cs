@@ -9,9 +9,9 @@ internal sealed class UpdateDrawingHandler
 {
     public async Task HandleAsync(UpdateDrawing command)
     {
-        var (id, drawingRevision, lot, block, section, stage, date, author) = command;
+        var (id, name, drawingRevision, lot, block, section, stage, date, author) = command;
 
-        var updated = factory.Create(id, drawingRevision, lot, block, section, stage, date, author);
+        var updated = factory.Create(id, name, drawingRevision, lot, block, section, stage, date, author);
         await repository.UpdateAsync(updated);
     }
 }

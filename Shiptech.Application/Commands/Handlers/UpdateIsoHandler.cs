@@ -8,9 +8,9 @@ internal sealed class UpdateIsoHandler(IIsoRepository repository, IIsoFactory fa
 {
     public async Task HandleAsync(UpdateIso command)
     {
-        var (id, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
+        var (id, name, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
 
-        var updated = factory.Create(id, isoRevision, system, @class, atest, kzmNumber, kzmDate);
+        var updated = factory.Create(id, name, isoRevision, system, @class, atest, kzmNumber, kzmDate);
         await repository.UpdateAsync(updated);
     }
 }

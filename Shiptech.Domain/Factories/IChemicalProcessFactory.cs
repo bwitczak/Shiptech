@@ -5,6 +5,6 @@ namespace Shiptech.Domain.Factories
 {
     public interface IChemicalProcessFactory
     {
-        ChemicalProcess Create(ChemicalProcessId id, ChemicalProcessName chemicalProcessName);
+        ChemicalProcess Create(Id Id, ChemicalProcessCode code, ChemicalProcessName chemicalProcessName);
     }
 }

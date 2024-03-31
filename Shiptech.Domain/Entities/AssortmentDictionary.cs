@@ -4,7 +4,8 @@ namespace Shiptech.Domain.Entities;
 
 public class AssortmentDictionary
 {
-    public AssortmentDictionaryId Id { get; private set; }
+    public Id Id { get; private set; }
+    private AssortmentDictionaryNumber _number;
     private AssortmentDictionaryName _name;
     private Distinguishing _distinguishing;
     private Unit _unit;
@@ -20,9 +21,10 @@ public class AssortmentDictionary
     {
     }
 
-    internal AssortmentDictionary(AssortmentDictionaryId id, AssortmentDictionaryName name, Distinguishing distinguishing, Unit unit, AssortmentDictionaryAmount amount, AssortmentDictionaryWeight weight, AssortmentDictionaryMaterial material, AssortmentDictionaryKind kind, AssortmentDictionaryLength length, RO ro, Comment comment)
+    internal AssortmentDictionary(Id id, AssortmentDictionaryNumber number, AssortmentDictionaryName name, Distinguishing distinguishing, Unit unit, AssortmentDictionaryAmount amount, AssortmentDictionaryWeight weight, AssortmentDictionaryMaterial material, AssortmentDictionaryKind kind, AssortmentDictionaryLength length, RO ro, Comment comment)
     {
         Id = id;
+        _number = number;
         _name = name;
         _distinguishing = distinguishing;
         _unit = unit;

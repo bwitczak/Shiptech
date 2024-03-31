@@ -14,7 +14,7 @@ internal sealed class ChemicalProcessService() : IChemicalProcessReadService
         _chemicalProcesses = context.ChemicalProcess;
     }
 
-    public async Task<bool> ExistsById(string id)
+    public async Task<bool> ExistsById(Guid id)
     {
         return await _chemicalProcesses.AnyAsync(x => x.Id == id);
     }

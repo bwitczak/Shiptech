@@ -9,14 +9,11 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
 {
     public CreateDrawingValidator(IDrawingReadService service)
     {
-        RuleFor(x => x.Id)
+        RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("DRAWING_400_ID")
-            .WithMessage("Nazwa rysunku nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("DRAWING_409_ID");
+            .WithErrorCode("DRAWING_400_NAME")
+            .WithMessage("Nazwa rysunku nie może być pusta!");
         
         RuleFor(x => x.DrawingRevision)
             .NotNull()

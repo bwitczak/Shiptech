@@ -2,4 +2,4 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands;
 
-public record DeleteAssortment(string Id) : ICommand;
+public record DeleteAssortment(Guid Id) : ICommand;

@@ -2,7 +2,7 @@ namespace Shiptech.Infrastructure.EF.Models;
 
 internal class AssortmentDictionaryReadModel
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
     public string Name { get; set; }
     public string Distinguishing { get; set; }
     public string Unit { get; set; }

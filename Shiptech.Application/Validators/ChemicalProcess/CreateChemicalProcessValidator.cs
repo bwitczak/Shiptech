@@ -8,14 +8,11 @@ public class CreateChemicalProcessValidator : AbstractValidator<CreateChemicalPr
 {
     public CreateChemicalProcessValidator(IChemicalProcessReadService service)
     {
-        RuleFor(x => x.Id)
+        RuleFor(x => x.ChemicalProcessCode)
             .NotNull()
             .NotEmpty()
             .WithErrorCode("CHEMICAL_PROCESS_400_ID")
-            .WithMessage("Kod procesu chemicznego nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("CHEMICAL_PROCESS_409_ID");
+            .WithMessage("Kod procesu chemicznego nie może być puste!");
 
         RuleFor(x => x.ChemicalProcessName)
             .NotNull()

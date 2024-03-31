@@ -37,7 +37,8 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 
     public void Configure(EntityTypeBuilder<Drawing> builder)
     {
-        var idConverter = new ValueConverter<DrawingId, string>(x => x.Value, x => new DrawingId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
+        var nameConverter = new ValueConverter<DrawingName, string>(x => x.Value, x => new DrawingName(x));
         var drawingRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var lotConverter = new ValueConverter<Lot, string?>(x => x.Value, x => new Lot(x));
         var blockConverter = new ValueConverter<Block, string?>(x => x.Value, x => new Block(x));
@@ -47,10 +48,16 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             x => ConvertStage(x));
         var dateConverter = new ValueConverter<CreationDate, DateTime>(x => (DateTime) x.Value!, x => new CreationDate(x));
         var authorConverter = new ValueConverter<Author, string>(x => x.Value, x => new Author(x));
-        
+
         builder.Property(x => x.Id)
             .HasConversion(idConverter)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
+        
+        builder.Property(typeof(DrawingName), "_name")
+            .HasConversion(nameConverter)
+            .HasColumnName("Name")
             .HasColumnType("varchar")
             .IsRequired();
 
@@ -93,13 +100,14 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .IsRequired();
 
         builder.ToTable("Drawings");
-        builder.HasKey(x => x.Id);
+        builder.HasKey("_name");
         builder.HasMany(typeof(Iso), "_isos");
     }
 
     public void Configure(EntityTypeBuilder<Iso> builder)
     {
-        var idConverter = new ValueConverter<IsoId, string>(x => x.Value, x => new IsoId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
+        var nameConverter = new ValueConverter<IsoName, string>(x => x.Value, x => new IsoName(x));
         var isoRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var isoSystemConverter = new ValueConverter<IsoSystem, string>(x => x.Value, x => new IsoSystem(x));
         var classConverter = new ValueConverter<Class, string>(x => x.Value, x => new Class(x));
@@ -112,6 +120,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(x => x.Id)
             .HasConversion(idConverter)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
+        
+        builder.Property(typeof(IsoName), "_name")
+            .HasConversion(nameConverter)
+            .HasColumnName("Name")
             .HasColumnType("varchar")
             .IsRequired();
 
@@ -149,14 +163,15 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnType("timestamp");
 
         builder.ToTable("Isos");
-        builder.HasKey(x => x.Id);
+        builder.HasKey("_name");
         builder.HasOne(typeof(ChemicalProcess), "_chemicalProcess");
         builder.HasMany(typeof(Assortment), "_assortments");
     }
 
     public void Configure(EntityTypeBuilder<Assortment> builder)
     {
-        var idConverter = new ValueConverter<AssortmentId, string>(x => x.Value, x => new AssortmentId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
+        var nameConverter = new ValueConverter<AssortmentName, string>(x => x.Value, x => new AssortmentName(x));
         var positionConverter = new ValueConverter<Position, char>(x => x.Value, x => new Position(x));
         var drawingLengthConverter =
             new ValueConverter<DrawingLength, ushort?>(x => x.Value, x => new DrawingLength(x));
@@ -204,6 +219,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(x => x.Id)
             .HasConversion(idConverter)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
+        
+        builder.Property(typeof(IsoName), "_name")
+            .HasConversion(nameConverter)
+            .HasColumnName("Name")
             .HasColumnType("varchar")
             .IsRequired();
 
@@ -295,19 +316,26 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .IsRequired();
 
         builder.ToTable("Assortments");
-        builder.HasKey(x => x.Id);
+        builder.HasKey("_name");
         builder.HasOne(typeof(AssortmentDictionary), "_standardNumber");
     }
 
     public void Configure(EntityTypeBuilder<ChemicalProcess> builder)
     {
-        var idConverter = new ValueConverter<ChemicalProcessId, string>(x => x.Value, x => new ChemicalProcessId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
+        var chemicalProcessCodeConverter = new ValueConverter<ChemicalProcessCode, string>(x => x.Value, x => new ChemicalProcessCode(x));
         var chemicalProcessNameConverter =
             new ValueConverter<ChemicalProcessName, string>(x => x.Value, x => new ChemicalProcessName(x));
 
         builder.Property(x => x.Id)
             .HasConversion(idConverter)
             .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
+        
+        builder.Property(typeof(AssemblyWeight), "_chemicalProcessCode")
+            .HasConversion(chemicalProcessCodeConverter)
+            .HasColumnName("ChemicalProcessCode")
             .HasColumnType("varchar")
             .IsRequired();
 
@@ -318,12 +346,13 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .IsRequired();
 
         builder.ToTable("ChemicalProcesses");
-        builder.HasKey(x => x.Id);
+        builder.HasKey("_chemicalProcessCode");
     }
     
     public void Configure(EntityTypeBuilder<AssortmentDictionary> builder)
     {
-        var idConverter = new ValueConverter<AssortmentDictionaryId, string>(x => x.Value, x => new AssortmentDictionaryId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
+        var numberConverter = new ValueConverter<AssortmentDictionaryNumber, string>(x => x.Value, x => new AssortmentDictionaryNumber(x));
         var nameConverter = new ValueConverter<AssortmentDictionaryName, string>(x => x.Value, x => new AssortmentDictionaryName(x));
         var distinguishingConverter = new ValueConverter<Distinguishing, string>(x => x.Value, x => new Distinguishing(x));
         var unitConverter = new ValueConverter<Unit, string>(
@@ -339,6 +368,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         
         builder.Property(x => x.Id)
             .HasConversion(idConverter)
+            .HasColumnName("Id")
+            .HasColumnType("uuid")
+            .IsRequired();
+        
+        builder.Property(typeof(AssortmentDictionaryNumber), "_number")
+            .HasConversion(numberConverter)
             .HasColumnName("Id")
             .HasColumnType("varchar")
             .IsRequired();
@@ -398,6 +433,9 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasConversion(commentConverter)
             .HasColumnName("Comment")
             .HasColumnType("varchar");
+        
+        builder.ToTable("AssortmentDictionary");
+        builder.HasKey("_number");
     }
     
     private static string? ConvertAtest(string? x)

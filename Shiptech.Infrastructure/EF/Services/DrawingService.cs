@@ -14,7 +14,7 @@ internal sealed class DrawingService() : IDrawingReadService
         _drawings = context.Drawing;
     }
 
-    public async Task<bool> ExistsById(string id)
+    public async Task<bool> ExistsById(Guid id)
     {
         return await _drawings.AnyAsync(x => x.Id == id);
     }
