@@ -16,5 +16,10 @@ public class MappingProfile : Profile
         
         CreateMap<DrawingWithNoRelationsDto, DrawingReadModel>();
         CreateMap<DrawingReadModel, DrawingWithNoRelationsDto>();
+        
+        CreateMap<DrawingDto, DrawingReadModel>().ForMember(
+            x => x.Isos,
+            x => x.Ignore());
+        CreateMap<DrawingReadModel, DrawingDto>();
     }
 }
