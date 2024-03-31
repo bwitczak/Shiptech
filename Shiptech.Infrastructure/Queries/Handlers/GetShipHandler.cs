@@ -15,6 +15,7 @@ internal sealed class GetShipHandler(ReadDbContext context, IMapper mapper) : IQ
     public async Task<ShipDto> HandleAsync(GetShip query)
     {
         return await _ships
+            .Include(x => x.Drawings.Take(20))
             .Where(x => x.Id == query.Id)
             .Select(x => mapper.Map<ShipDto>(x))
             .AsNoTracking()
