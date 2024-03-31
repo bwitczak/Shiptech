@@ -14,7 +14,7 @@ internal sealed class IsoService() : IIsoReadService
         _isos = context.Iso;
     }
 
-    public async Task<bool> ExistsById(string id)
+    public async Task<bool> ExistsById(Guid id)
     {
         return await _isos.AnyAsync(x => x.Id == id);
     }

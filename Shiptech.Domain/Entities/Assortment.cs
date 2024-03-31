@@ -4,7 +4,8 @@ namespace Shiptech.Domain.Entities
 {
     public class Assortment
     {
-        public AssortmentId Id { get; private set; }
+        public Id Id { get; private set; }
+        private AssortmentName _name;
         private Position _position;
         private DrawingLength _drawingLength;
         private Addition _addition;
@@ -27,12 +28,13 @@ namespace Shiptech.Domain.Entities
         {
         }
 
-        internal Assortment(AssortmentId id, Position position, DrawingLength drawingLength, Addition addition,
+        internal Assortment(Id id, AssortmentName name, Position position, DrawingLength drawingLength, Addition addition,
             TechnologicalAddition technologicalAddition, AssortmentStage stage, Comment comment, D15I d15I, D15II d15II, 
             D1I d1I, D1II d1II, PrefabricationQuantity prefabricationQuantity, PrefabricationLength prefabricationLength,
             PrefabricationWeight prefabricationWeight, AssemblyQuantity assemblyQuantity, AssemblyLength assemblyLength, AssemblyWeight assemblyWeight)
         {
             Id = id;
+            _name = name;
             _position = position;
             _drawingLength = drawingLength;
             _addition = addition;

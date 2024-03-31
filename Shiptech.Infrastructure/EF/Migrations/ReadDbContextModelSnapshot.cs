@@ -25,9 +25,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Name");
 
                     b.Property<double>("Amount")
                         .HasColumnType("decimal(5,3)")
@@ -42,6 +42,11 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(6)")
                         .HasColumnName("Distinguishing");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
                     b.Property<string>("Kind")
                         .HasColumnType("varchar")
                         .HasColumnName("Kind");
@@ -53,11 +58,6 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     b.Property<string>("Material")
                         .HasColumnType("varchar")
                         .HasColumnName("Material");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar")
-                        .HasColumnName("Name");
 
                     b.Property<string>("RO")
                         .IsRequired()
@@ -73,16 +73,16 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Weight");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
                     b.ToTable("AssortmentDictionary", (string)null);
                 });
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Name");
 
                     b.Property<short?>("Addition")
                         .HasColumnType("smallint")
@@ -100,9 +100,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("AssemblyWeight");
 
-                    b.Property<string>("AssortmentDictionaryId")
+                    b.Property<string>("AssortmentDictionaryName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Comment")
                         .HasColumnType("varchar")
@@ -128,9 +128,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("DrawingLength");
 
-                    b.Property<string>("IsoId")
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.Property<string>("IsoName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar");
 
                     b.Property<char>("Position")
                         .HasColumnType("char(1)")
@@ -156,35 +161,43 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("TechnologicalAddition");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
-                    b.HasIndex("AssortmentDictionaryId");
+                    b.HasIndex("AssortmentDictionaryName");
 
-                    b.HasIndex("IsoId");
+                    b.HasIndex("IsoName");
 
                     b.ToTable("Assortments", (string)null);
                 });
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.ChemicalProcessReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<string>("ChemicalProcessCode")
+                        .HasColumnType("varchar")
+                        .HasColumnName("ChemicalProcessCode");
 
                     b.Property<string>("ChemicalProcessName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar")
+                        .HasColumnName("ChemicalProcessName");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
+
+                    b.HasKey("ChemicalProcessCode");
 
                     b.ToTable("ChemicalProcesses", (string)null);
                 });
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.DrawingReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -207,12 +220,18 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(3)")
                         .HasColumnName("Lot");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Name");
+
                     b.Property<string>("Section")
                         .HasColumnType("char(4)")
                         .HasColumnName("Section");
 
-                    b.Property<Guid>("ShipId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("ShipOrderer")
+                        .IsRequired()
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Stage")
                         .HasColumnType("char(3)")
@@ -220,33 +239,37 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShipId");
+                    b.HasIndex("ShipOrderer");
 
                     b.ToTable("Drawings", (string)null);
                 });
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.IsoReadModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("Id");
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Name");
 
                     b.Property<string>("Atest")
                         .HasColumnType("varchar")
                         .HasColumnName("Atest");
 
-                    b.Property<string>("ChemicalProcessId")
+                    b.Property<string>("ChemicalProcessCode")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Class")
                         .IsRequired()
                         .HasColumnType("char(6)")
                         .HasColumnName("Class");
 
-                    b.Property<string>("DrawingId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("DrawingId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id")
+                        .HasDefaultValueSql("uuid_generate_v4()");
 
                     b.Property<char>("IsoRevision")
                         .HasColumnType("char(1)")
@@ -265,9 +288,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("System");
 
-                    b.HasKey("Id");
+                    b.HasKey("Name");
 
-                    b.HasIndex("ChemicalProcessId");
+                    b.HasIndex("ChemicalProcessCode");
 
                     b.HasIndex("DrawingId");
 
@@ -276,21 +299,16 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.ShipReadModel", b =>
                 {
+                    b.Property<string>("Orderer")
+                        .HasColumnType("varchar")
+                        .HasColumnName("Orderer");
+
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("Id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<string>("Orderer")
-                        .IsRequired()
-                        .HasColumnType("varchar")
-                        .HasColumnName("Orderer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Orderer")
-                        .IsUnique();
+                    b.HasKey("Orderer");
 
                     b.ToTable("Ships", (string)null);
                 });
@@ -299,13 +317,13 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", "AssortmentDictionary")
                         .WithMany("Assortments")
-                        .HasForeignKey("AssortmentDictionaryId")
+                        .HasForeignKey("AssortmentDictionaryName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Shiptech.Infrastructure.EF.Models.IsoReadModel", "Iso")
                         .WithMany("Assortments")
-                        .HasForeignKey("IsoId")
+                        .HasForeignKey("IsoName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -318,7 +336,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Shiptech.Infrastructure.EF.Models.ShipReadModel", "Ship")
                         .WithMany("Drawings")
-                        .HasForeignKey("ShipId")
+                        .HasForeignKey("ShipOrderer")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -329,7 +347,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Shiptech.Infrastructure.EF.Models.ChemicalProcessReadModel", "ChemicalProcess")
                         .WithMany("Isos")
-                        .HasForeignKey("ChemicalProcessId")
+                        .HasForeignKey("ChemicalProcessCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

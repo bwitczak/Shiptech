@@ -18,8 +18,8 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "AssortmentDictionary",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Distinguishing = table.Column<string>(type: "char(6)", nullable: false),
                     Unit = table.Column<string>(type: "char(4)", nullable: false),
                     Amount = table.Column<double>(type: "numeric(5,3)", nullable: false),
@@ -32,38 +32,40 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssortmentDictionary", x => x.Id);
+                    table.PrimaryKey("PK_AssortmentDictionary", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ChemicalProcesses",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    ChemicalProcessName = table.Column<string>(type: "text", nullable: false)
+                    ChemicalProcessCode = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    ChemicalProcessName = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChemicalProcesses", x => x.Id);
+                    table.PrimaryKey("PK_ChemicalProcesses", x => x.ChemicalProcessCode);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Ships",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    Orderer = table.Column<string>(type: "varchar", nullable: false)
+                    Orderer = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ships", x => x.Id);
+                    table.PrimaryKey("PK_Ships", x => x.Orderer);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Drawings",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Name = table.Column<string>(type: "varchar", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     Lot = table.Column<string>(type: "char(3)", nullable: true),
                     Block = table.Column<string>(type: "char(3)", nullable: true),
@@ -71,16 +73,16 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Stage = table.Column<string>(type: "char(3)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Author = table.Column<string>(type: "varchar", nullable: false),
-                    ShipId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ShipOrderer = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drawings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Drawings_Ships_ShipId",
-                        column: x => x.ShipId,
+                        name: "FK_Drawings_Ships_ShipOrderer",
+                        column: x => x.ShipOrderer,
                         principalTable: "Ships",
-                        principalColumn: "Id",
+                        principalColumn: "Orderer",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -88,24 +90,25 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Isos",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     System = table.Column<string>(type: "varchar", nullable: false),
                     Class = table.Column<string>(type: "char(6)", nullable: false),
                     Atest = table.Column<string>(type: "varchar", nullable: true),
                     KzmNumber = table.Column<string>(type: "char(6)", nullable: true),
                     KzmDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    DrawingId = table.Column<string>(type: "text", nullable: false),
-                    ChemicalProcessId = table.Column<string>(type: "text", nullable: false)
+                    DrawingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ChemicalProcessCode = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Isos", x => x.Id);
+                    table.PrimaryKey("PK_Isos", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_Isos_ChemicalProcesses_ChemicalProcessId",
-                        column: x => x.ChemicalProcessId,
+                        name: "FK_Isos_ChemicalProcesses_ChemicalProcessCode",
+                        column: x => x.ChemicalProcessCode,
                         principalTable: "ChemicalProcesses",
-                        principalColumn: "Id",
+                        principalColumn: "ChemicalProcessCode",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Isos_Drawings_DrawingId",
@@ -119,7 +122,8 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Assortments",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
                     Position = table.Column<char>(type: "char(1)", nullable: false),
                     DrawingLength = table.Column<short>(type: "smallint", nullable: true),
                     Addition = table.Column<short>(type: "smallint", nullable: true),
@@ -136,56 +140,50 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     AssemblyQuantity = table.Column<short>(type: "smallint", nullable: false),
                     AssemblyLength = table.Column<short>(type: "smallint", nullable: false),
                     AssemblyWeight = table.Column<double>(type: "numeric(5,3)", nullable: false),
-                    IsoId = table.Column<string>(type: "text", nullable: false),
-                    AssortmentDictionaryId = table.Column<string>(type: "text", nullable: false)
+                    IsoName = table.Column<string>(type: "varchar", nullable: false),
+                    AssortmentDictionaryName = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Assortments", x => x.Id);
+                    table.PrimaryKey("PK_Assortments", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_Assortments_AssortmentDictionary_AssortmentDictionaryId",
-                        column: x => x.AssortmentDictionaryId,
+                        name: "FK_Assortments_AssortmentDictionary_AssortmentDictionaryName",
+                        column: x => x.AssortmentDictionaryName,
                         principalTable: "AssortmentDictionary",
-                        principalColumn: "Id",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Assortments_Isos_IsoId",
-                        column: x => x.IsoId,
+                        name: "FK_Assortments_Isos_IsoName",
+                        column: x => x.IsoName,
                         principalTable: "Isos",
-                        principalColumn: "Id",
+                        principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assortments_AssortmentDictionaryId",
+                name: "IX_Assortments_AssortmentDictionaryName",
                 table: "Assortments",
-                column: "AssortmentDictionaryId");
+                column: "AssortmentDictionaryName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assortments_IsoId",
+                name: "IX_Assortments_IsoName",
                 table: "Assortments",
-                column: "IsoId");
+                column: "IsoName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Drawings_ShipId",
+                name: "IX_Drawings_ShipOrderer",
                 table: "Drawings",
-                column: "ShipId");
+                column: "ShipOrderer");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Isos_ChemicalProcessId",
+                name: "IX_Isos_ChemicalProcessCode",
                 table: "Isos",
-                column: "ChemicalProcessId");
+                column: "ChemicalProcessCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Isos_DrawingId",
                 table: "Isos",
                 column: "DrawingId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ships_Orderer",
-                table: "Ships",
-                column: "Orderer",
-                unique: true);
         }
 
         /// <inheritdoc />

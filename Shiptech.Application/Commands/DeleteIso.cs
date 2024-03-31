@@ -2,4 +2,4 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands;
 
-public record DeleteIso(string Id) : ICommand;
+public record DeleteIso(Guid Id) : ICommand;

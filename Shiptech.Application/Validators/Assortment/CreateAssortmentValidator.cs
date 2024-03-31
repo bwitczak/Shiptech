@@ -8,14 +8,11 @@ public class CreateAssortmentValidator : AbstractValidator<CreateAssortment>
 {
     public CreateAssortmentValidator(IAssortmentReadService service)
     {
-        RuleFor(x => x.Id)
+        RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_400_ID")
-            .WithMessage("Nazwa asortymentu nie może być pusta!")
-            .MustAsync(async (x, _) => !await service.ExistsById(x))
-            .WithMessage(x => $"{x.Id} już istnieje w bazie!")
-            .WithErrorCode("ASSORTMENT_409_ID");
+            .WithErrorCode("ASSORTMENT_400_Name")
+            .WithMessage("Nazwa asortymentu nie może być pusta!");
         
         RuleFor(x => x.Position)
             .NotEmpty()

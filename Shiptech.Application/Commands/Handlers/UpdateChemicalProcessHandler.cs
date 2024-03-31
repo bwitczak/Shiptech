@@ -10,9 +10,9 @@ internal sealed class UpdateChemicalProcessHandler(IChemicalProcessRepository re
 {
     public async Task HandleAsync(UpdateChemicalProcess command)
     {
-        var (id, chemicalProcessName) = command;
+        var (id, chemicalProcessCode, chemicalProcessName) = command;
 
-        var updated = factory.Create(id, chemicalProcessName);
+        var updated = factory.Create(id, chemicalProcessCode, chemicalProcessName);
         await repository.UpdateAsync(updated);
     }
 }

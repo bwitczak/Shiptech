@@ -4,7 +4,8 @@ namespace Shiptech.Infrastructure.EF.Models;
 
 internal class DrawingReadModel
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
     public char DrawingRevision { get; set; }
     public string? Lot { get; set; }
     public string? Block { get; set; }

@@ -14,7 +14,7 @@ internal sealed class AssortmentService() : IAssortmentReadService
         _assortments = context.Assortment;
     }
 
-    public async Task<bool> ExistsById(string id)
+    public async Task<bool> ExistsById(Guid id)
     {
         return await _assortments.AnyAsync(x => x.Id == id);
     }

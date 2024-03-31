@@ -2,7 +2,8 @@ namespace Shiptech.Infrastructure.EF.Models;
 
 internal class AssortmentReadModel
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
     public char Position { get; set; }
     public short? DrawingLength { get; set; }
     public short? Addition { get; set; }

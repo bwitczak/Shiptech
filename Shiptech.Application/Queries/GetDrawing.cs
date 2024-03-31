@@ -5,5 +5,5 @@ namespace Shiptech.Application.Queries;
 
 public class GetDrawing : IQuery<DrawingDto>
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
 }

@@ -12,7 +12,7 @@ public class DeleteIsoValidator : AbstractValidator<DeleteIso>
             .NotNull()
             .NotEmpty()
             .WithErrorCode("ISO_400_ID")
-            .WithMessage("Nazwa izometryka nie może być pusta!")
+            .WithMessage("Identyfikator ISO nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
             .WithErrorCode("ISO_404_ID");

@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Factories
 {
     public sealed class ChemicalProcessFactory : IChemicalProcessFactory
     {
-        public ChemicalProcess Create(ChemicalProcessId id, ChemicalProcessName chemicalProcessName)
-            => new(id, chemicalProcessName);
+        public ChemicalProcess Create(Id id, ChemicalProcessCode code, ChemicalProcessName chemicalProcessName)
+            => new(id, code, chemicalProcessName);
     }
 }
