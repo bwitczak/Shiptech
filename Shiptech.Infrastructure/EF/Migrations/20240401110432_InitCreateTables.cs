@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -69,7 +70,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     Lot = table.Column<string>(type: "char(3)", nullable: true),
                     Block = table.Column<string>(type: "char(3)", nullable: true),
-                    Section = table.Column<string>(type: "char(4)", nullable: true),
+                    Section = table.Column<List<string>>(type: "text[]", nullable: true),
                     Stage = table.Column<string>(type: "char(3)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Author = table.Column<string>(type: "varchar", nullable: false),

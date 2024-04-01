@@ -55,7 +55,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
         
         builder.Property(x => x.Section)
             .HasColumnName("Section")
-            .HasColumnType("char(4)");
+            .HasColumnType("text[]");
         
         builder.Property(x => x.Stage)
             .HasColumnName("Stage")

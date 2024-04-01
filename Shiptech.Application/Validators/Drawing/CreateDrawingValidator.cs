@@ -50,7 +50,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
             .WithErrorCode("DRAWING_400_BLOCK")
             .WithMessage(x => $"Niepoprawny blok {x.Block}! Wymagane > 99 oraz < 1000");
         
-        RuleFor(x => x.Section)
+        RuleForEach(x => x.Section)
             .Must(x =>
             {
                 if (!int.TryParse(x, out var number))
@@ -58,7 +58,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
                     return false;
                 }
                 
-                return number is >= 1000 and <= 9999;
+                return number is >= 100 and <= 999;
             })
             .WithErrorCode("DRAWING_400_SECTION")
             .WithMessage(x => $"Niepoprawna sekcja {x.Section}! Wymagane > 999 oraz < 10000");
@@ -71,7 +71,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
         RuleFor(x => x.Date)
             .NotNull()
             .WithErrorCode("DRAWING_400_DATE")
-            .WithMessage("Data stworzenia nie może być pusta!");
+            .WithMessage("Data utworzenia nie może być pusta!");
         
         RuleFor(x => x.Author)
             .NotNull()

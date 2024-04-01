@@ -42,7 +42,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var drawingRevisionConverter = new ValueConverter<Revision, char>(x => x.Value, x => new Revision(x));
         var lotConverter = new ValueConverter<Lot, string?>(x => x.Value, x => new Lot(x));
         var blockConverter = new ValueConverter<Block, string?>(x => x.Value, x => new Block(x));
-        var sectionConverter = new ValueConverter<Section, string?>(x => x.Value, x => new Section(x));
+        var sectionConverter = new ValueConverter<Section, List<string>?>(x => x.Value, x => new Section(x));
         var stageConverter = new ValueConverter<Stage, string?>(
             x => x.Value,
             x => ConvertStage(x));
@@ -80,7 +80,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         builder.Property(typeof(Section), "_section")
             .HasConversion(sectionConverter)
             .HasColumnName("Section")
-            .HasColumnType("char(4)");
+            .HasColumnType("text[]");
 
         builder.Property(typeof(Stage), "_stage")
             .HasConversion(stageConverter)
