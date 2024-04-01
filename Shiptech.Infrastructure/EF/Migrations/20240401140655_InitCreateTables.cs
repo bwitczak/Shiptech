@@ -19,9 +19,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "AssortmentDictionary",
                 columns: table => new
                 {
-                    Name = table.Column<string>(type: "varchar", nullable: false),
+                    Number = table.Column<string>(type: "varchar", nullable: false),
                     Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
-                    Distinguishing = table.Column<string>(type: "char(6)", nullable: false),
+                    Name = table.Column<string>(type: "varchar", nullable: false),
+                    Distinguishing = table.Column<string>(type: "char(22)", nullable: false),
                     Unit = table.Column<string>(type: "char(4)", nullable: false),
                     Amount = table.Column<double>(type: "numeric(5,3)", nullable: false),
                     Weight = table.Column<double>(type: "numeric(5,3)", nullable: false),
@@ -33,7 +34,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AssortmentDictionary", x => x.Name);
+                    table.PrimaryKey("PK_AssortmentDictionary", x => x.Number);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,16 +143,16 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     AssemblyLength = table.Column<short>(type: "smallint", nullable: false),
                     AssemblyWeight = table.Column<double>(type: "numeric(5,3)", nullable: false),
                     IsoName = table.Column<string>(type: "varchar", nullable: false),
-                    AssortmentDictionaryName = table.Column<string>(type: "varchar", nullable: false)
+                    AssortmentDictionaryNumber = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assortments", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_Assortments_AssortmentDictionary_AssortmentDictionaryName",
-                        column: x => x.AssortmentDictionaryName,
+                        name: "FK_Assortments_AssortmentDictionary_AssortmentDictionaryNumber",
+                        column: x => x.AssortmentDictionaryNumber,
                         principalTable: "AssortmentDictionary",
-                        principalColumn: "Name",
+                        principalColumn: "Number",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Assortments_Isos_IsoName",
@@ -162,9 +163,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assortments_AssortmentDictionaryName",
+                name: "IX_Assortments_AssortmentDictionaryNumber",
                 table: "Assortments",
-                column: "AssortmentDictionaryName");
+                column: "AssortmentDictionaryNumber");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Assortments_IsoName",

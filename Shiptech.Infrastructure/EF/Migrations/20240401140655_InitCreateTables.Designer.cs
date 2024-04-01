@@ -13,7 +13,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240401110432_InitCreateTables")]
+    [Migration("20240401140655_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -29,9 +29,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<string>("Number")
                         .HasColumnType("varchar")
-                        .HasColumnName("Name");
+                        .HasColumnName("Number");
 
                     b.Property<double>("Amount")
                         .HasColumnType("decimal(5,3)")
@@ -43,7 +43,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
                     b.Property<string>("Distinguishing")
                         .IsRequired()
-                        .HasColumnType("char(6)")
+                        .HasColumnType("char(22)")
                         .HasColumnName("Distinguishing");
 
                     b.Property<Guid>("Id")
@@ -63,6 +63,11 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Material");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Name");
+
                     b.Property<string>("RO")
                         .IsRequired()
                         .HasColumnType("varchar")
@@ -77,7 +82,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Weight");
 
-                    b.HasKey("Name");
+                    b.HasKey("Number");
 
                     b.ToTable("AssortmentDictionary", (string)null);
                 });
@@ -104,7 +109,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("AssemblyWeight");
 
-                    b.Property<string>("AssortmentDictionaryName")
+                    b.Property<string>("AssortmentDictionaryNumber")
                         .IsRequired()
                         .HasColumnType("varchar");
 
@@ -167,7 +172,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
                     b.HasKey("Name");
 
-                    b.HasIndex("AssortmentDictionaryName");
+                    b.HasIndex("AssortmentDictionaryNumber");
 
                     b.HasIndex("IsoName");
 
@@ -321,7 +326,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", "AssortmentDictionary")
                         .WithMany("Assortments")
-                        .HasForeignKey("AssortmentDictionaryName")
+                        .HasForeignKey("AssortmentDictionaryNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

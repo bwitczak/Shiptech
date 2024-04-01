@@ -255,7 +255,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
         
         builder.Property(x => x.Distinguishing)
             .HasColumnName("Distinguishing")
-            .HasColumnType("char(6)")
+            .HasColumnType("char(22)")
             .IsRequired();
         
         builder.Property(x => x.Unit)
