@@ -16,7 +16,7 @@ internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, 
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;
 
-        var assortment = factory.Create(id, name, position, drawingLength, addition,
+        var assortment = factory.Create(Guid.NewGuid(), name, position, drawingLength, addition,
             technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight);

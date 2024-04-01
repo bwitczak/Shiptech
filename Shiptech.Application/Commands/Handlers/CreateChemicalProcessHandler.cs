@@ -13,7 +13,7 @@ internal sealed class CreateChemicalProcessHandler(IChemicalProcessRepository re
     {
         var (id, chemicalProcessCode, chemicalProcessName) = command;
 
-        var chemicalProcess = factory.Create(id, chemicalProcessCode, chemicalProcessName);
+        var chemicalProcess = factory.Create(Guid.NewGuid(), chemicalProcessCode, chemicalProcessName);
         await repository.CreateAsync(chemicalProcess);
     }
 }

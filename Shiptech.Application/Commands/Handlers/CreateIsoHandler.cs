@@ -12,7 +12,7 @@ internal sealed class CreateIsoHandler(IIsoRepository repository, IIsoFactory fa
     {
         var (id, name, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
 
-        var iso = factory.Create(id, name, isoRevision, system, @class, atest, kzmNumber, kzmDate);
+        var iso = factory.Create(Guid.NewGuid(), name, isoRevision, system, @class, atest, kzmNumber, kzmDate);
         await repository.CreateAsync(iso);
     }
 }
