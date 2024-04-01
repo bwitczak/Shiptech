@@ -12,55 +12,55 @@ public class UpdateAssortmentDictionaryValidator : AbstractValidator<UpdateAssor
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_ID")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_ID")
             .WithMessage("Identyfikator asortymentu nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
-            .WithErrorCode("ASSORTMENT_DICTIONARY_404_ID");
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_404_ID");
         
         RuleFor(x => x.Number)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_NUMBER")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_NUMBER")
             .WithMessage("Numer asortymentu nie może być pusty!");
         
         RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_NAME")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_NAME")
             .WithMessage("Nazwa asortymentu nie może być pusta!");
         
         RuleFor(x => x.Distinguishing)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_DISTINGUISHING")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_DISTINGUISHING")
             .WithMessage("Wyróżnik nie może być pusty!");
             
         RuleFor(x => x.Unit)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_UNIT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_UNIT")
             .WithMessage("Jednostka nie może być pusta!")
             .Must(x => x is UnitConsts.Kg or UnitConsts.Szt)
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_UNIT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_UNIT")
             .WithMessage(x => $"Niepoprawna sekcja {x.Unit}! Wymagane kg/szt.");
         
         RuleFor(x => x.Amount)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_AMOUNT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_AMOUNT")
             .WithMessage("Ilość nie może być pusta!")
             .Must(x => x > 0.0)
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_AMOUNT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_AMOUNT")
             .WithMessage(x => $"Ilość {x.Amount}{x.Unit} jest < 0!");
         
         RuleFor(x => x.Weight)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_WEIGHT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_WEIGHT")
             .WithMessage("Waga nie może być pusta!")
             .Must(x => x > 0.0)
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_WEIGHT")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_WEIGHT")
             .WithMessage(x => $"Waga {x.Amount}{x.Unit} jest < 0!");
         
         // TODO: Material validator
@@ -69,16 +69,16 @@ public class UpdateAssortmentDictionaryValidator : AbstractValidator<UpdateAssor
         RuleFor(x => x.Length)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_LENGTH")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_LENGTH")
             .WithMessage("Długość nie może być puste!")
             .Must(x => x > 0.0)
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_LENGTH")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_LENGTH")
             .WithMessage(x => $"Długość {x.Length}{x.Unit} jest < 0!");
 
-        RuleFor(x => x.Ro)
+        RuleFor(x => x.RO)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_DICTIONARY_400_RO")
+            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_RO")
             .WithMessage("RO nie może być puste!");
     }
 }

@@ -11,10 +11,10 @@ public class DeleteIsoValidator : AbstractValidator<DeleteIso>
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ISO_400_ID")
+            .WithErrorCode("DELETE_ISO_400_ID")
             .WithMessage("Identyfikator ISO nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
-            .WithErrorCode("ISO_404_ID");
+            .WithErrorCode("DELETE_ISO_404_ID");
     }
 }

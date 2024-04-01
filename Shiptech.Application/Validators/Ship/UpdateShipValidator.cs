@@ -12,7 +12,7 @@ public class UpdateShipValidator : AbstractValidator<UpdateShip>
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("SHIP_400_ID")
+            .WithErrorCode("UPDATE_SHIP_400_ID")
             .WithMessage("Identyfikator statku nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
@@ -22,7 +22,7 @@ public class UpdateShipValidator : AbstractValidator<UpdateShip>
             .NotNull()
             .NotEmpty()
             .WithMessage("Nazwa zamawiającego nie może być pusta!")
-            .WithErrorCode("SHIP_400_ORDERER")
+            .WithErrorCode("UPDATE_SHIP_400_ORDERER")
             .MustAsync(async (x, _) => !await service.ExistsByOrderer(x))
             .WithMessage(x => $"{x.Orderer} już istnieje w bazie!")
             .WithErrorCode("SHIP_409_ORDERER");

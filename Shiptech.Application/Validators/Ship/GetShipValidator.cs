@@ -12,10 +12,10 @@ public class GetShipValidator : AbstractValidator<GetShip>
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("SHIP_400_ID")
+            .WithErrorCode("GET_SHIP_400_ID")
             .WithMessage("Identyfikator statku nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
-            .WithErrorCode("SHIP_404_ID")
+            .WithErrorCode("GET_SHIP_404_ID")
             .WithMessage(x =>$"{x.Id} nie istnieje w bazie!");
     }
 }

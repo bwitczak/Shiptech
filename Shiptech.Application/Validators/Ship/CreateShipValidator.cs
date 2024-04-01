@@ -13,9 +13,9 @@ public class CreateShipValidator : AbstractValidator<CreateShip>
             .NotNull()
             .NotEmpty()
             .WithMessage("Nazwa zamawiającego nie może być pusta!")
-            .WithErrorCode("SHIP_400_ORDERER")
+            .WithErrorCode("CREATE_SHIP_400_ORDERER")
             .MustAsync(async (x, _) => !await service.ExistsByOrderer(x))
             .WithMessage(x => $"{x.Orderer} już istnieje w bazie!")
-            .WithErrorCode("SHIP_409_ORDERER");
+            .WithErrorCode("CREATE_SHIP_409_ORDERER");
     }
 }

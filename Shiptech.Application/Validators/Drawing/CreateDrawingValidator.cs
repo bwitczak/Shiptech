@@ -12,16 +12,16 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
         RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("DRAWING_400_NAME")
+            .WithErrorCode("CREATE_DRAWING_400_NAME")
             .WithMessage("Nazwa rysunku nie może być pusta!");
         
         RuleFor(x => x.DrawingRevision)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("DRAWING_400_REVISION")
+            .WithErrorCode("CREATE_DRAWING_400_REVISION")
             .WithMessage("Nazwa rewizji nie może być pusta!")
             .Must(char.IsLetterOrDigit)
-            .WithErrorCode("DRAWING_400_REVISION")
+            .WithErrorCode("CREATE_DRAWING_400_REVISION")
             .WithMessage(x => $"Niepoprawna rewizja {x.DrawingRevision}! Wymagany 1 znak");
 
         RuleFor(x => x.Lot)
@@ -34,7 +34,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
                 
                 return number is >= 100 and <= 999;
             })
-            .WithErrorCode("DRAWING_400_LOT")
+            .WithErrorCode("CREATE_DRAWING_400_LOT")
             .WithMessage(x => $"Niepoprawny lot {x.Lot}! Wymagane > 99 oraz < 1000");
         
         RuleFor(x => x.Block)
@@ -47,7 +47,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
                 
                 return number is >= 100 and <= 999;
             })
-            .WithErrorCode("DRAWING_400_BLOCK")
+            .WithErrorCode("CREATE_DRAWING_400_BLOCK")
             .WithMessage(x => $"Niepoprawny blok {x.Block}! Wymagane > 99 oraz < 1000");
         
         RuleForEach(x => x.Section)
@@ -60,23 +60,23 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
                 
                 return number is >= 100 and <= 999;
             })
-            .WithErrorCode("DRAWING_400_SECTION")
+            .WithErrorCode("CREATE_DRAWING_400_SECTION")
             .WithMessage(x => $"Niepoprawna sekcja {x.Section}! Wymagane > 999 oraz < 10000");
 
         RuleFor(x => x.Stage)
             .Must(x => x is StageConsts.None or StageConsts.Odp or StageConsts.Ods or StageConsts.Odi)
-            .WithErrorCode("DRAWING_400_STAGE")
+            .WithErrorCode("CREATE_DRAWING_400_STAGE")
             .WithMessage(x => $"Niepoprawna sekcja {x.Stage}! Wymagane ODP/ODS/ODI/Puste");
 
         RuleFor(x => x.Date)
             .NotNull()
-            .WithErrorCode("DRAWING_400_DATE")
+            .WithErrorCode("CREATE_DRAWING_400_DATE")
             .WithMessage("Data utworzenia nie może być pusta!");
         
         RuleFor(x => x.Author)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("DRAWING_400_AUTHOR")
+            .WithErrorCode("CREATE_DRAWING_400_AUTHOR")
             .WithMessage("Autor nie może być pusty!");
     }
 }

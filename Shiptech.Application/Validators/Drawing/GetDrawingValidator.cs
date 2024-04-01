@@ -12,10 +12,10 @@ public class GetDrawingValidator : AbstractValidator<GetDrawing>
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("DRAWING_400_ID")
+            .WithErrorCode("GET_DRAWING_400_ID")
             .WithMessage("Identyfikator rysunku nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
-            .WithErrorCode("DRAWING_404_ID");
+            .WithErrorCode("GET_DRAWING_404_ID");
     }
 }

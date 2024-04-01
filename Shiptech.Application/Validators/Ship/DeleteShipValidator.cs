@@ -11,10 +11,10 @@ public class DeleteShipValidator : AbstractValidator<DeleteShip>
         RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("SHIP_400_ID")
+            .WithErrorCode("DELETE_SHIP_400_ID")
             .WithMessage("Identyfikator statku nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
-            .WithErrorCode("SHIP_404_ID")
+            .WithErrorCode("DELETE_SHIP_404_ID")
             .WithMessage(x =>$"{x.Id} nie istnieje w bazie!");
     }
 }
