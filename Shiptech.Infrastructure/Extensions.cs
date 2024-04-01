@@ -50,6 +50,7 @@ namespace Shiptech.Infrastructure
             services.AddScoped<IIsoReadService, IsoService>();
             services.AddScoped<IAssortmentReadService, AssortmentService>();
             services.AddScoped<IChemicalProcessReadService, ChemicalProcessService>();
+            services.AddScoped<IAssortmentDictionaryReadService, AssortmentDictionaryService>();
 
             // Queries
             services.AddQueriesAbstraction();
@@ -58,6 +59,7 @@ namespace Shiptech.Infrastructure
             services.AddScoped<IQueryHandler<GetAllShips, IEnumerable<ShipWithNoRelationsDto>>, GetAllShipsHandler>();
             services.AddScoped<IQueryHandler<GetPagedDrawings, IEnumerable<DrawingWithNoRelationsDto>>, GetPagedDrawingsHandler>();
             services.AddScoped<IQueryHandler<GetShip, ShipDto>, GetShipHandler>();
+            services.AddScoped<IQueryHandler<GetPagedAssortmentDictionary, IEnumerable<AssortmentDictionaryWithNoRelationsDto>>, GetPagedAssortmentDictionaryHandler>();
 
             return services;
         }

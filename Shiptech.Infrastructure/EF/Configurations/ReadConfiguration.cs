@@ -243,6 +243,11 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasDefaultValueSql("uuid_generate_v4()")
             .IsRequired();
         
+        builder.Property(x => x.Number)
+            .HasColumnName("Number")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
         builder.Property(x => x.Name)
             .HasColumnName("Name")
             .HasColumnType("varchar")
@@ -290,7 +295,7 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnType("varchar");
         
         builder.ToTable("AssortmentDictionary");
-        builder.HasKey(x => x.Name);
+        builder.HasKey(x => x.Number);
         builder.HasMany(x => x.Assortments)
             .WithOne(x => x.AssortmentDictionary);
     }

@@ -21,5 +21,8 @@ public class MappingProfile : Profile
             x => x.Isos,
             x => x.Ignore());
         CreateMap<DrawingReadModel, DrawingDto>();
+        
+        CreateMap<AssortmentDictionaryWithNoRelationsDto, AssortmentDictionaryReadModel>();
+        CreateMap<AssortmentDictionaryReadModel, AssortmentDictionaryWithNoRelationsDto>();
     }
 }

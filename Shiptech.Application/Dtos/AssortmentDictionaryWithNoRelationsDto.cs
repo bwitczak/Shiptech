@@ -1,9 +1,8 @@
-namespace Shiptech.Infrastructure.EF.Models;
+namespace Shiptech.Application.Dtos;
 
-internal class AssortmentDictionaryReadModel
+public class AssortmentDictionaryWithNoRelationsDto
 {
     public Guid Id { get; set; }
-    public string Number { get; set; }
     public string Name { get; set; }
     public string Distinguishing { get; set; }
     public string Unit { get; set; }
@@ -14,5 +13,4 @@ internal class AssortmentDictionaryReadModel
     public double? Length { get; set; }
     public string RO { get; set; }
     public string? Comment { get; set; }
-    public IEnumerable<AssortmentReadModel> Assortments { get; set; }
 }

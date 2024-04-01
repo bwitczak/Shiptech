@@ -11,7 +11,7 @@ public class CreateAssortmentValidator : AbstractValidator<CreateAssortment>
         RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("ASSORTMENT_400_Name")
+            .WithErrorCode("ASSORTMENT_400_NAME")
             .WithMessage("Nazwa asortymentu nie może być pusta!");
         
         RuleFor(x => x.Position)
