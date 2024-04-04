@@ -14,7 +14,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
 {
     public void Configure(EntityTypeBuilder<Ship> builder)
     {
-        var idConverter = new ValueConverter<ShipId, Guid>(x => x.Value, x => new ShipId(x));
+        var idConverter = new ValueConverter<Id, Guid>(x => x.Value, x => new Id(x));
         var ordererConverter = new ValueConverter<Orderer, string>(x => x.Value, x => new Orderer(x));
 
         builder.Property(x => x.Id)

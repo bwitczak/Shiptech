@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Factories
 {
     public sealed class ShipFactory : IShipFactory
     {
-        public Ship Create(ShipId id, Orderer orderer)
+        public Ship Create(Id id, Orderer orderer)
             => new(id, orderer);
     }
 }

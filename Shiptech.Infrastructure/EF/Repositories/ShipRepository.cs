@@ -17,7 +17,7 @@ internal sealed class ShipRepository() : IShipRepository
         _dbContext = dbContext;
     }
 
-    public async Task<Ship?> GetAsync(ShipId id)
+    public async Task<Ship?> GetAsync(Id id)
     {
         return await _ships.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
     }
