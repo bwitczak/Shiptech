@@ -229,7 +229,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnType("uuid")
             .IsRequired();
         
-        builder.Property(typeof(IsoName), "_name")
+        builder.Property(typeof(AssortmentName), "_name")
             .HasConversion(nameConverter)
             .HasColumnName("Name")
             .HasColumnType("varchar")
@@ -340,7 +340,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
             .HasColumnType("uuid")
             .IsRequired();
         
-        builder.Property(typeof(AssemblyWeight), "_chemicalProcessCode")
+        builder.Property(typeof(ChemicalProcessCode), "_chemicalProcessCode")
             .HasConversion(chemicalProcessCodeConverter)
             .HasColumnName("ChemicalProcessCode")
             .HasColumnType("varchar")
@@ -381,7 +381,7 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         
         builder.Property(typeof(AssortmentDictionaryNumber), "_number")
             .HasConversion(numberConverter)
-            .HasColumnName("Id")
+            .HasColumnName("Number")
             .HasColumnType("varchar")
             .IsRequired();
 
