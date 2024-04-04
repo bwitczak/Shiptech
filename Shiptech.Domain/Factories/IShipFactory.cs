@@ -5,6 +5,6 @@ namespace Shiptech.Domain.Factories
 {
     public interface IShipFactory
     {
-        Ship Create(Id id, Orderer orderer);
+        Ship Create(Id id, ShipCode code, Orderer orderer);
     }
 }

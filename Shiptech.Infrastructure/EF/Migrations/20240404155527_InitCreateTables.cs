@@ -54,12 +54,13 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Ships",
                 columns: table => new
                 {
-                    Orderer = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()")
+                    Code = table.Column<string>(type: "varchar", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Orderer = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ships", x => x.Orderer);
+                    table.PrimaryKey("PK_Ships", x => x.Code);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,16 +76,16 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Stage = table.Column<string>(type: "char(3)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Author = table.Column<string>(type: "varchar", nullable: false),
-                    ShipOrderer = table.Column<string>(type: "varchar", nullable: false)
+                    ShipCode = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drawings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Drawings_Ships_ShipOrderer",
-                        column: x => x.ShipOrderer,
+                        name: "FK_Drawings_Ships_ShipCode",
+                        column: x => x.ShipCode,
                         principalTable: "Ships",
-                        principalColumn: "Orderer",
+                        principalColumn: "Code",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -173,9 +174,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 column: "IsoName");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Drawings_ShipOrderer",
+                name: "IX_Drawings_ShipCode",
                 table: "Drawings",
-                column: "ShipOrderer");
+                column: "ShipCode");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Isos_ChemicalProcessCode",

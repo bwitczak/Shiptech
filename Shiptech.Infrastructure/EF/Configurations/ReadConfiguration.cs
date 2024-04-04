@@ -16,13 +16,18 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasDefaultValueSql("uuid_generate_v4()")
             .IsRequired();
         
+        builder.Property(x => x.Code)
+            .HasColumnName("Code")
+            .HasColumnType("varchar")
+            .IsRequired();
+        
         builder.Property(x => x.Orderer)
             .HasColumnName("Orderer")
             .HasColumnType("varchar")
             .IsRequired();
 
         builder.ToTable("Ships");
-        builder.HasKey(x => x.Orderer);
+        builder.HasKey(x => x.Code);
         builder.HasMany(x => x.Drawings)
             .WithOne(x => x.Ship);
     }

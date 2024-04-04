@@ -235,7 +235,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("text[]")
                         .HasColumnName("Section");
 
-                    b.Property<string>("ShipOrderer")
+                    b.Property<string>("ShipCode")
                         .IsRequired()
                         .HasColumnType("varchar");
 
@@ -245,7 +245,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShipOrderer");
+                    b.HasIndex("ShipCode");
 
                     b.ToTable("Drawings", (string)null);
                 });
@@ -305,16 +305,21 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.ShipReadModel", b =>
                 {
-                    b.Property<string>("Orderer")
+                    b.Property<string>("Code")
                         .HasColumnType("varchar")
-                        .HasColumnName("Orderer");
+                        .HasColumnName("Code");
 
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("Id")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.HasKey("Orderer");
+                    b.Property<string>("Orderer")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Orderer");
+
+                    b.HasKey("Code");
 
                     b.ToTable("Ships", (string)null);
                 });
@@ -342,7 +347,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 {
                     b.HasOne("Shiptech.Infrastructure.EF.Models.ShipReadModel", "Ship")
                         .WithMany("Drawings")
-                        .HasForeignKey("ShipOrderer")
+                        .HasForeignKey("ShipCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

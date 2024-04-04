@@ -8,9 +8,9 @@ internal sealed class UpdateShipHandler(IShipRepository repository, IShipFactory
 {
     public async Task HandleAsync(UpdateShip command)
     {
-        var (id, orderer) = command;
+        var (id, code, orderer) = command;
 
-        var updated = factory.Create(id, orderer);
+        var updated = factory.Create(id, code, orderer);
         await repository.UpdateAsync(updated);
     }
 }
