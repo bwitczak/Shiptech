@@ -41,14 +41,6 @@ public class DrawingController : ControllerBase
 
         return Results.Ok(drawing);
     }
-    
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<DrawingDto>>> GetPaged([FromQuery] GetPagedDrawings query)
-    {
-        var result = await _queryDispatcher.QueryAsync(query);
-    
-        return Ok(result);
-    }
 
     [HttpPost]
     public async Task<IResult> Post([FromBody] CreateDrawing command)

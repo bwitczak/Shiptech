@@ -57,7 +57,6 @@ namespace Shiptech.Infrastructure
 
             // --> Read
             services.AddScoped<IQueryHandler<GetAllShips, IEnumerable<ShipWithNoRelationsDto>>, GetAllShipsHandler>();
-            services.AddScoped<IQueryHandler<GetPagedDrawings, IEnumerable<DrawingWithNoRelationsDto>>, GetPagedDrawingsHandler>();
             services.AddScoped<IQueryHandler<GetShip, ShipDto>, GetShipHandler>();
             services.AddScoped<IQueryHandler<GetPagedAssortmentDictionary, IEnumerable<AssortmentDictionaryWithNoRelationsDto>>, GetPagedAssortmentDictionaryHandler>();
 

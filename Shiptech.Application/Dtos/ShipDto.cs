@@ -5,5 +5,5 @@ public class ShipDto
     public Guid Id { get; set; }
     public string Code { get; set; }
     public string Orderer { get; set; }
-    public IEnumerable<DrawingDto> Drawings { get; set; }
+    public IEnumerable<DrawingWithNoRelationsDto> Drawings { get; set; }
 }
