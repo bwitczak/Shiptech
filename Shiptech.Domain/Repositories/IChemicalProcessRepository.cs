@@ -5,7 +5,7 @@ namespace Shiptech.Domain.Repositories
 {
     public interface IChemicalProcessRepository
     {
-        Task<ChemicalProcess?> GetAsync(Id id);
+        Task<ChemicalProcess> GetAsync(Id id);
         Task CreateAsync(ChemicalProcess chemicalProcess);
         Task UpdateAsync(ChemicalProcess chemicalProcess);
         Task DeleteAsync(ChemicalProcess chemicalProcess);

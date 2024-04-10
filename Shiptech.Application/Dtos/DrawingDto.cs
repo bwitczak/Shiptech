@@ -11,4 +11,5 @@ public class DrawingDto
     public string? Stage { get; set; }
     public string CreationDate { get; set; }
     public string Author { get; set; }
+    public IEnumerable<IsoDto> Isos { get; set; }
 }
