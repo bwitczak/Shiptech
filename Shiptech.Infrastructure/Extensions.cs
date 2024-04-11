@@ -57,8 +57,8 @@ namespace Shiptech.Infrastructure
 
             // --> Read
             services.AddScoped<IQueryHandler<GetAllShips, IEnumerable<ShipWithNoRelationsDto>>, GetAllShipsHandler>();
-            services.AddScoped<IQueryHandler<GetShip, ShipDto>, GetShipHandler>();
-            services.AddScoped<IQueryHandler<GetPagedAssortmentDictionary, IEnumerable<AssortmentDictionaryDto>>, GetPagedAssortmentDictionaryHandler>();
+            services.AddScoped<IQueryHandler<GetShipWithPagedDrawings, ShipDto>, GetShipWithPagedDrawingsHandler>();
+            services.AddScoped<IQueryHandler<GetPagedAssortmentDictionaries, IEnumerable<AssortmentDictionaryDto>>, GetPagedAssortmentDictionaryHandler>();
             services.AddScoped<IQueryHandler<GetAssortmentDictionary, AssortmentDictionaryDto>, GetAssortmentDictionaryHandler>();
             services.AddScoped<IQueryHandler<GetAllChemicalProcesses, IEnumerable<ChemicalProcessDto>>, GetAllChemicalProcessesHandler>();
             services.AddScoped<IQueryHandler<GetChemicalProcess, ChemicalProcessDto>, GetChemicalProcessHandler>();

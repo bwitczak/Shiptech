@@ -3,7 +3,7 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Application.Queries;
 
-public class GetShip : IQuery<ShipDto>
+public class GetShipWithPagedDrawings : IQuery<ShipDto>
 {
     public Guid Id { get; set; }
     public int DrawingPageSize { get; set; }

@@ -26,8 +26,8 @@ public class ChemicalProcessController : ControllerBase
         _readService = readService;
     }
     
-    [HttpGet]
-    public async Task<IResult> Get([FromQuery] GetChemicalProcess query)
+    [HttpGet("{id}")]
+    public async Task<IResult> Get([FromRoute] GetChemicalProcess query)
     {
         var validator = new GetChemicalProcessValidator(_readService);
         var result = await validator.ValidateAsync(query);

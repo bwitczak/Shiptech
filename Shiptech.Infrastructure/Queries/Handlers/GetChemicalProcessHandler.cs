@@ -10,7 +10,7 @@ namespace Shiptech.Infrastructure.Queries.Handlers;
 
 internal sealed class GetChemicalProcessHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetChemicalProcess, ChemicalProcessDto>
 {
-    private readonly DbSet<ShipReadModel> _chemicalProcess = context.Ship;
+    private readonly DbSet<ChemicalProcessReadModel> _chemicalProcess = context.ChemicalProcess;
 
     public async Task<ChemicalProcessDto> HandleAsync(GetChemicalProcess query)
     {

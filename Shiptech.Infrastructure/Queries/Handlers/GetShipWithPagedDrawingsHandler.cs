@@ -8,11 +8,11 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Infrastructure.Queries.Handlers;
 
-internal sealed class GetShipHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetShip, ShipDto>
+internal sealed class GetShipWithPagedDrawingsHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetShipWithPagedDrawings, ShipDto>
 {
     private readonly DbSet<ShipReadModel> _ships = context.Ship;
 
-    public async Task<ShipDto> HandleAsync(GetShip query)
+    public async Task<ShipDto> HandleAsync(GetShipWithPagedDrawings query)
     {
         return await _ships
             .Include(x => x.Drawings.Skip((query.DrawingPageNumber - 1) * query.DrawingPageSize).Take(query.DrawingPageSize))

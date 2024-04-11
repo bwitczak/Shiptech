@@ -26,9 +26,9 @@ public class ShipController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IResult> Get([FromQuery] GetShip query)
+    public async Task<IResult> GetShipWithDrawings([FromQuery] GetShipWithPagedDrawings query)
     {
-        var validator = new GetShipValidator(_readService);
+        var validator = new GetShipWithPagedDrawingsValidator(_readService);
         var result = await validator.ValidateAsync(query);
 
         if (!result.IsValid)
@@ -42,7 +42,7 @@ public class ShipController : ControllerBase
     }
     
     [HttpGet("all")]
-    public async Task<ActionResult<IEnumerable<ShipWithNoRelationsDto>>> GetAll([FromQuery] GetAllShips query)
+    public async Task<ActionResult<IEnumerable<ShipWithNoRelationsDto>>> GetAll(GetAllShips query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
 

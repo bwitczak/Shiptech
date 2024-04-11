@@ -5,9 +5,9 @@ using Shiptech.Application.Services;
 
 namespace Shiptech.Application.Validators.Ship;
 
-public class GetShipValidator : AbstractValidator<GetShip>
+public class GetShipWithPagedDrawingsValidator : AbstractValidator<GetShipWithPagedDrawings>
 {
-    public GetShipValidator(IShipReadService service)
+    public GetShipWithPagedDrawingsValidator(IShipReadService service)
     {
         RuleFor(x => x.Id)
             .NotNull()

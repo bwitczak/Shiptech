@@ -44,7 +44,7 @@ public class AssortmentDictionaryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShipDto>>> GetPaged([FromQuery] GetPagedAssortmentDictionary query)
+    public async Task<ActionResult<IEnumerable<ShipDto>>> GetPaged([FromQuery] GetPagedAssortmentDictionaries query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
 
