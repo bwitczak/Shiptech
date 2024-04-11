@@ -3,7 +3,7 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Application.Queries;
 
-public class GetPagedAssortmentDictionary : IQuery<IEnumerable<AssortmentDictionaryWithNoRelationsDto>>
+public class GetPagedAssortmentDictionary : IQuery<IEnumerable<AssortmentDictionary>>
 {
     public int PageSize { get; set; }
     public int PageNumber { get; set; }
