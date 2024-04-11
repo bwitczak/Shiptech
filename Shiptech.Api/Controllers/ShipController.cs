@@ -26,7 +26,7 @@ public class ShipController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IResult> GetShipWithDrawings([FromQuery] GetShipWithPagedDrawings query)
+    public async Task<IResult> GetWithDrawings([FromQuery] GetShipWithPagedDrawings query)
     {
         var validator = new GetShipWithPagedDrawingsValidator(_readService);
         var result = await validator.ValidateAsync(query);

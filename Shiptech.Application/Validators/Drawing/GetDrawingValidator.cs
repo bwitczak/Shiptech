@@ -5,7 +5,7 @@ using Shiptech.Application.Services;
 
 namespace Shiptech.Application.Validators.Drawing;
 
-public class GetDrawingValidator : AbstractValidator<GetDrawing>
+public class GetDrawingValidator : AbstractValidator<GetDrawingWithPagedIsos>
 {
     public GetDrawingValidator(IDrawingReadService service)
     {

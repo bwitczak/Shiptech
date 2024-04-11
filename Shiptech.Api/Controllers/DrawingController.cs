@@ -26,8 +26,8 @@ public class DrawingController : ControllerBase
         _readService = readService;
     }
 
-    [HttpGet("{id}")]
-    public async Task<IResult> Get([FromRoute] GetDrawing query)
+    [HttpGet]
+    public async Task<IResult> GetWithIsos([FromQuery] GetDrawingWithPagedIsos query)
     {
         var validator = new GetDrawingValidator(_readService);
         var result = await validator.ValidateAsync(query);
