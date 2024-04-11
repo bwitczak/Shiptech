@@ -25,6 +25,30 @@ public class ChemicalProcessController : ControllerBase
         _queryDispatcher = queryDispatcher;
         _readService = readService;
     }
+    
+    [HttpGet]
+    public async Task<IResult> Get([FromQuery] GetChemicalProcess query)
+    {
+        var validator = new GetChemicalProcessValidator(_readService);
+        var result = await validator.ValidateAsync(query);
+
+        if (!result.IsValid)
+        {
+            return Results.ValidationProblem(result.ToDictionary());
+        }
+        
+        var chemicalProcess = await _queryDispatcher.QueryAsync(query);
+
+        return Results.Ok(chemicalProcess);
+    }
+    
+    [HttpGet("all")]
+    public async Task<ActionResult<IEnumerable<ChemicalProcessDto>>> GetAll([FromQuery] GetAllChemicalProcesses query)
+    {
+        var result = await _queryDispatcher.QueryAsync(query);
+
+        return Ok(result);
+    }
 
     [HttpPost]
     public async Task<IResult> Post([FromBody] CreateChemicalProcess command)
