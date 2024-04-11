@@ -20,5 +20,5 @@ public class AssortmentDto
     public short AssemblyQuantity { get; set; }
     public short AssemblyLength { get; set; }
     public double AssemblyWeight { get; set; }
-    public AssortmentDictionary StandardNumber { get; set; }
+    public AssortmentDictionaryDto StandardNumber { get; set; }
 }

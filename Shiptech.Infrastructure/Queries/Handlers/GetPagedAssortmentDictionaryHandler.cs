@@ -8,13 +8,13 @@ using Shiptech.Shared.Abstractions.Queries;
 
 namespace Shiptech.Infrastructure.Queries.Handlers;
 
-internal sealed class GetPagedAssortmentDictionaryHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetPagedAssortmentDictionary, IEnumerable<AssortmentDictionary>>
+internal sealed class GetPagedAssortmentDictionaryHandler(ReadDbContext context, IMapper mapper) : IQueryHandler<GetPagedAssortmentDictionary, IEnumerable<AssortmentDictionaryDto>>
 {
     private readonly DbSet<AssortmentDictionaryReadModel> _assortmentDictionary = context.AssortmentDictionary;
     
-    public async Task<IEnumerable<AssortmentDictionary>> HandleAsync(GetPagedAssortmentDictionary query)
+    public async Task<IEnumerable<AssortmentDictionaryDto>> HandleAsync(GetPagedAssortmentDictionary query)
     {
         return await _assortmentDictionary.Skip((query.PageNumber - 1) * query.PageSize).Take(query.PageSize)
-            .Select(x => mapper.Map<AssortmentDictionary>(x)).ToListAsync();
+            .Select(x => mapper.Map<AssortmentDictionaryDto>(x)).ToListAsync();
     }
 }

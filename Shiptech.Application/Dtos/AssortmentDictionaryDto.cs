@@ -1,6 +1,6 @@
 namespace Shiptech.Application.Dtos;
 
-public class AssortmentDictionary
+public class AssortmentDictionaryDto
 {
     public Guid Id { get; set; }
     public string Number { get; set; }

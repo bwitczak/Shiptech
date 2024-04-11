@@ -22,7 +22,7 @@ public class MappingProfile : Profile
             x => x.Ignore());
         CreateMap<DrawingReadModel, DrawingDto>();
         
-        CreateMap<AssortmentDictionary, AssortmentDictionaryReadModel>();
-        CreateMap<AssortmentDictionaryReadModel, AssortmentDictionary>();
+        CreateMap<AssortmentDictionaryDto, AssortmentDictionaryReadModel>();
+        CreateMap<AssortmentDictionaryReadModel, AssortmentDictionaryDto>();
     }
 }

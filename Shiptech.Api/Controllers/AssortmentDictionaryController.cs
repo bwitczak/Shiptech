@@ -38,13 +38,13 @@ public class AssortmentDictionaryController : ControllerBase
             return Results.ValidationProblem(result.ToDictionary());
         }
         
-        var ship = await _queryDispatcher.QueryAsync(query);
+        var assortmentDictionary = await _queryDispatcher.QueryAsync(query);
 
-        return Results.Ok(ship);
+        return Results.Ok(assortmentDictionary);
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShipDto>>> GetAll([FromQuery] GetAllShips query)
+    public async Task<ActionResult<IEnumerable<ShipDto>>> GetPaged([FromQuery] GetPagedAssortmentDictionary query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
 
