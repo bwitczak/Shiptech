@@ -21,5 +21,5 @@ internal class AssortmentReadModel
     public short AssemblyLength { get; set; }
     public double AssemblyWeight { get; set; }
     public IsoReadModel Iso { get; set; }
-    public AssortmentDictionaryReadModel AssortmentDictionary { get; set; }
+    public AssortmentDictionaryReadModel StandardNumber { get; set; }
 }

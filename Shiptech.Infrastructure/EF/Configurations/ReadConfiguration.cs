@@ -302,6 +302,6 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
         builder.ToTable("AssortmentDictionary");
         builder.HasKey(x => x.Number);
         builder.HasMany(x => x.Assortments)
-            .WithOne(x => x.AssortmentDictionary);
+            .WithOne(x => x.StandardNumber);
     }
 }
