@@ -11,6 +11,8 @@ public class AssortmentDictionaryDto
     public double Weight { get; set; }
     public string? Material { get; set; }
     public string? Kind { get; set; }
+    public string? DN1 { get; set; }
+    public string? DN2 { get; set; }
     public double? Length { get; set; }
     public string RO { get; set; }
     public string? Comment { get; set; }

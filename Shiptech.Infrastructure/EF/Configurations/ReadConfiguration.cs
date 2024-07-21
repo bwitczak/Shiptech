@@ -286,6 +286,14 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnName("Kind")
             .HasColumnType("varchar");
         
+        builder.Property(x => x.DN1)
+            .HasColumnName("DN1")
+            .HasColumnType("varchar");
+        
+        builder.Property(x => x.DN2)
+            .HasColumnName("DN2")
+            .HasColumnType("varchar");
+        
         builder.Property(x => x.Length)
             .HasColumnName("Length")
             .HasColumnType("smallint");

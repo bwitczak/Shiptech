@@ -13,7 +13,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240404155527_InitCreateTables")]
+    [Migration("20240721093016_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -40,6 +40,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("varchar")
                         .HasColumnName("Comment");
+
+                    b.Property<string>("DN1")
+                        .HasColumnType("varchar")
+                        .HasColumnName("DN1");
+
+                    b.Property<string>("DN2")
+                        .HasColumnType("varchar")
+                        .HasColumnName("DN2");
 
                     b.Property<string>("Distinguishing")
                         .IsRequired()
@@ -109,10 +117,6 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("AssemblyWeight");
 
-                    b.Property<string>("AssortmentDictionaryNumber")
-                        .IsRequired()
-                        .HasColumnType("varchar");
-
                     b.Property<string>("Comment")
                         .HasColumnType("varchar")
                         .HasColumnName("Comment");
@@ -166,15 +170,19 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(1)")
                         .HasColumnName("Stage");
 
+                    b.Property<string>("StandardNumberNumber")
+                        .IsRequired()
+                        .HasColumnType("varchar");
+
                     b.Property<short?>("TechnologicalAddition")
                         .HasColumnType("smallint")
                         .HasColumnName("TechnologicalAddition");
 
                     b.HasKey("Name");
 
-                    b.HasIndex("AssortmentDictionaryNumber");
-
                     b.HasIndex("IsoName");
+
+                    b.HasIndex("StandardNumberNumber");
 
                     b.ToTable("Assortments", (string)null);
                 });
@@ -329,21 +337,21 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentReadModel", b =>
                 {
-                    b.HasOne("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", "AssortmentDictionary")
-                        .WithMany("Assortments")
-                        .HasForeignKey("AssortmentDictionaryNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Shiptech.Infrastructure.EF.Models.IsoReadModel", "Iso")
                         .WithMany("Assortments")
                         .HasForeignKey("IsoName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AssortmentDictionary");
+                    b.HasOne("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", "StandardNumber")
+                        .WithMany("Assortments")
+                        .HasForeignKey("StandardNumberNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Iso");
+
+                    b.Navigation("StandardNumber");
                 });
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.DrawingReadModel", b =>

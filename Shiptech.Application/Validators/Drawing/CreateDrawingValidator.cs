@@ -68,7 +68,7 @@ public class CreateDrawingValidator : AbstractValidator<CreateDrawing>
             .WithErrorCode("CREATE_DRAWING_400_STAGE")
             .WithMessage(x => $"Niepoprawna sekcja {x.Stage}! Wymagane ODP/ODS/ODI/Puste");
 
-        RuleFor(x => x.Date)
+        RuleFor(x => x.CreationDate)
             .NotNull()
             .WithErrorCode("CREATE_DRAWING_400_DATE")
             .WithMessage("Data utworzenia nie może być pusta!");

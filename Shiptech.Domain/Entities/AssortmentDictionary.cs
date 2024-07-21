@@ -13,6 +13,8 @@ public class AssortmentDictionary
     private AssortmentDictionaryWeight _weight;
     private AssortmentDictionaryMaterial _material;
     private AssortmentDictionaryKind _kind;
+    private DN _dn1;
+    private DN _dn2;
     private AssortmentDictionaryLength _length;
     private RO _ro;
     private Comment _comment;

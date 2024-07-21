@@ -28,6 +28,8 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     Weight = table.Column<double>(type: "numeric(5,3)", nullable: false),
                     Material = table.Column<string>(type: "varchar", nullable: true),
                     Kind = table.Column<string>(type: "varchar", nullable: true),
+                    DN1 = table.Column<string>(type: "varchar", nullable: true),
+                    DN2 = table.Column<string>(type: "varchar", nullable: true),
                     Length = table.Column<short>(type: "smallint", nullable: true),
                     RO = table.Column<string>(type: "varchar", nullable: false),
                     Comment = table.Column<string>(type: "varchar", nullable: true)
@@ -144,14 +146,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                     AssemblyLength = table.Column<short>(type: "smallint", nullable: false),
                     AssemblyWeight = table.Column<double>(type: "numeric(5,3)", nullable: false),
                     IsoName = table.Column<string>(type: "varchar", nullable: false),
-                    AssortmentDictionaryNumber = table.Column<string>(type: "varchar", nullable: false)
+                    StandardNumberNumber = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assortments", x => x.Name);
                     table.ForeignKey(
-                        name: "FK_Assortments_AssortmentDictionary_AssortmentDictionaryNumber",
-                        column: x => x.AssortmentDictionaryNumber,
+                        name: "FK_Assortments_AssortmentDictionary_StandardNumberNumber",
+                        column: x => x.StandardNumberNumber,
                         principalTable: "AssortmentDictionary",
                         principalColumn: "Number",
                         onDelete: ReferentialAction.Cascade);
@@ -164,14 +166,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assortments_AssortmentDictionaryNumber",
-                table: "Assortments",
-                column: "AssortmentDictionaryNumber");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Assortments_IsoName",
                 table: "Assortments",
                 column: "IsoName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assortments_StandardNumberNumber",
+                table: "Assortments",
+                column: "StandardNumberNumber");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Drawings_ShipCode",
