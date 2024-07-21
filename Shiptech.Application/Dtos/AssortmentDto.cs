@@ -2,7 +2,7 @@ namespace Shiptech.Application.Dtos;
 
 public class AssortmentDto
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public string Name { get; set; }
     public char Position { get; set; }
     public short? DrawingLength { get; set; }

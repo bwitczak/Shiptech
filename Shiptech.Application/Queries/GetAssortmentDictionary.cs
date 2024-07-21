@@ -5,5 +5,5 @@ namespace Shiptech.Application.Queries;
 
 public class GetAssortmentDictionary : IQuery<AssortmentDictionaryDto>
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
 }

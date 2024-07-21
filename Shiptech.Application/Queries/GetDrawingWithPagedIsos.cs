@@ -5,7 +5,7 @@ namespace Shiptech.Application.Queries;
 
 public class GetDrawingWithPagedIsos : IQuery<DrawingDto>
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public int IsoPageSize { get; set; }
     public int IsoPageNumber { get; set; }
 }

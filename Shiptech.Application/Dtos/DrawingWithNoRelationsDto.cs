@@ -2,7 +2,7 @@ namespace Shiptech.Application.Dtos;
 
 public class DrawingWithNoRelationsDto
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public string Name { get; set; }
     public string DrawingRevision { get; set; }
     public string? Lot { get; set; }

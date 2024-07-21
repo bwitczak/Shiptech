@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Entities;
 
 public class ChemicalProcess
 {
-    public Id Id { get; private set; }
+    public Ulid Id { get; private set; }
     private ChemicalProcessCode _chemicalProcessCode;
     private ChemicalProcessName _chemicalProcessName;
 

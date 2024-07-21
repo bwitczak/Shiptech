@@ -12,7 +12,7 @@ internal sealed class CreateAssortmentDictionaryHandler(IAssortmentDictionaryRep
     {
         var (id, number, name, distinguishing, unit, amount, weight, material, kind, dn1, dn2, length, ro, comment) = command;
 
-        var assortmentDictionary = factory.Create(Guid.NewGuid(), number, name, distinguishing, unit, amount, weight, material, kind, dn1, dn2, length, ro, comment);
+        var assortmentDictionary = factory.Create(Ulid.NewUlid(), number, name, distinguishing, unit, amount, weight, material, kind, dn1, dn2, length, ro, comment);
         await repository.CreateAsync(assortmentDictionary);
     }
 }

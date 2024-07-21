@@ -4,7 +4,7 @@ namespace Shiptech.Infrastructure.EF.Models;
 
 internal class IsoReadModel
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public string Name { get; set; }
     public char IsoRevision { get; set; }
     public string System { get; set; }

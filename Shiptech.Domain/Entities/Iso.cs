@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Entities
 {
     public class Iso
     {
-        public Id Id { get; private set; }
+        public Ulid Id { get; private set; }
         private IsoName _name;
         private Revision _isoRevision;
         private IsoSystem _system;

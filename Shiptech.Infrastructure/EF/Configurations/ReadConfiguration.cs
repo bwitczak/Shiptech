@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Shiptech.Domain.ValueObjects;
+using Shiptech.Infrastructure.EF.Converters;
 using Shiptech.Infrastructure.EF.Models;
 
 namespace Shiptech.Infrastructure.EF.Configurations;
@@ -12,8 +15,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.Code)
@@ -36,8 +39,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.Name)
@@ -86,8 +89,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.Name)
@@ -132,8 +135,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.Name)
@@ -220,8 +223,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.ChemicalProcessCode)
@@ -244,8 +247,8 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
-            .HasColumnType("uuid")
-            .HasDefaultValueSql("uuid_generate_v4()")
+            .HasColumnType("varchar(26)")
+            .HasConversion<UlidToStringConverter>()
             .IsRequired();
         
         builder.Property(x => x.Number)

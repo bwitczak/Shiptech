@@ -5,7 +5,7 @@ namespace Shiptech.Application.Queries;
 
 public class GetShipWithPagedDrawings : IQuery<ShipDto>
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
     public int DrawingPageSize { get; set; }
     public int DrawingPageNumber { get; set; }
 }

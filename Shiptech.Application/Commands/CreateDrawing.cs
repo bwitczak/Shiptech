@@ -3,5 +3,5 @@ using Shiptech.Shared.Abstractions.Commands;
 
 namespace Shiptech.Application.Commands;
 
-public record CreateDrawing(Guid Id, string Name, char DrawingRevision, string? Lot, string? Block, List<string>? Section,
+public record CreateDrawing(Ulid Id, string Name, char DrawingRevision, string? Lot, string? Block, List<string>? Section,
     string? Stage, DateTime CreationDate, string Author) : ICommand;

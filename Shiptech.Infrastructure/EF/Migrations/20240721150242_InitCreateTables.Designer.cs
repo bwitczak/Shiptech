@@ -13,7 +13,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240721112232_InitCreateTables")]
+    [Migration("20240721150242_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -24,7 +24,6 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.AssortmentDictionaryReadModel", b =>
@@ -54,10 +53,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(22)")
                         .HasColumnName("Distinguishing");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Kind")
                         .HasColumnType("varchar")
@@ -141,10 +140,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("DrawingLength");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.Property<string>("IsoName")
                         .IsRequired()
@@ -198,10 +197,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("ChemicalProcessName");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.HasKey("ChemicalProcessCode");
 
@@ -210,11 +209,9 @@ namespace Shiptech.Infrastructure.EF.Migrations
 
             modelBuilder.Entity("Shiptech.Infrastructure.EF.Models.DrawingReadModel", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -280,13 +277,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(6)")
                         .HasColumnName("Class");
 
-                    b.Property<Guid>("DrawingId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("DrawingId")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.Property<char>("IsoRevision")
                         .HasColumnType("char(1)")
@@ -320,10 +318,10 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Code");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("Id")
-                        .HasDefaultValueSql("uuid_generate_v4()");
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("character varying(26)")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Orderer")
                         .IsRequired()

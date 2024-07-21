@@ -5,5 +5,5 @@ namespace Shiptech.Application.Queries;
 
 public class GetChemicalProcess : IQuery<ChemicalProcessDto>
 {
-    public Guid Id { get; set; }
+    public Ulid Id { get; set; }
 }

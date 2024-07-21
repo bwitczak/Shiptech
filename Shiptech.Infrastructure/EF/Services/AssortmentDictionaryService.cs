@@ -14,7 +14,7 @@ internal sealed class AssortmentDictionaryService() : IAssortmentDictionaryReadS
         _assortmentDictionary = context.AssortmentDictionary;
     }
 
-    public async Task<bool> ExistsById(Guid id)
+    public async Task<bool> ExistsById(Ulid id)
     {
         return await _assortmentDictionary.AnyAsync(x => x.Id == id);
     }

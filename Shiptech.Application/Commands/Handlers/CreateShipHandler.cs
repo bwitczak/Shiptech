@@ -12,7 +12,7 @@ internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory
     {
         var (id, code, orderer) = command;
         
-        var ship = factory.Create(Guid.NewGuid(), code, orderer);
+        var ship = factory.Create(Ulid.NewUlid(), code, orderer);
         await repository.CreateAsync(ship);
     }
 }

@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Entities
 {
     public class Drawing
     {
-        public Id Id { get; private set; }
+        public Ulid Id { get; private set; }
         private DrawingName _name;
         private Revision _drawingRevision;
         private Lot _lot;

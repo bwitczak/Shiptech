@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Entities;
 
 public class AssortmentDictionary
 {
-    public Id Id { get; private set; }
+    public Ulid Id { get; private set; }
     private AssortmentDictionaryNumber _number;
     private AssortmentDictionaryName _name;
     private Distinguishing _distinguishing;

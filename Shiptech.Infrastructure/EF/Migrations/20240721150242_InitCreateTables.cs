@@ -12,15 +12,12 @@ namespace Shiptech.Infrastructure.EF.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:PostgresExtension:uuid-ossp", ",,");
-
             migrationBuilder.CreateTable(
                 name: "AssortmentDictionary",
                 columns: table => new
                 {
                     Number = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     Name = table.Column<string>(type: "varchar", nullable: false),
                     Distinguishing = table.Column<string>(type: "char(22)", nullable: false),
                     Unit = table.Column<string>(type: "char(4)", nullable: false),
@@ -44,7 +41,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     ChemicalProcessCode = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     ChemicalProcessName = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
@@ -57,7 +54,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Code = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     Orderer = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
@@ -69,7 +66,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 name: "Drawings",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     Name = table.Column<string>(type: "varchar", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     Lot = table.Column<string>(type: "char(3)", nullable: true),
@@ -96,14 +93,14 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Name = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     DrawingRevision = table.Column<char>(type: "char(1)", nullable: false),
                     System = table.Column<string>(type: "varchar", nullable: false),
                     Class = table.Column<string>(type: "char(6)", nullable: false),
                     Atest = table.Column<string>(type: "varchar", nullable: true),
                     KzmNumber = table.Column<string>(type: "char(6)", nullable: true),
                     KzmDate = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    DrawingId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DrawingId = table.Column<string>(type: "character varying(26)", nullable: false),
                     ChemicalProcessCode = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
@@ -128,7 +125,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                 columns: table => new
                 {
                     Name = table.Column<string>(type: "varchar", nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "uuid_generate_v4()"),
+                    Id = table.Column<string>(type: "character varying(26)", nullable: false),
                     Position = table.Column<char>(type: "char(1)", nullable: false),
                     DrawingLength = table.Column<short>(type: "smallint", nullable: true),
                     Addition = table.Column<short>(type: "smallint", nullable: true),

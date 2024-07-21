@@ -4,7 +4,7 @@ namespace Shiptech.Domain.Entities
 {
     public sealed class Ship
     {
-        public Id Id { get; private set; }
+        public Ulid Id { get; private set; }
         private ShipCode _code;
         private Orderer _orderer;
         private IEnumerable<Drawing> _drawings;

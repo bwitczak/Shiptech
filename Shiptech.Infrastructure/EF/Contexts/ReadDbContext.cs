@@ -20,8 +20,6 @@ internal sealed class ReadDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasPostgresExtension("uuid-ossp");
-        
         var configuration = new ReadConfiguration();
         modelBuilder.ApplyConfiguration<ShipReadModel>(configuration);
         modelBuilder.ApplyConfiguration<DrawingReadModel>(configuration);
