@@ -32,53 +32,77 @@ public class UpdateAssortmentValidator : AbstractValidator<UpdateAssortment>
             .WithErrorCode("UPDATE_ASSORTMENT_400_POSITION")
             .WithMessage(x => $"Niepoprawna pozycja {x.Position}! Wymagany 1 znak");
 
-        RuleFor(x => x.DrawingLength)
-            .Must(x => x > 0)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_DRAWING_LENGTH")
-            .WithMessage(x => $"Długość rysunku {x.DrawingLength}mm jest < 0!");
+     When(x => x.DrawingLength is not null, () =>
+        {
+            RuleFor(x => x.DrawingLength)
+                .Must(x => x > 0)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_DRAWING_LENGTH")
+                .WithMessage(x => $"Długość rysunku {x.DrawingLength}mm jest < 0!");
+        });
 
-        RuleFor(x => x.Addition)
-            .Must(x => x > 0)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_ADDITION")
-            .WithMessage(x => $"Naddatek {x.Addition}mm jest < 0!");
-        
-        RuleFor(x => x.TechnologicalAddition)
-            .Must(x => x > 0)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_ADDITION")
-            .WithMessage(x => $"Długość technologicznego naddatku {x.TechnologicalAddition}mm jest < 0!");
-            
-        RuleFor(x => x.Stage)
-            .Must(x =>
-            {
-                if (!int.TryParse($"{x}", out var number))
+        When(x => x.Addition is not null, () =>
+        {
+            RuleFor(x => x.Addition)
+                .Must(x => x > 0)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_ADDITION")
+                .WithMessage(x => $"Naddatek {x.Addition}mm jest < 0!");
+        });
+
+        When(x => x.TechnologicalAddition is not null, () =>
+        {
+            RuleFor(x => x.TechnologicalAddition)
+                .Must(x => x > 0)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_ADDITION")
+                .WithMessage(x => $"Długość technologicznego naddatku {x.TechnologicalAddition}mm jest < 0!");
+        });
+
+        When(x => x.Stage is not null, () =>
+        {
+            RuleFor(x => x.Stage)
+                .Must(x =>
                 {
-                    return false;
-                }
+                    if (!int.TryParse($"{x}", out var number))
+                    {
+                        return false;
+                    }
                 
-                return number is 1 or 2 or 3;
-            })
-            .WithErrorCode("UPDATE_ASSORTMENT_400_STAGE")
-            .WithMessage(x => $"Niepoprawna faza {x.Stage}! Wymagane 1, 2 or 3");
-        
-        RuleFor(x => x.D15I)
-            .Must(x => x is > 0 and <= 90)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D15I")
-            .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15I}! Wymagane > 0 oraz <= 90");
-        
-        RuleFor(x => x.D15II)
-            .Must(x => x is > 0 and <= 90)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D15II")
-            .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15II}! Wymagane > 0 oraz <= 90");
-        
-        RuleFor(x => x.D1I)
-            .Must(x => x is > 0 and <= 90)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D1I")
-            .WithMessage(x => $"Niepoprawny kąt 1D {x.D1I}! Wymagane > 0 oraz <= 90");
-        
-        RuleFor(x => x.D1II)
-            .Must(x => x is > 0 and <= 90)
-            .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D1II")
-            .WithMessage(x => $"Niepoprawny kąt 1D {x.D1II}! Wymagane > 0 oraz <= 90");
+                    return number is 1 or 2 or 3;
+                })
+                .WithErrorCode("UPDATE_ASSORTMENT_400_STAGE")
+                .WithMessage(x => $"Niepoprawna faza {x.Stage}! Wymagane 1, 2 or 3");
+        });
+
+        When(x => x.D15I is not null, () =>
+        {
+            RuleFor(x => x.D15I)
+                .Must(x => x is > 0 and <= 90)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D15I")
+                .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15I}! Wymagane > 0 oraz <= 90");
+        });
+
+        When(x => x.D15II is not null, () =>
+        {
+            RuleFor(x => x.D15II)
+                .Must(x => x is > 0 and <= 90)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D15II")
+                .WithMessage(x => $"Niepoprawny kąt 1.5D {x.D15II}! Wymagane > 0 oraz <= 90");
+        });
+
+        When(x => x.D1I is not null, () =>
+        {
+            RuleFor(x => x.D1I)
+                .Must(x => x is > 0 and <= 90)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D1I")
+                .WithMessage(x => $"Niepoprawny kąt 1D {x.D1I}! Wymagane > 0 oraz <= 90");
+        });
+
+        When(x => x.D1II is not null, () =>
+        {
+            RuleFor(x => x.D1II)
+                .Must(x => x is > 0 and <= 90)
+                .WithErrorCode("UPDATE_ASSORTMENT_400_TECHNOLOGICAL_D1II")
+                .WithMessage(x => $"Niepoprawny kąt 1D {x.D1II}! Wymagane > 0 oraz <= 90");
+        });
 
         RuleFor(x => x.PrefabricationQuantity)
             .NotNull()
