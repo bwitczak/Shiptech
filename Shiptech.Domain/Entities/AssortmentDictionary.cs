@@ -23,7 +23,7 @@ public class AssortmentDictionary
     {
     }
 
-    internal AssortmentDictionary(Id id, AssortmentDictionaryNumber number, AssortmentDictionaryName name, Distinguishing distinguishing, Unit unit, AssortmentDictionaryAmount amount, AssortmentDictionaryWeight weight, AssortmentDictionaryMaterial material, AssortmentDictionaryKind kind, AssortmentDictionaryLength length, RO ro, Comment comment)
+    internal AssortmentDictionary(Id id, AssortmentDictionaryNumber number, AssortmentDictionaryName name, Distinguishing distinguishing, Unit unit, AssortmentDictionaryAmount amount, AssortmentDictionaryWeight weight, AssortmentDictionaryMaterial material, AssortmentDictionaryKind kind, DN dn1, DN dn2, AssortmentDictionaryLength length, RO ro, Comment comment)
     {
         Id = id;
         _number = number;
@@ -34,8 +34,28 @@ public class AssortmentDictionary
         _weight = weight;
         _material = material;
         _kind = kind;
+        _dn1 = dn1;
+        _dn2 = dn2;
         _length = length;
         _ro = ro;
         _comment = comment;
     }
+
+    // internal AssortmentDictionary(Id id, AssortmentDictionaryNumber number, AssortmentDictionaryName name, Distinguishing distinguishing, Unit unit, AssortmentDictionaryAmount amount, AssortmentDictionaryWeight weight, AssortmentDictionaryMaterial material, AssortmentDictionaryKind kind, DN dn1, DN dn2, AssortmentDictionaryLength length, RO ro, Comment comment)
+    // {
+    //     Id = id;
+    //     _number = number;
+    //     _name = name;
+    //     _distinguishing = distinguishing;
+    //     _unit = unit;
+    //     _amount = amount;
+    //     _weight = weight;
+    //     _material = material;
+    //     _kind = kind;
+    //     _dn1 = _dn1;
+    //     _dn2 = _dn2;
+    //     _length = length;
+    //     _ro = ro;
+    //     _comment = comment;
+    // }
 }

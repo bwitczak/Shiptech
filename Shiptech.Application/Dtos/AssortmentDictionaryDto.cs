@@ -7,8 +7,8 @@ public class AssortmentDictionaryDto
     public string Name { get; set; }
     public string Distinguishing { get; set; }
     public string Unit { get; set; }
-    public double Amount { get; set; }
-    public double Weight { get; set; }
+    public double? Amount { get; set; }
+    public double? Weight { get; set; }
     public string? Material { get; set; }
     public string? Kind { get; set; }
     public string? DN1 { get; set; }

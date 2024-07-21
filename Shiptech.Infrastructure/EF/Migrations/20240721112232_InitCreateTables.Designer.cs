@@ -13,7 +13,7 @@ using Shiptech.Infrastructure.EF.Contexts;
 namespace Shiptech.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20240721093016_InitCreateTables")]
+    [Migration("20240721112232_InitCreateTables")]
     partial class InitCreateTables
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<double>("Amount")
+                    b.Property<double?>("Amount")
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Amount");
 
@@ -86,7 +86,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(4)")
                         .HasColumnName("Unit");
 
-                    b.Property<double>("Weight")
+                    b.Property<double?>("Weight")
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Weight");
 

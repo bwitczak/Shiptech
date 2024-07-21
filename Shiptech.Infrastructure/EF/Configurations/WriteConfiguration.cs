@@ -365,12 +365,12 @@ internal class WriteConfiguration : IEntityTypeConfiguration<Ship>, IEntityTypeC
         var unitConverter = new ValueConverter<Unit, string>(
             x => x.Value,
             x => ConvertUnit(x));
-        var amountConverter = new ValueConverter<AssortmentDictionaryAmount, double>(x => x.Value, x => new AssortmentDictionaryAmount(x));
-        var weightConverter = new ValueConverter<AssortmentDictionaryWeight, double>(x => x.Value, x => new AssortmentDictionaryWeight(x));
+        var amountConverter = new ValueConverter<AssortmentDictionaryAmount, double?>(x => x.Value, x => new AssortmentDictionaryAmount(x));
+        var weightConverter = new ValueConverter<AssortmentDictionaryWeight, double?>(x => x.Value, x => new AssortmentDictionaryWeight(x));
         var materialConverter = new ValueConverter<AssortmentDictionaryMaterial, string?>(x => x.Value, x => new AssortmentDictionaryMaterial(x));
         var kindConverter = new ValueConverter<AssortmentDictionaryKind, string?>(x => x.Value, x => new AssortmentDictionaryKind(x));
         var dnConverter = new ValueConverter<DN, string?>(x => x.Value, x => new DN(x));
-        var lengthConverter = new ValueConverter<AssortmentDictionaryLength, ushort>(x => x.Value, x => new AssortmentDictionaryLength(x));
+        var lengthConverter = new ValueConverter<AssortmentDictionaryLength, ushort?>(x => x.Value, x => new AssortmentDictionaryLength(x));
         var roConverter = new ValueConverter<RO, string>(x => x.Value, x => new RO(x));
         var commentConverter = new ValueConverter<Comment, string?>(x => x.Value, x => new Comment(x));
         

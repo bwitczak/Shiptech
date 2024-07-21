@@ -30,7 +30,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<double>("Amount")
+                    b.Property<double?>("Amount")
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Amount");
 
@@ -83,7 +83,7 @@ namespace Shiptech.Infrastructure.EF.Migrations
                         .HasColumnType("char(4)")
                         .HasColumnName("Unit");
 
-                    b.Property<double>("Weight")
+                    b.Property<double?>("Weight")
                         .HasColumnType("decimal(5,3)")
                         .HasColumnName("Weight");
 

@@ -24,6 +24,7 @@ namespace Shiptech.Application
             services.AddScoped<ICommandHandler<CreateDrawing>, CreateDrawingHandler>();
             services.AddScoped<ICommandHandler<CreateIso>, CreateIsoHandler>();
             services.AddScoped<ICommandHandler<CreateAssortment>, CreateAssortmentHandler>();
+            services.AddScoped<ICommandHandler<CreateAssortmentDictionary>, CreateAssortmentDictionaryHandler>();
             services.AddScoped<ICommandHandler<CreateChemicalProcess>, CreateChemicalProcessHandler>();
 
             //  --> Update
@@ -31,6 +32,7 @@ namespace Shiptech.Application
             services.AddScoped<ICommandHandler<UpdateDrawing>, UpdateDrawingHandler>();
             services.AddScoped<ICommandHandler<UpdateIso>, UpdateIsoHandler>();
             services.AddScoped<ICommandHandler<UpdateAssortment>, UpdateAssortmentHandler>();
+            services.AddScoped<ICommandHandler<UpdateAssortmentDictionary>, UpdateAssortmentDictionaryHandler>();
             services.AddScoped<ICommandHandler<UpdateChemicalProcess>, UpdateChemicalProcessHandler>();
 
             //  --> Delete
@@ -38,6 +40,7 @@ namespace Shiptech.Application
             services.AddScoped<ICommandHandler<DeleteDrawing>, DeleteDrawingHandler>();
             services.AddScoped<ICommandHandler<DeleteIso>, DeleteIsoHandler>();
             services.AddScoped<ICommandHandler<DeleteAssortment>, DeleteAssortmentHandler>();
+            services.AddScoped<ICommandHandler<DeleteAssortmentDictionary>, DeleteAssortmentDictionaryHandler>();
             services.AddScoped<ICommandHandler<DeleteChemicalProcess>, DeleteChemicalProcessHandler>();
 
             // Factories
@@ -45,6 +48,7 @@ namespace Shiptech.Application
             services.AddScoped<IDrawingFactory, DrawingFactory>();
             services.AddScoped<IIsoFactory, IsoFactory>();
             services.AddScoped<IAssortmentFactory, AssortmentFactory>();
+            services.AddScoped<IAssortmentDictionaryFactory, AssortmentDictionaryFactory>();
             services.AddScoped<IChemicalProcessFactory, ChemicalProcessFactory>();
 
             // Policies

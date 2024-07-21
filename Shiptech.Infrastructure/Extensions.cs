@@ -42,6 +42,7 @@ namespace Shiptech.Infrastructure
             services.AddScoped<IDrawingRepository, DrawingRepository>();
             services.AddScoped<IIsoRepository, IsoRepository>();
             services.AddScoped<IAssortmentRepository, AssortmentRepository>();
+            services.AddScoped<IAssortmentDictionaryRepository, AssortmentDictionaryRepository>();
             services.AddScoped<IChemicalProcessRepository, ChemicalProcessRepository>();
 
             // Services
@@ -49,8 +50,8 @@ namespace Shiptech.Infrastructure
             services.AddScoped<IDrawingReadService, DrawingService>();
             services.AddScoped<IIsoReadService, IsoService>();
             services.AddScoped<IAssortmentReadService, AssortmentService>();
-            services.AddScoped<IChemicalProcessReadService, ChemicalProcessService>();
             services.AddScoped<IAssortmentDictionaryReadService, AssortmentDictionaryService>();
+            services.AddScoped<IChemicalProcessReadService, ChemicalProcessService>();
 
             // Queries
             services.AddQueriesAbstraction();

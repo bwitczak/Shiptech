@@ -11,6 +11,7 @@ internal sealed class WriteDbContext : DbContext
     public DbSet<Drawing> Drawing { get; set; }
     public DbSet<Iso> Iso { get; set; }
     public DbSet<Assortment> Assortment { get; set; }
+    public DbSet<AssortmentDictionary> AssortmentDictionary { get; set; }
     public DbSet<ChemicalProcess> ChemicalProcess { get; set; }
 
     public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
@@ -24,6 +25,7 @@ internal sealed class WriteDbContext : DbContext
         modelBuilder.ApplyConfiguration<Drawing>(configuration);
         modelBuilder.ApplyConfiguration<Iso>(configuration);
         modelBuilder.ApplyConfiguration<Assortment>(configuration);
+        modelBuilder.ApplyConfiguration<AssortmentDictionary>(configuration);
         modelBuilder.ApplyConfiguration<ChemicalProcess>(configuration);
         modelBuilder.ApplyConfiguration<AssortmentDictionary>(configuration);
     }

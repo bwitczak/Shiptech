@@ -267,16 +267,14 @@ internal class ReadConfiguration : IEntityTypeConfiguration<ShipReadModel>, IEnt
             .HasColumnName("Unit")
             .HasColumnType("char(4)")
             .IsRequired();
-        
+
         builder.Property(x => x.Amount)
             .HasColumnName("Amount")
-            .HasColumnType("decimal(5,3)")
-            .IsRequired();
-        
+            .HasColumnType("decimal(5,3)");
+
         builder.Property(x => x.Weight)
             .HasColumnName("Weight")
-            .HasColumnType("decimal(5,3)")
-            .IsRequired();
+            .HasColumnType("decimal(5,3)");
 
         builder.Property(x => x.Material)
             .HasColumnName("Material")
