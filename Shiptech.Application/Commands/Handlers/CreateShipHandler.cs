@@ -10,7 +10,7 @@ internal sealed class CreateShipHandler(IShipRepository repository, IShipFactory
 {
     public async Task HandleAsync(CreateShip command)
     {
-        var (id, code, orderer) = command;
+        var (_, code, orderer) = command;
         
         var ship = factory.Create(Ulid.NewUlid(), code, orderer);
         await repository.CreateAsync(ship);

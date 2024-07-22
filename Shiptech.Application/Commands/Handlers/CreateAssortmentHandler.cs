@@ -11,7 +11,7 @@ internal sealed class CreateAssortmentHandler(IAssortmentRepository repository, 
 {
     public async Task HandleAsync(CreateAssortment command)
     {
-        var (id, name, position, drawingLength, addition,
+        var (_, name, position, drawingLength, addition,
             technologicalAddition, stage, comment, d15I, d15II, d1I, d1II,
             prefabricationQuantity, prefabricationLength, prefabricationWeight,
             assemblyQuantity, assemblyLength, assemblyWeight) = command;

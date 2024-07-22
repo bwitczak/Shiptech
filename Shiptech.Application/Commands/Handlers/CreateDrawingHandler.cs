@@ -11,7 +11,7 @@ internal sealed class CreateDrawingHandler(IDrawingRepository repository, IDrawi
 {
     public async Task HandleAsync(CreateDrawing command)
     {
-        var (id, name, drawingRevision, lot, block, section, stage, date, author) = command;
+        var (_, name, drawingRevision, lot, block, section, stage, date, author) = command;
 
         var drawing = factory.Create(Ulid.NewUlid(), name, drawingRevision, lot, block, section, stage, date, author);
         await repository.CreateAsync(drawing);

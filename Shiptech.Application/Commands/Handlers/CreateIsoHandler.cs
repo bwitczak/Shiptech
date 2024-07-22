@@ -10,7 +10,7 @@ internal sealed class CreateIsoHandler(IIsoRepository repository, IIsoFactory fa
 {
     public async Task HandleAsync(CreateIso command)
     {
-        var (id, name, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
+        var (_, name, isoRevision, system, @class, atest, kzmNumber, kzmDate) = command;
 
         var iso = factory.Create(Ulid.NewUlid(), name, isoRevision, system, @class, atest, kzmNumber, kzmDate);
         await repository.CreateAsync(iso);

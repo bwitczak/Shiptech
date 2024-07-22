@@ -11,7 +11,7 @@ internal sealed class CreateChemicalProcessHandler(IChemicalProcessRepository re
 {
     public async Task HandleAsync(CreateChemicalProcess command)
     {
-        var (id, chemicalProcessCode, chemicalProcessName) = command;
+        var (_, chemicalProcessCode, chemicalProcessName) = command;
 
         var chemicalProcess = factory.Create(Ulid.NewUlid(), chemicalProcessCode, chemicalProcessName);
         await repository.CreateAsync(chemicalProcess);
