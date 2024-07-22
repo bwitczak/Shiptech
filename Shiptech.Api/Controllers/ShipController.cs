@@ -42,11 +42,11 @@ public class ShipController : ControllerBase
     }
     
     [HttpGet("all")]
-    public async Task<ActionResult<IEnumerable<ShipWithNoRelationsDto>>> GetAll(GetAllShips query)
+    public async Task<IResult> GetAll(GetAllShips query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
 
-        return Ok(result);
+        return Results.Ok(result);
     }
 
     [HttpPost]

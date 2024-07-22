@@ -43,11 +43,11 @@ public class ChemicalProcessController : ControllerBase
     }
     
     [HttpGet("all")]
-    public async Task<ActionResult<IEnumerable<ChemicalProcessDto>>> GetAll(GetAllChemicalProcesses query)
+    public async Task<IResult> GetAll(GetAllChemicalProcesses query)
     {
         var result = await _queryDispatcher.QueryAsync(query);
 
-        return Ok(result);
+        return Results.Ok(result);
     }
 
     [HttpPost]
