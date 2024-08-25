@@ -1,0 +1,16 @@
+﻿volumes:
+  postgres:
+
+services:
+  db:
+    container_name: shiptech_db
+    image: postgres:16.4-alpine3.20
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: shiptech
+      POSTGRES_USER: ${SHIPTECH_DATABASE_USER}
+      POSTGRES_PASSWORD: ${SHIPTECH_DATABASE_PASSWORD}
+    volumes:
+      - postgres:/var/lib/postgresql/data
