@@ -1,71 +1,93 @@
-﻿# Shiptech
+# Shiptech
 
-The project was generated using the [Clean.Architecture.Solution.Template](https://github.com/jasontaylordev/Shiptech) version 8.0.5.
+Shiptech is an application designed to manage ship technical drawings efficiently. It provides a robust platform for adding, managing, and releasing technical drawings for production.
 
-## Build
+## Features
 
-Run `dotnet build -tl` to build the solution.
+- Manage technical drawings
+- Upload and download technical drawings
+- Export technical drawings to Excel
+- Release finished drawings for production
+- Authentication and authorization
 
-## Run
+## Technology Stack
 
-To run the web application:
+### Backend
+- Language: C#
+- Database: Postgres
+- Architecture: Clean Architecture with CQRS pattern
 
-```bash
-cd .\src\Web\
-dotnet watch run
+### Frontend
+- Framework: Angular (UI/UX design in progress)
+
+## Current Status
+
+The project is under active development. Currently, endpoints for managing technical drawings have been implemented. Other features are in the planning and development stages.
+
+## Getting Started
+
+### Current Development Setup
+
+Currently, the application can be run locally using the following steps:
+
+1. Ensure you have a local Postgres server running, or use the provided `docker-compose.yml` in the root of the project to set up a Postgres container:
+
+   ```
+   docker compose up -d
+   ```
+
+2. Navigate to the API project directory:
+
+   ```
+   cd ./Shiptech.Api
+   ```
+
+3. Run the application using the .NET CLI:
+
+   ```
+   dotnet run
+   ```
+
+### Docker Setup (Planned)
+
+In the future, the entire build application will be containerized and run using Docker with reverse proxy. The setup will be as follows:
+
+#### Prerequisites
+
+- Docker
+- Docker Compose
+
+#### Running the Application
+
+1. Clone the repository to your local machine.
+2. Navigate to the root directory of the project where the `docker-compose.yml` file is located.
+3. Run the following command to start the application:
+
+   ```
+   docker compose up -d
+   ```
+
+   This command will build and start all the necessary containers in detached mode.
+
+4. Once the containers are up and running, you can access the application through the specified ports (add more details about accessing the frontend and backend if available).
+
+#### Stopping the Application
+
+To stop the application, run the following command in the same directory:
+
+```
+docker compose down
 ```
 
-Navigate to https://localhost:5001. The application will automatically reload if you change any of the source files.
+This will stop and remove the containers, networks, and volumes created by `docker compose up`.
 
-## Code Styles & Formatting
+## API Documentation
 
-The template includes [EditorConfig](https://editorconfig.org/) support to help maintain consistent coding styles for multiple developers working on the same project across various editors and IDEs. The **.editorconfig** file defines the coding styles applicable to this solution.
-
-## Code Scaffolding
-
-The template includes support to scaffold new commands and queries.
-
-Start in the `.\src\Application\` folder.
-
-Create a new command:
+API documentation will be available in the future through Swagger UI at
 
 ```
-dotnet new ca-usecase --name CreateTodoList --feature-name TodoLists --usecase-type command --return-type int
+http://localhost:5290/swagger
 ```
 
-Create a new query:
+Currently, Swagger has been temporarily disabled as it's not being used as an HTTP Client. For API testing and exploration, Insomnia is being used due to personal preferences.
 
-```
-dotnet new ca-usecase -n GetTodos -fn TodoLists -ut query -rt TodosVm
-```
-
-If you encounter the error *"No templates or subcommands found matching: 'ca-usecase'."*, install the template and try again:
-
-```bash
-dotnet new install Clean.Architecture.Solution.Template::8.0.5
-```
-
-## Test
-
-The solution contains unit, integration, functional, and acceptance tests.
-
-To run the unit, integration, and functional tests (excluding acceptance tests):
-```bash
-dotnet test --filter "FullyQualifiedName!~AcceptanceTests"
-```
-
-To run the acceptance tests, first start the application:
-
-```bash
-cd .\src\Web\
-dotnet run
-```
-
-Then, in a new console, run the tests:
-```bash
-cd .\src\Web\
-dotnet test
-```
-
-## Help
-To learn more about the template go to the [project website](https://github.com/jasontaylordev/CleanArchitecture). Here you can find additional guidance, request new features, report a bug, and discuss the template with other users.
