@@ -25,7 +25,6 @@ else
 }
 
 app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseSwaggerUi(settings =>
