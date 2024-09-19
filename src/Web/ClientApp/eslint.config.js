@@ -2,10 +2,14 @@
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
+const prettier = require('eslint-plugin-prettier');
 
 module.exports = tseslint.config(
   {
-    ignores: ["**/web-api-client.ts"],
+    ignores: ['**/web-api-client.ts'],
+    plugins: {
+      prettier,
+    },
     files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
@@ -31,6 +35,7 @@ module.exports = tseslint.config(
           style: 'kebab-case',
         },
       ],
+      'prettier/prettier': 'error',
     },
   },
   {
