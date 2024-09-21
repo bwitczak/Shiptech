@@ -13,3 +13,4 @@ services:
       POSTGRES_USER: ${SHIPTECH_DATABASE_USER}
       POSTGRES_PASSWORD: ${SHIPTECH_DATABASE_PASSWORD}
     volumes:
+      - postgres:/var/lib/postgresql/data/
