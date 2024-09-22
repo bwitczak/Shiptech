@@ -30,6 +30,7 @@
           <p-sortIcon field="{{ col.field }}" />
         </th>
       }
+      <th>Akcje</th>
     </tr>
     <tr>
       @for (col of cols; track col) {
@@ -42,6 +43,7 @@
           />
         </th>
       }
+      <th></th>
     </tr>
   </ng-template>
   <ng-template let-columns="columns" let-rowData pTemplate="body">
@@ -51,6 +53,16 @@
           {{ rowData[col.field] }}
         </td>
       }
+      <td>
+        <a href="/isos/{{ rowData.id }}">
+          <button
+            icon="pi pi-arrow-up-right"
+            pButton
+            pRipple
+            type="button"
+          ></button>
+        </a>
+      </td>
     </tr>
   </ng-template>
 </p-table>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { PrimeNGConfig } from 'primeng/api';
@@ -10,7 +10,7 @@ import { PrimeNGConfig } from 'primeng/api';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {

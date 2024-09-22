@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { DrawingsComponent } from '../pages/drawings/drawings.component';
+import { IsosComponent } from '../pages/isos/isos.component';
 
 export const routes: Routes = [
   { path: 'drawings/:shipId', component: DrawingsComponent },
+  { path: 'isos/:drawingId', component: IsosComponent },
 ];
