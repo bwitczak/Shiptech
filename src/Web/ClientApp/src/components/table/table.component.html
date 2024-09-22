@@ -1,1 +1,30 @@
-<p>table works!</p>
+<p-table
+  [columns]="cols"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [value]="data"
+  [paginator]="true"
+  [rows]="25"
+  [rowsPerPageOptions]="[25, 50, 75, 100]"
+  showCurrentPageReport="true"
+  currentPageReportTemplate="{first} do {last} z {totalRecords} wierszy"
+  styleClass="p-datatable-lg p-datatable-gridlines"
+>
+  <ng-template let-columns pTemplate="header">
+    <tr>
+      @for (col of cols; track col) {
+        <th>
+          {{ col.header }}
+        </th>
+      }
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      @for (col of cols; track col) {
+        <td>
+          {{ rowData[col.field] }}
+        </td>
+      }
+    </tr>
+  </ng-template>
+</p-table>

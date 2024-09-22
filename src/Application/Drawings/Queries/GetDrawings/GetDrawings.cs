@@ -2,19 +2,16 @@
 using AutoMapper.QueryableExtensions;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
-using Shiptech.Application.Common.Mappings;
-using Shiptech.Application.Common.Models;
 using Shiptech.Application.Common.Models.Drawing;
 
-namespace Shiptech.Application.Drawings.Queries.GetPaginatedDrawings;
+namespace Shiptech.Application.Drawings.Queries.GetDrawings;
 
-public record GetPaginatedDrawingsQuery : IRequest<PaginatedList<DrawingWithNoRelationsDto>>
+public record GetPaginatedDrawingsQuery : IRequest<IEnumerable<DrawingWithNoRelationsDto>>
 {
     public Ulid ShipId { get; init; }
-    public int PageNumber { get; init; } = 1;
-    public int PageSize { get; init; } = 25;
 }
 
 public class GetPaginatedDrawingsQueryValidator : AbstractValidator<GetPaginatedDrawingsQuery>
@@ -32,7 +29,7 @@ public class GetPaginatedDrawingsQueryValidator : AbstractValidator<GetPaginated
     }
 }
 
-public class GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDrawingsQuery, PaginatedList<DrawingWithNoRelationsDto>>
+public class GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDrawingsQuery, IEnumerable<DrawingWithNoRelationsDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -43,12 +40,11 @@ public class GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDraw
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<DrawingWithNoRelationsDto>> Handle(GetPaginatedDrawingsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<DrawingWithNoRelationsDto>> Handle(GetPaginatedDrawingsQuery request, CancellationToken cancellationToken)
     {
         return await _context.Drawings
             .Where(x => x.Ship != null && x.Ship.Id == request.ShipId)
             .OrderBy(x => x.Number)
-            .ProjectTo<DrawingWithNoRelationsDto>(_mapper.ConfigurationProvider)
-            .PaginatedListAsync(request.PageNumber, request.PageSize);
+            .ProjectTo<DrawingWithNoRelationsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken: cancellationToken);
     }
 }
