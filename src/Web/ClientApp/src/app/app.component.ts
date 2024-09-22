@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,18 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private primengConfig: PrimeNGConfig) {}
+
+  ngOnInit() {
+    this.primengConfig.setTranslation({
+      startsWith: 'Zaczyna się',
+      contains: 'Zawiera',
+      notContains: 'Nie zawiera',
+      endsWith: 'Kończy się',
+      equals: 'Równe',
+      notEquals: 'Nie równe',
+      noFilter: 'Resetuj filtry',
+    });
+  }
+}

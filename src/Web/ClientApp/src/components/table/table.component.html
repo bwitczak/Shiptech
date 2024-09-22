@@ -1,5 +1,16 @@
 <p-table
+  #tableRef
   [columns]="cols"
+  [globalFilterFields]="[
+    'number',
+    'name',
+    'drawingRevision',
+    'lot',
+    'block',
+    'section',
+    'stage',
+    'createdBy',
+  ]"
   [paginator]="true"
   [rowsPerPageOptions]="[25, 50, 75, 100]"
   [rows]="25"
@@ -16,6 +27,18 @@
         <th pSortableColumn="{{ col.field }}">
           {{ col.header }}
           <p-sortIcon field="{{ col.field }}" />
+        </th>
+      }
+    </tr>
+    <tr>
+      @for (col of cols; track col) {
+        <th>
+          <p-columnFilter
+            type="text"
+            field="{{ col.field }}"
+            placeholder="Wyszukaj po {{ col.header }}"
+            ariaLabel="Filter {{ col.field }}"
+          />
         </th>
       }
     </tr>
