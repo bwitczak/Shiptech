@@ -14,12 +14,13 @@
   [paginator]="true"
   [rowsPerPageOptions]="[25, 50, 75, 100]"
   [rows]="25"
-  [tableStyle]="{ 'min-width': '50rem' }"
+  [scrollable]="true"
   [value]="data"
   currentPageReportTemplate="{first} do {last} z {totalRecords} wierszy"
+  scrollHeight="calc(100vh - 180px)"
   showCurrentPageReport="true"
   sortMode="multiple"
-  styleClass="p-datatable-lg p-datatable-gridlines"
+  styleClass="p-datatable-lg p-datatable-gridlines mt-3"
 >
   <ng-template let-columns pTemplate="header">
     <tr>
