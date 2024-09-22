@@ -1,24 +1,26 @@
 <p-table
   [columns]="cols"
+  [paginator]="true"
+  [rowsPerPageOptions]="[25, 50, 75, 100]"
+  [rows]="25"
   [tableStyle]="{ 'min-width': '50rem' }"
   [value]="data"
-  [paginator]="true"
-  [rows]="25"
-  [rowsPerPageOptions]="[25, 50, 75, 100]"
-  showCurrentPageReport="true"
   currentPageReportTemplate="{first} do {last} z {totalRecords} wierszy"
+  showCurrentPageReport="true"
+  sortMode="multiple"
   styleClass="p-datatable-lg p-datatable-gridlines"
 >
   <ng-template let-columns pTemplate="header">
     <tr>
       @for (col of cols; track col) {
-        <th>
+        <th pSortableColumn="{{ col.field }}">
           {{ col.header }}
+          <p-sortIcon field="{{ col.field }}" />
         </th>
       }
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-rowData let-columns="columns">
+  <ng-template let-columns="columns" let-rowData pTemplate="body">
     <tr>
       @for (col of cols; track col) {
         <td>
