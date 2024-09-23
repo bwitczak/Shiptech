@@ -9,41 +9,41 @@ using Shiptech.Application.Common.Models.Iso;
 
 namespace Shiptech.Application.Isos.Queries.GetIsos;
 
-public record GetPaginatedIsosQuery : IRequest<IEnumerable<IsoDto>>
+public record GetIsosQuery : IRequest<IEnumerable<IsoDto>>
 {
-    public Ulid DrawingId { get; set; }
+    public required string DrawingNumber { get; set; }
 }
 
-public class GetPaginatedIsosQueryValidator : AbstractValidator<GetPaginatedIsosQuery>
+public class GetIsosQueryValidator : AbstractValidator<GetIsosQuery>
 {
-    public GetPaginatedIsosQueryValidator(IDrawingService service)
+    public GetIsosQueryValidator(IDrawingService service)
     {
-        RuleFor(x => x.DrawingId)
+        RuleFor(x => x.DrawingNumber)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("GET_PAGINATED_ISOS_400_DRAWINGID")
-            .WithMessage("Identyfikator rysunku nie może być pusty!")
-            .MustAsync(async (x, _) => await service.ExistsById(x))
-            .WithMessage(x => $"{x.DrawingId} nie istnieje w bazie!")
-            .WithErrorCode("DRAWING_404_ID");
+            .WithErrorCode("GET_PAGINATED_ISOS_400_DRAWING_NUMBER")
+            .WithMessage("Numer rysunku nie może być pusty!")
+            .MustAsync(async (x, _) => await service.ExistsByNumber(x))
+            .WithMessage(x => $"{x.DrawingNumber} istnieje w bazie!")
+            .WithErrorCode("DRAWING_409_ID");
     }
 }
 
-public class GetPaginatedIsosQueryHandler : IRequestHandler<GetPaginatedIsosQuery, IEnumerable<IsoDto>>
+public class GetIsosQueryHandler : IRequestHandler<GetIsosQuery, IEnumerable<IsoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetPaginatedIsosQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetIsosQueryHandler(IApplicationDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<IsoDto>> Handle(GetPaginatedIsosQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<IsoDto>> Handle(GetIsosQuery request, CancellationToken cancellationToken)
     {
         return await _context.Isos
-            .Where(x => x.Drawing != null && x.Drawing.Id == request.DrawingId)
+            .Where(x => x.Drawing != null && x.Drawing.Number == request.DrawingNumber)
             .OrderBy(x => x.Number)
             .ProjectTo<IsoDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);

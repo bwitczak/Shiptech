@@ -14,14 +14,18 @@ public record CreateDrawingCommand(string Number, string Name, char Revision, st
 
 public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingCommand>
 {
-    public CreateDrawingCommandValidator(IShipService service)
+    public CreateDrawingCommandValidator(IShipService shipService, IDrawingService drawingService)
     {
         RuleFor(x => x.Number)
             .NotNull()
             .NotEmpty()
             .WithErrorCode("CREATE_DRAWING_400_NUMBER")
-            .WithMessage("Numer rysunku nie może być pusty!");
-        
+            .WithMessage("Numer rysunku nie może być pusty!")
+            .MustAsync(async (x, _) => !await drawingService.ExistsByNumber(x))
+            .WithMessage(x => $"{x.Number} istnieje w bazie!")
+            .WithErrorCode("CREATE_DRAWING_409_NUMBER");
+        ;
+
         RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
@@ -90,7 +94,7 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
             .NotEmpty()
             .WithErrorCode("CREATE_DRAWING_400_SHIP_ID")
             .WithMessage("Identyfikator statku nie może być pusty!")
-            .MustAsync(async (x, _) => await service.ExistsById(x))
+            .MustAsync(async (x, _) => await shipService.ExistsById(x))
             .WithMessage(x => $"{x.ShipId} nie istnieje w bazie!")
             .WithErrorCode("CREATE_DRAWING_404_SHIP_ID");
     }

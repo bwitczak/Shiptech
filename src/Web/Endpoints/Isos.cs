@@ -20,7 +20,7 @@ public class Isos : EndpointGroupBase
             .MapDelete(DeleteIso, "/Delete/{id}");
     }
 
-    private Task<IEnumerable<IsoDto>> GetAllIsos(ISender sender, [AsParameters] GetPaginatedIsosQuery query)
+    private Task<IEnumerable<IsoDto>> GetAllIsos(ISender sender, [AsParameters] GetIsosQuery query)
     {
         return sender.Send(query);
     }

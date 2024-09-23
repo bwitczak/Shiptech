@@ -13,9 +13,14 @@ public class DrawingService : IDrawingService
     {
         _drawings = context.Drawings;
     }
-    
+
     public async Task<bool> ExistsById(Ulid id)
     {
         return await _drawings.AnyAsync(x => x.Id == id);
+    }
+
+    public async Task<bool> ExistsByNumber(string number)
+    {
+        return await _drawings.AnyAsync(x => x.Number == number);
     }
 }
