@@ -1,0 +1,14 @@
+<p-breadcrumb [model]="navigation" class="max-w-full" ngSkipHydration>
+  <ng-template let-item pTemplate="item">
+    @if (item.route) {
+      <ng-container>
+        <a [routerLink]="item.route" class="p-menuitem-link">
+          <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
+          <span class="text-primary font-semibold">{{ item.label }}</span>
+        </a>
+      </ng-container>
+    } @else {
+      <span class="text-color">{{ item.label }}</span>
+    }
+  </ng-template>
+</p-breadcrumb>

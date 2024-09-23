@@ -4,11 +4,13 @@ import { DrawingWithNoRelationsDto } from '../../app/web-api-client';
 import { HttpClient } from '@angular/common/http';
 import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
+import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-drawings',
   standalone: true,
-  imports: [TableComponent],
+  imports: [TableComponent, BreadcrumbComponent],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',
 })
@@ -25,19 +27,27 @@ export class DrawingsComponent implements OnInit {
     { field: 'createdBy', header: 'Autor' },
   ];
   filterFields = this.cols.map((x) => x.field);
+  shipId = '';
+  navigation: MenuItem[];
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient
-  ) {}
+  ) {
+    this.actionButtonRedirect = this.actionButtonRedirect.bind(this);
+  }
 
   ngOnInit() {
-    const shipId = this.route.snapshot.params['shipId'];
+    this.shipId = this.route.snapshot.params['shipId'];
+    this.navigation = [
+      { icon: 'pi pi-home', route: '/' },
+      { label: `Rysunek(${this.shipId})` },
+    ];
 
     this.http
       .get<DrawingWithNoRelationsDto[]>('/api/Drawings/GetAll', {
         params: {
-          ShipId: shipId,
+          ShipId: this.shipId,
         },
       })
       .subscribe({
@@ -45,5 +55,9 @@ export class DrawingsComponent implements OnInit {
           this.drawings = x;
         },
       });
+  }
+
+  actionButtonRedirect(number: string) {
+    return `/isos/${number}?shipId=${this.shipId}`;
   }
 }

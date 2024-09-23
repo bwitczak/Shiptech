@@ -3,7 +3,6 @@ import { Column } from '../../shared/types';
 import { TableModule } from 'primeng/table';
 import { ButtonDirective } from 'primeng/button';
 import { Ripple } from 'primeng/ripple';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -16,10 +15,5 @@ export class TableComponent<T> {
   @Input() cols: Column[];
   @Input() data: T[];
   @Input() filterFields: string[];
-
-  constructor(private route: Router) {}
-
-  selectRow(id: string) {
-    this.route.navigate(['/isos', { drawingId: id }]);
-  }
+  @Input() action?: (number: string) => string;
 }

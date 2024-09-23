@@ -8,7 +8,7 @@
   [scrollable]="true"
   [value]="data"
   currentPageReportTemplate="{first} do {last} z {totalRecords} wierszy"
-  scrollHeight="calc(100vh - 180px)"
+  scrollHeight="calc(100vh - 230px)"
   showCurrentPageReport="true"
   sortMode="multiple"
   styleClass="p-datatable-lg p-datatable-gridlines mt-3"
@@ -21,7 +21,9 @@
           <p-columnFilter type="text" field="{{ col.field }}" display="menu" />
         </th>
       }
-      <th>Akcje</th>
+      @if (action) {
+        <th>Akcje</th>
+      }
     </tr>
   </ng-template>
   <ng-template let-columns="columns" let-rowData pTemplate="body">
@@ -31,16 +33,18 @@
           {{ rowData[col.field] }}
         </td>
       }
-      <td>
-        <a href="/isos/{{ rowData.id }}">
-          <button
-            icon="pi pi-arrow-up-right"
-            pButton
-            pRipple
-            type="button"
-          ></button>
-        </a>
-      </td>
+      @if (action) {
+        <td>
+          <a href="{{ action(rowData.number) }}">
+            <button
+              icon="pi pi-arrow-up-right"
+              pButton
+              pRipple
+              type="button"
+            ></button>
+          </a>
+        </td>
+      }
     </tr>
   </ng-template>
 </p-table>

@@ -4,5 +4,5 @@ import { IsosComponent } from '../pages/isos/isos.component';
 
 export const routes: Routes = [
   { path: 'drawings/:shipId', component: DrawingsComponent },
-  { path: 'isos/:drawingId', component: IsosComponent },
+  { path: 'isos/:drawingNumber', component: IsosComponent },
 ];
