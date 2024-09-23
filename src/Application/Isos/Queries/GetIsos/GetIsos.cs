@@ -2,20 +2,16 @@
 using AutoMapper.QueryableExtensions;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
-using Shiptech.Application.Common.Mappings;
-using Shiptech.Application.Common.Models;
-using Shiptech.Application.Common.Models.Drawing;
 using Shiptech.Application.Common.Models.Iso;
 
-namespace Shiptech.Application.Isos.Queries.GetPaginatedIsos;
+namespace Shiptech.Application.Isos.Queries.GetIsos;
 
-public record GetPaginatedIsosQuery : IRequest<PaginatedList<IsoDto>>
+public record GetPaginatedIsosQuery : IRequest<IEnumerable<IsoDto>>
 {
     public Ulid DrawingId { get; set; }
-    public int PageNumber { get; init; } = 1;
-    public int PageSize { get; init; } = 25;
 }
 
 public class GetPaginatedIsosQueryValidator : AbstractValidator<GetPaginatedIsosQuery>
@@ -33,7 +29,7 @@ public class GetPaginatedIsosQueryValidator : AbstractValidator<GetPaginatedIsos
     }
 }
 
-public class GetPaginatedIsosQueryHandler : IRequestHandler<GetPaginatedIsosQuery, PaginatedList<IsoDto>>
+public class GetPaginatedIsosQueryHandler : IRequestHandler<GetPaginatedIsosQuery, IEnumerable<IsoDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -44,12 +40,12 @@ public class GetPaginatedIsosQueryHandler : IRequestHandler<GetPaginatedIsosQuer
         _mapper = mapper;
     }
 
-    public async Task<PaginatedList<IsoDto>> Handle(GetPaginatedIsosQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<IsoDto>> Handle(GetPaginatedIsosQuery request, CancellationToken cancellationToken)
     {
         return await _context.Isos
             .Where(x => x.Drawing != null && x.Drawing.Id == request.DrawingId)
             .OrderBy(x => x.Number)
             .ProjectTo<IsoDto>(_mapper.ConfigurationProvider)
-            .PaginatedListAsync(request.PageNumber, request.PageSize);
+            .ToListAsync(cancellationToken);
     }
 }
