@@ -22,6 +22,12 @@ export class AppComponent implements OnInit {
       equals: 'Równe',
       notEquals: 'Nie równe',
       noFilter: 'Resetuj filtry',
+      matchAll: 'Dopasuj wszystko',
+      matchAny: 'Dopasuj dowolny',
+      addRule: 'Dodaj regułę',
+      removeRule: 'Usuń regułę',
+      clear: 'Wyczyść',
+      apply: 'Zatwierdź',
     });
   }
 }

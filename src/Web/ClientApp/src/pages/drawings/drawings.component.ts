@@ -24,6 +24,7 @@ export class DrawingsComponent implements OnInit {
     { field: 'stage', header: 'Etap' },
     { field: 'createdBy', header: 'Autor' },
   ];
+  filterFields = this.cols.map((x) => x.field);
 
   constructor(
     private route: ActivatedRoute,

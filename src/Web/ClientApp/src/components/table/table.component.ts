@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class TableComponent<T> {
   @Input() cols: Column[];
   @Input() data: T[];
+  @Input() filterFields: string[];
 
   constructor(private route: Router) {}
 

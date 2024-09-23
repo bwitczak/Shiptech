@@ -6,3 +6,11 @@
 body {
   padding: 1rem;
 }
+
+@layer custom-primeng, primeng;
+
+@layer custom-primeng {
+  .p-datatable.p-datatable-lg .p-datatable-thead > tr > th {
+    padding: 1rem;
+  }
+}
