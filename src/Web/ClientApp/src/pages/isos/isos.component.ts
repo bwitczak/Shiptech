@@ -6,11 +6,12 @@ import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
 import { MenuItem } from 'primeng/api';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-isos',
   standalone: true,
-  imports: [TableComponent, BreadcrumbComponent],
+  imports: [TableComponent, BreadcrumbComponent, Button],
   templateUrl: './isos.component.html',
   styleUrl: './isos.component.scss',
 })

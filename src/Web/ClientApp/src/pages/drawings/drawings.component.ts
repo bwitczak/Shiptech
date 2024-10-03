@@ -6,11 +6,12 @@ import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { MenuItem } from 'primeng/api';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-drawings',
   standalone: true,
-  imports: [TableComponent, BreadcrumbComponent],
+  imports: [TableComponent, BreadcrumbComponent, Button],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',
 })

@@ -1,14 +1,19 @@
-<p-breadcrumb [model]="navigation" class="max-w-full" ngSkipHydration>
-  <ng-template let-item pTemplate="item">
-    @if (item.route) {
-      <ng-container>
+<div class="flex justify-content-between align-items-center">
+  <app-sidebar />
+  <p-breadcrumb [model]="navigation" ngSkipHydration>
+    <ng-template let-item pTemplate="item">
+      @if (item.route) {
         <a [routerLink]="item.route" class="p-menuitem-link">
           <span [ngClass]="[item.icon ? item.icon : '', 'text-color']"></span>
           <span class="text-primary font-semibold">{{ item.label }}</span>
         </a>
-      </ng-container>
-    } @else {
-      <span class="text-color">{{ item.label }}</span>
-    }
-  </ng-template>
-</p-breadcrumb>
+      } @else {
+        <span class="text-color">{{ item.label }}</span>
+      }
+    </ng-template>
+  </p-breadcrumb>
+
+  <div>
+    <ng-content />
+  </div>
+</div>
