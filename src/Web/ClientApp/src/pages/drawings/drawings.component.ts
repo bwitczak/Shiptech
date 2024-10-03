@@ -27,7 +27,7 @@ export class DrawingsComponent implements OnInit {
     { field: 'createdBy', header: 'Autor' },
   ];
   filterFields = this.cols.map((x) => x.field);
-  shipId = '';
+  shipOrderer = '';
   navigation: MenuItem[];
 
   constructor(
@@ -38,16 +38,16 @@ export class DrawingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shipId = this.route.snapshot.params['shipId'];
+    this.shipOrderer = this.route.snapshot.params['shipOrderer'];
     this.navigation = [
       { icon: 'pi pi-home', route: '/' },
-      { label: `Rysunek(${this.shipId})` },
+      { label: `Rysunek(${this.shipOrderer})` },
     ];
 
     this.http
       .get<DrawingWithNoRelationsDto[]>('/api/Drawings/GetAll', {
         params: {
-          ShipId: this.shipId,
+          ShipOrderer: this.shipOrderer,
         },
       })
       .subscribe({
@@ -58,6 +58,6 @@ export class DrawingsComponent implements OnInit {
   }
 
   actionButtonRedirect(number: string) {
-    return `/isos/${number}?shipId=${this.shipId}`;
+    return `/isos/${number}?shipOrderer=${this.shipOrderer}`;
   }
 }

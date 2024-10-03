@@ -11,25 +11,27 @@ namespace Shiptech.Application.Drawings.Queries.GetDrawings;
 
 public record GetPaginatedDrawingsQuery : IRequest<IEnumerable<DrawingWithNoRelationsDto>>
 {
-    public Ulid ShipId { get; init; }
+    public required string ShipOrderer { get; init; }
 }
 
 public class GetPaginatedDrawingsQueryValidator : AbstractValidator<GetPaginatedDrawingsQuery>
 {
     public GetPaginatedDrawingsQueryValidator(IShipService service)
     {
-        RuleFor(x => x.ShipId)
+        RuleFor(x => x.ShipOrderer)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("GET_PAGINATED_DRAWINGS_400_SHIPID")
+            .WithErrorCode("GET_PAGINATED_DRAWINGS_400_SHIP_ORDERER")
             .WithMessage("Identyfikator statku nie może być pusty!")
-            .MustAsync(async (x, _) => await service.ExistsById(x))
-            .WithMessage(x => $"{x.ShipId} nie istnieje w bazie!")
-            .WithErrorCode("SHIP_404_ID");
+            .MustAsync(async (x, _) => await service.ExistsByOrderer(x))
+            .WithMessage(x => $"{x.ShipOrderer} nie istnieje w bazie!")
+            .WithErrorCode("SHIP_404_ORDERER");
     }
 }
 
-public class GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDrawingsQuery, IEnumerable<DrawingWithNoRelationsDto>>
+public class
+    GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDrawingsQuery,
+    IEnumerable<DrawingWithNoRelationsDto>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -40,11 +42,12 @@ public class GetPaginatedDrawingsQueryHandler : IRequestHandler<GetPaginatedDraw
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<DrawingWithNoRelationsDto>> Handle(GetPaginatedDrawingsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<DrawingWithNoRelationsDto>> Handle(GetPaginatedDrawingsQuery request,
+        CancellationToken cancellationToken)
     {
         return await _context.Drawings
-            .Where(x => x.Ship != null && x.Ship.Id == request.ShipId)
+            .Where(x => x.Ship != null && x.Ship.Orderer == request.ShipOrderer)
             .OrderBy(x => x.Number)
-            .ProjectTo<DrawingWithNoRelationsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken: cancellationToken);
+            .ProjectTo<DrawingWithNoRelationsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }
 }

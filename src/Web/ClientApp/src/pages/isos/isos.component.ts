@@ -44,10 +44,10 @@ export class IsosComponent implements OnInit {
 
   ngOnInit() {
     const drawingNumber = this.route.snapshot.params['drawingNumber'];
-    const shipId = this.route.snapshot.queryParams['shipId'];
+    const shipOrderer = this.route.snapshot.queryParams['shipOrderer'];
     this.navigation = [
       { icon: 'pi pi-home', route: '/' },
-      { label: 'Rysunek', route: `/drawings/${shipId}` },
+      { label: `Rysunek(${shipOrderer})`, route: `/drawings/${shipOrderer}` },
       { label: `Iso(${drawingNumber})` },
     ];
 
