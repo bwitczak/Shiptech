@@ -27,11 +27,11 @@ export class IsosComponent implements OnInit {
     { field: 'kzmNumber', header: 'Numer KZM' },
     { field: 'kzmDate', header: 'Data KZM' },
     {
-      field: 'chemicalProcess.chemicalProcessName',
+      field: 'chemicalProcess',
+      subfield: 'chemicalProcessName',
       header: 'Obróbka chemiczna',
     },
   ];
-  filterFields = this.cols.map((x) => x.field);
   navigation: MenuItem[];
 
   constructor(

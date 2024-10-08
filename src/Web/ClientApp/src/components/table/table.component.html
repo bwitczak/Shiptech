@@ -16,9 +16,17 @@
   <ng-template let-columns pTemplate="header">
     <tr>
       @for (col of cols; track col) {
-        <th pSortableColumn="{{ col.field }}">
+        <th
+          [pSortableColumn]="
+            col.subfield ? col.field + '.' + col.subfield : col.field
+          "
+        >
           {{ col.header }}
-          <p-columnFilter type="text" field="{{ col.field }}" display="menu" />
+          <p-columnFilter
+            type="text"
+            [field]="col.subfield ? col.field + '.' + col.subfield : col.field"
+            display="menu"
+          />
         </th>
       }
       @if (action) {
@@ -30,7 +38,11 @@
     <tr>
       @for (col of cols; track col) {
         <td>
-          {{ rowData[col.field] }}
+          @if (col.subfield) {
+            {{ rowData[col.field][col.subfield] }}
+          } @else {
+            {{ rowData[col.field] }}
+          }
         </td>
       }
       @if (action) {

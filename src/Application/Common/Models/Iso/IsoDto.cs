@@ -1,7 +1,6 @@
 using AutoMapper;
 using Shiptech.Application.Common.Models.Assortment;
 using Shiptech.Application.Common.Models.ChemicalProcess;
-using Shiptech.Application.Common.Models.Drawing;
 
 namespace Shiptech.Application.Common.Models.Iso;
 
@@ -18,7 +17,7 @@ public class IsoDto
     public DateOnly? KzmDate { get; set; }
     public ChemicalProcessDto? ChemicalProcess { get; set; }
     public IList<AssortmentDto> Assortments { get; set; } = new List<AssortmentDto>();
-    
+
     private class Mapping : Profile
     {
         public Mapping()
