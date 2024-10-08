@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { PrimeNGConfig } from 'primeng/api';
 
@@ -11,7 +11,10 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    protected router: Router
+  ) {}
 
   ngOnInit() {
     this.primengConfig.setTranslation({

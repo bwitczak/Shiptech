@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.Data;
 namespace Shiptech.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240904182548_Init")]
+    [Migration("20241008143314_Init")]
     partial class Init
     {
         /// <inheritdoc />
