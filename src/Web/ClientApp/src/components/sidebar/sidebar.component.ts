@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild, WritableSignal } from '@angular/core';
-import { Sidebar, SidebarModule } from 'primeng/sidebar';
-import { Button } from 'primeng/button';
 import { Ripple } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 import { AvatarModule } from 'primeng/avatar';
 import { HttpClient } from '@angular/common/http';
 import { ShipWithNoRelationsDto } from '../../app/web-api-client';
+import { ButtonModule } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule, Button, Ripple, StyleClassModule, AvatarModule],
+  imports: [Ripple, StyleClassModule, AvatarModule, ButtonModule, Drawer],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnInit {
-  sidebarVisible: boolean | WritableSignal<boolean> = false;
-  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
+  visible: boolean | WritableSignal<boolean> = false;
+  @ViewChild('drawerRef') drawerRef!: Drawer;
   shipowners: ShipWithNoRelationsDto[] = [];
 
   constructor(private http: HttpClient) {}
@@ -25,11 +25,12 @@ export class SidebarComponent implements OnInit {
     this.http.get<ShipWithNoRelationsDto[]>('/api/Ships/GetAll').subscribe({
       next: (x) => {
         this.shipowners = x;
+        console.log(x);
       },
     });
   }
 
   closeCallback(e: MouseEvent): void {
-    this.sidebarRef.close(e);
+    this.drawerRef.close(e);
   }
 }

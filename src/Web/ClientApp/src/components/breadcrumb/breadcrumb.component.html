@@ -1,6 +1,6 @@
-<div class="flex justify-content-between align-items-center">
+<div class="flex justify-between items-center">
   <app-sidebar />
-  <p-breadcrumb [model]="navigation" ngSkipHydration>
+  <p-breadcrumb [model]="navigation">
     <ng-template let-item pTemplate="item">
       @if (item.route) {
         <a [routerLink]="item.route" class="p-menuitem-link">

@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Column } from '../../shared/types';
 import { TableModule } from 'primeng/table';
-import { ButtonDirective } from 'primeng/button';
 import { Ripple } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, ButtonDirective, Ripple],
+  imports: [TableModule, Ripple, ButtonModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
