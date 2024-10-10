@@ -4,11 +4,20 @@ using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
 using Shiptech.Domain.Constants;
+using Shiptech.Domain.Entities;
 using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application.Drawings.Commands.CreateDrawing;
 
-public record CreateDrawingCommand(string Number, string Name, char Revision, string? Lot, string? Block, List<string>? Section, string? Stage, Ulid ShipId) : IRequest
+public record CreateDrawingCommand(
+    string Number,
+    string Name,
+    char Revision,
+    string? Lot,
+    string? Block,
+    List<string>? Section,
+    string? Stage,
+    Ulid ShipId) : IRequest
 {
 }
 
@@ -31,7 +40,7 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
             .NotEmpty()
             .WithErrorCode("CREATE_DRAWING_400_NAME")
             .WithMessage("Nazwa rysunku nie może być pusta!");
-        
+
         RuleFor(x => x.Revision)
             .NotNull()
             .NotEmpty()
@@ -46,11 +55,11 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
             RuleFor(x => x.Lot)
                 .Must(x =>
                 {
-                    if (!int.TryParse(x, out var number))
+                    if (!int.TryParse(x, out int number))
                     {
                         return false;
                     }
-                
+
                     return number is >= 100 and <= 999;
                 })
                 .WithErrorCode("CREATE_DRAWING_400_LOT")
@@ -68,9 +77,10 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
         When(x => x.Section is not null, () =>
         {
             RuleForEach(x => x.Section)
+                .Cascade(CascadeMode.Stop)
                 .Must(x =>
                 {
-                    if (!int.TryParse(x, out var number))
+                    if (!int.TryParse(x, out int number))
                     {
                         return false;
                     }
@@ -78,7 +88,7 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
                     return number is >= 100 and <= 999;
                 })
                 .WithErrorCode("CREATE_DRAWING_400_SECTION")
-                .WithMessage(x => $"Niepoprawna sekcja {x.Section}! Wymagane > 999 oraz < 10000");
+                .WithMessage(_ => "Niepoprawna sekcja! Wymagane > 999 oraz < 10000");
         });
 
         When(x => x.Stage is not null, () =>
@@ -88,7 +98,7 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
                 .WithErrorCode("CREATE_DRAWING_400_STAGE")
                 .WithMessage(x => $"Niepoprawna sekcja {x.Stage}! Wymagane ODP/ODS/ODI/Puste");
         });
-        
+
         RuleFor(x => x.ShipId)
             .NotNull()
             .NotEmpty()
@@ -113,11 +123,12 @@ public class CreateDrawingCommandHandler : IRequestHandler<CreateDrawingCommand>
 
     public async Task Handle(CreateDrawingCommand request, CancellationToken cancellationToken)
     {
-        var (number, name, revision, lot, block, section, stage, shipId) = request;
-        
-        var ship = await _context.Ships.FirstAsync(x => x.Id == shipId, cancellationToken: cancellationToken);
-        var drawing = _factory.Create(Ulid.NewUlid(), number, name, revision, lot, block, section, stage, ship);
-        
+        (string number, string name, char revision, string? lot, string? block, List<string>? section, string? stage,
+            Ulid shipId) = request;
+
+        Ship ship = await _context.Ships.FirstAsync(x => x.Id == shipId, cancellationToken);
+        Drawing drawing = _factory.Create(Ulid.NewUlid(), number, name, revision, lot, block, section, stage, ship);
+
         await _context.Drawings.AddAsync(drawing, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
