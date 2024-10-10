@@ -7,11 +7,22 @@ import { TableComponent } from '../../components/table/table.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ErrorHandlingService } from '../../forms/errorHandlingService';
+import { Select } from 'primeng/select';
 
 @Component({
   selector: 'app-drawings',
   standalone: true,
-  imports: [TableComponent, BreadcrumbComponent, ButtonModule],
+  imports: [
+    TableComponent,
+    BreadcrumbComponent,
+    ButtonModule,
+    DialogModule,
+    ReactiveFormsModule,
+    Select,
+  ],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',
 })
@@ -30,10 +41,22 @@ export class DrawingsComponent implements OnInit {
   filterFields = this.cols.map((x) => x.field);
   shipOrderer = '';
   navigation: MenuItem[];
+  visible: boolean;
+
+  drawingForm = new FormGroup({
+    number: new FormControl(''),
+    name: new FormControl(''),
+    revision: new FormControl(''),
+    lot: new FormControl(''),
+    block: new FormControl(''),
+    section: new FormControl(''),
+    stage: new FormControl(''),
+  });
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private errorHandlingService: ErrorHandlingService
   ) {
     this.actionButtonRedirect = this.actionButtonRedirect.bind(this);
   }
@@ -58,7 +81,29 @@ export class DrawingsComponent implements OnInit {
       });
   }
 
+  addNewDrawing() {
+    this.http
+      .post('/api/Drawings/Create', {
+        ...this.drawingForm.value,
+        section: [this.drawingForm.value.section],
+        shipId: '01J9P8YK4709ASQA8K7W6DK1A9',
+      })
+      .subscribe({
+        next: (x) => {
+          console.log(x);
+        },
+        error: (error) => {
+          console.log(error);
+          this.errorHandlingService.handleApiErrors(error, this.drawingForm);
+        },
+      });
+  }
+
   actionButtonRedirect(number: string) {
-    return `/isos/${number}?shipOrderer=${this.shipOrderer}`;
+    return `/isos/${number}?shipCode=${this.shipOrderer}`;
+  }
+
+  toggleAddDrawingDialog() {
+    this.visible = true;
   }
 }

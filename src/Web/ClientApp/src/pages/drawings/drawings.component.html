@@ -1,4 +1,174 @@
 <app-breadcrumb [navigation]="navigation">
-  <p-button icon="pi pi-plus" label="Add" />
+  <p-button
+    (onClick)="toggleAddDrawingDialog()"
+    icon="pi pi-plus"
+    label="Dodaj"
+  />
 </app-breadcrumb>
 <app-table [action]="actionButtonRedirect" [cols]="cols" [data]="drawings" />
+
+<p-dialog
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+  header="Dodaj rysunek"
+>
+  <form
+    (ngSubmit)="addNewDrawing()"
+    [formGroup]="drawingForm"
+    class="grid grid-cols-[auto_1fr] gap-4 mt-3"
+  >
+    <label class="font-semibold self-center" for="number">Numer</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('number')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="number-error"
+        formControlName="number"
+        id="number"
+        pInputText
+      />
+      @if (drawingForm.get('number')?.errors?.['serverError']) {
+        <small id="number-error" class="text-red-500">
+          {{ drawingForm.get('number')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="name">Nazwa</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('name')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="name-error"
+        formControlName="name"
+        id="name"
+        pInputText
+      />
+      @if (drawingForm.get('name')?.errors?.['serverError']) {
+        <small id="name-error" class="text-red-500">
+          {{ drawingForm.get('name')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="revision">Rewizja</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('revision')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="revision-error"
+        formControlName="revision"
+        id="revision"
+        pInputText
+      />
+      @if (drawingForm.get('revision')?.errors?.['serverError']) {
+        <small id="revision-error" class="text-red-500">
+          {{ drawingForm.get('revision')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="stage">Etap</label>
+    <div>
+      <p-select
+        [class]="
+          drawingForm.get('stage')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        [options]="['ODP', 'ODS', 'ODI']"
+        aria-describedby="stage-error"
+        formControlName="stage"
+        id="stage"
+      />
+      @if (drawingForm.get('stage')?.errors?.['serverError']) {
+        <small id="stage-error" class="text-red-500">
+          {{ drawingForm.get('stage')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="lot">Lot</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('lot')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="lot-error"
+        formControlName="lot"
+        id="lot"
+        pInputText
+      />
+      @if (drawingForm.get('lot')?.errors?.['serverError']) {
+        <small id="lot-error" class="text-red-500">
+          {{ drawingForm.get('lot')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="block">Blok</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('block')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="block-error"
+        formControlName="block"
+        id="block"
+        pInputText
+      />
+      @if (drawingForm.get('block')?.errors?.['serverError']) {
+        <small id="block-error" class="text-red-500">
+          {{ drawingForm.get('block')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+
+    <label class="font-semibold self-center" for="section">Sekcja</label>
+    <div>
+      <input
+        [class]="
+          drawingForm.get('section')?.errors?.['serverError']
+            ? 'border border-red-500 w-full px-3 py-2'
+            : 'w-full px-3 py-2'
+        "
+        aria-describedby="section-error"
+        formControlName="section"
+        id="section"
+        pInputText
+      />
+      @if (drawingForm.get('section')?.errors?.['serverError']) {
+        <small id="section-error" class="text-red-500">
+          {{ drawingForm.get('section')?.errors?.['serverError'] }}
+        </small>
+      }
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      (onClick)="addNewDrawing()"
+      label="Dodaj"
+      severity="primary"
+      type="submit"
+    />
+    <p-button
+      (click)="visible = false"
+      [text]="true"
+      label="Anuluj"
+      severity="secondary"
+    />
+  </ng-template>
+</p-dialog>

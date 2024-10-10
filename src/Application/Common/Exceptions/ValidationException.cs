@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using System.Text.RegularExpressions;
+using FluentValidation.Results;
 
 namespace Shiptech.Application.Common.Exceptions;
 
@@ -14,9 +15,15 @@ public class ValidationException : Exception
         : this()
     {
         Errors = failures
-            .GroupBy(e => e.PropertyName, e => e.ErrorMessage)
+            .GroupBy(e => RemoveArrayIndex(e.PropertyName).ToLower(), e => e.ErrorMessage)
             .ToDictionary(failureGroup => failureGroup.Key, failureGroup => failureGroup.ToArray());
     }
 
     public IDictionary<string, string[]> Errors { get; }
+
+    private string RemoveArrayIndex(string propertyName)
+    {
+        // Remove array indices from property names
+        return Regex.Replace(propertyName, @"\[\d+\]", string.Empty);
+    }
 }
