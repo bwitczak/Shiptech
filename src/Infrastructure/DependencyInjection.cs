@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
-using Shiptech.Domain.Factories;
 using Shiptech.Infrastructure.Data;
 using Shiptech.Infrastructure.Data.Interceptors;
 using Shiptech.Infrastructure.Data.Services;
@@ -17,7 +16,7 @@ public static class DependencyInjection
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
@@ -36,8 +35,9 @@ public static class DependencyInjection
         services.AddScoped<ApplicationDbContextInitialiser>();
 
         services.AddSingleton(TimeProvider.System);
-        
+
         // Services
+        services.AddScoped<IShipownerService, ShipownerService>();
         services.AddScoped<IShipService, ShipService>();
         services.AddScoped<IDrawingService, DrawingService>();
         services.AddScoped<IIsoService, IsoService>();

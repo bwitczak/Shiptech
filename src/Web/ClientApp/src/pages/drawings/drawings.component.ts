@@ -39,7 +39,7 @@ export class DrawingsComponent implements OnInit {
     { field: 'createdBy', header: 'Autor' },
   ];
   filterFields = this.cols.map((x) => x.field);
-  shipOrderer = '';
+  shipCode = '';
   navigation: MenuItem[];
   visible: boolean;
 
@@ -62,16 +62,16 @@ export class DrawingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shipOrderer = this.route.snapshot.params['shipOrderer'];
+    this.shipCode = this.route.snapshot.params['shipCode'];
     this.navigation = [
       { icon: 'pi pi-home', route: '/' },
-      { label: `Rysunek(${this.shipOrderer})` },
+      { label: `Rysunek(${this.shipCode})` },
     ];
 
     this.http
       .get<DrawingWithNoRelationsDto[]>('/api/Drawings/GetAll', {
         params: {
-          ShipOrderer: this.shipOrderer,
+          ShipCode: this.shipCode,
         },
       })
       .subscribe({
@@ -82,16 +82,18 @@ export class DrawingsComponent implements OnInit {
   }
 
   addNewDrawing() {
+    console.log({
+      ...this.drawingForm.value,
+      section: [this.drawingForm.value.section],
+      shipCode: this.shipCode,
+    });
     this.http
       .post('/api/Drawings/Create', {
         ...this.drawingForm.value,
         section: [this.drawingForm.value.section],
-        shipId: '01J9P8YK4709ASQA8K7W6DK1A9',
+        shipCode: this.shipCode,
       })
       .subscribe({
-        next: (x) => {
-          console.log(x);
-        },
         error: (error) => {
           console.log(error);
           this.errorHandlingService.handleApiErrors(error, this.drawingForm);
@@ -100,7 +102,7 @@ export class DrawingsComponent implements OnInit {
   }
 
   actionButtonRedirect(number: string) {
-    return `/isos/${number}?shipCode=${this.shipOrderer}`;
+    return `/isos/${number}?shipCode=${this.shipCode}`;
   }
 
   toggleAddDrawingDialog() {

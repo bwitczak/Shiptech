@@ -49,16 +49,33 @@ namespace Shiptech.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Shipowners",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "varchar(26)", nullable: false),
+                    Orderer = table.Column<string>(type: "varchar", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipowners", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ships",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "varchar(26)", nullable: false),
                     Code = table.Column<string>(type: "varchar", nullable: false),
-                    Orderer = table.Column<string>(type: "varchar", nullable: false)
+                    ShipownerId = table.Column<string>(type: "varchar(26)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ships", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ships_Shipowners_ShipownerId",
+                        column: x => x.ShipownerId,
+                        principalTable: "Shipowners",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -184,6 +201,11 @@ namespace Shiptech.Infrastructure.Data.Migrations
                 name: "IX_Isos_DrawingId",
                 table: "Isos",
                 column: "DrawingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ships_ShipownerId",
+                table: "Ships",
+                column: "ShipownerId");
         }
 
         /// <inheritdoc />
@@ -206,6 +228,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ships");
+
+            migrationBuilder.DropTable(
+                name: "Shipowners");
         }
     }
 }

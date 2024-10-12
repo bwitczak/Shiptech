@@ -82,8 +82,8 @@
       <p-select
         [class]="
           drawingForm.get('stage')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
+            ? 'border border-red-500 w-full'
+            : 'w-full'
         "
         [options]="['ODP', 'ODS', 'ODI']"
         aria-describedby="stage-error"

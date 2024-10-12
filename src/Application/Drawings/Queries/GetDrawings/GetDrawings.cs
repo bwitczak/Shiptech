@@ -11,21 +11,21 @@ namespace Shiptech.Application.Drawings.Queries.GetDrawings;
 
 public record GetPaginatedDrawingsQuery : IRequest<IEnumerable<DrawingWithNoRelationsDto>>
 {
-    public required string ShipOrderer { get; init; }
+    public required string ShipCode { get; init; }
 }
 
 public class GetPaginatedDrawingsQueryValidator : AbstractValidator<GetPaginatedDrawingsQuery>
 {
     public GetPaginatedDrawingsQueryValidator(IShipService service)
     {
-        RuleFor(x => x.ShipOrderer)
+        RuleFor(x => x.ShipCode)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("GET_PAGINATED_DRAWINGS_400_SHIP_ORDERER")
+            .WithErrorCode("GET_PAGINATED_DRAWINGS_400_SHIP_CODE")
             .WithMessage("Identyfikator statku nie może być pusty!")
-            .MustAsync(async (x, _) => await service.ExistsByOrderer(x))
-            .WithMessage(x => $"{x.ShipOrderer} nie istnieje w bazie!")
-            .WithErrorCode("SHIP_404_ORDERER");
+            .MustAsync(async (x, _) => await service.ExistsByCode(x))
+            .WithMessage(x => $"{x.ShipCode} nie istnieje w bazie!")
+            .WithErrorCode("SHIP_404_CODE");
     }
 }
 
@@ -46,7 +46,7 @@ public class
         CancellationToken cancellationToken)
     {
         return await _context.Drawings
-            .Where(x => x.Ship != null && x.Ship.Orderer == request.ShipOrderer)
+            .Where(x => x.Ship != null && x.Ship.Code == request.ShipCode)
             .OrderBy(x => x.Number)
             .ProjectTo<DrawingWithNoRelationsDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
     }

@@ -17,7 +17,7 @@ public record CreateDrawingCommand(
     string? Block,
     List<string>? Section,
     string? Stage,
-    Ulid ShipId) : IRequest
+    string ShipCode) : IRequest
 {
 }
 
@@ -99,14 +99,14 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
                 .WithMessage(x => $"Niepoprawna sekcja {x.Stage}! Wymagane ODP/ODS/ODI/Puste");
         });
 
-        RuleFor(x => x.ShipId)
+        RuleFor(x => x.ShipCode)
             .NotNull()
             .NotEmpty()
-            .WithErrorCode("CREATE_DRAWING_400_SHIP_ID")
-            .WithMessage("Identyfikator statku nie może być pusty!")
-            .MustAsync(async (x, _) => await shipService.ExistsById(x))
-            .WithMessage(x => $"{x.ShipId} nie istnieje w bazie!")
-            .WithErrorCode("CREATE_DRAWING_404_SHIP_ID");
+            .WithErrorCode("CREATE_DRAWING_400_SHIP_CODE")
+            .WithMessage("Kod statku nie może być pusty!")
+            .MustAsync(async (x, _) => await shipService.ExistsByCode(x))
+            .WithMessage(x => $"{x.ShipCode} nie istnieje w bazie!")
+            .WithErrorCode("CREATE_DRAWING_404_SHIP_CODE");
     }
 }
 
@@ -124,12 +124,11 @@ public class CreateDrawingCommandHandler : IRequestHandler<CreateDrawingCommand>
     public async Task Handle(CreateDrawingCommand request, CancellationToken cancellationToken)
     {
         (string number, string name, char revision, string? lot, string? block, List<string>? section, string? stage,
-            Ulid shipId) = request;
+            string shipCode) = request;
 
-        Ship ship = await _context.Ships.FirstAsync(x => x.Id == shipId, cancellationToken);
+        Ship ship = await _context.Ships.FirstAsync(x => x.Code == shipCode, cancellationToken);
         Drawing drawing = _factory.Create(Ulid.NewUlid(), number, name, revision, lot, block, section, stage, ship);
 
         await _context.Drawings.AddAsync(drawing, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
     }
 }

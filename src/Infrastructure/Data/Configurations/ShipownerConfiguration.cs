@@ -5,9 +5,9 @@ using Shiptech.Infrastructure.Data.Converters;
 
 namespace Shiptech.Infrastructure.Data.Configurations;
 
-public class ShipConfiguration : IEntityTypeConfiguration<Ship>
+public class ShipownerConfiguration : IEntityTypeConfiguration<Shipowner>
 {
-    public void Configure(EntityTypeBuilder<Ship> builder)
+    public void Configure(EntityTypeBuilder<Shipowner> builder)
     {
         builder.Property(x => x.Id)
             .HasColumnName("Id")
@@ -15,14 +15,12 @@ public class ShipConfiguration : IEntityTypeConfiguration<Ship>
             .HasConversion<UlidToStringConverter>()
             .IsRequired();
 
-        builder.Property(x => x.Code)
-            .HasColumnName("Code")
+        builder.Property(x => x.Orderer)
+            .HasColumnName("Orderer")
             .HasColumnType("varchar")
             .IsRequired();
 
-        builder.ToTable("Ships");
-        builder.HasKey(x => x.Id);
-        builder.HasMany(x => x.Drawings)
-            .WithOne(x => x.Ship);
+        builder.HasMany(x => x.Ships)
+            .WithOne(x => x.Shipowner);
     }
 }

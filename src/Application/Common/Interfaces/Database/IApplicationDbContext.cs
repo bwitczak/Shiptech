@@ -5,6 +5,7 @@ namespace Shiptech.Application.Common.Interfaces.Database;
 
 public interface IApplicationDbContext
 {
+    DbSet<Shipowner> Shipowners { get; }
     DbSet<Ship> Ships { get; }
     DbSet<Drawing> Drawings { get; }
     DbSet<Iso> Isos { get; }

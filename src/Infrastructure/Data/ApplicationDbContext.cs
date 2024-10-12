@@ -10,7 +10,8 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
-    
+
+    public DbSet<Shipowner> Shipowners => Set<Shipowner>();
     public DbSet<Ship> Ships => Set<Ship>();
     public DbSet<Drawing> Drawings => Set<Drawing>();
     public DbSet<Iso> Isos => Set<Iso>();
