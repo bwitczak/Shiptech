@@ -332,6 +332,22 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Code");
 
+                    b.Property<string>("ShipownerId")
+                        .HasColumnType("varchar(26)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ShipownerId");
+
+                    b.ToTable("Ships", (string)null);
+                });
+
+            modelBuilder.Entity("Shiptech.Domain.Entities.Shipowner", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(26)")
+                        .HasColumnName("Id");
+
                     b.Property<string>("Orderer")
                         .IsRequired()
                         .HasColumnType("varchar")
@@ -339,7 +355,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ships", (string)null);
+                    b.ToTable("Shipowners");
                 });
 
             modelBuilder.Entity("Shiptech.Domain.Entities.Assortment", b =>
@@ -381,6 +397,15 @@ namespace Shiptech.Infrastructure.Data.Migrations
                     b.Navigation("Drawing");
                 });
 
+            modelBuilder.Entity("Shiptech.Domain.Entities.Ship", b =>
+                {
+                    b.HasOne("Shiptech.Domain.Entities.Shipowner", "Shipowner")
+                        .WithMany("Ships")
+                        .HasForeignKey("ShipownerId");
+
+                    b.Navigation("Shipowner");
+                });
+
             modelBuilder.Entity("Shiptech.Domain.Entities.AssortmentDictionary", b =>
                 {
                     b.Navigation("Assortments");
@@ -404,6 +429,11 @@ namespace Shiptech.Infrastructure.Data.Migrations
             modelBuilder.Entity("Shiptech.Domain.Entities.Ship", b =>
                 {
                     b.Navigation("Drawings");
+                });
+
+            modelBuilder.Entity("Shiptech.Domain.Entities.Shipowner", b =>
+                {
+                    b.Navigation("Ships");
                 });
 #pragma warning restore 612, 618
         }

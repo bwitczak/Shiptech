@@ -3,7 +3,6 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Shiptech.Application.Common.Behaviours;
-using Shiptech.Application.Common.Interfaces.Services;
 using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application;
@@ -23,15 +22,16 @@ public static class DependencyInjection
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         });
-        
+
         // Factories
+        services.AddScoped<IShipownerFactory, ShipownerFactory>();
         services.AddScoped<IShipFactory, ShipFactory>();
         services.AddScoped<IDrawingFactory, DrawingFactory>();
         services.AddScoped<IIsoFactory, IsoFactory>();
         services.AddScoped<IAssortmentFactory, AssortmentFactory>();
         services.AddScoped<IAssortmentDictionaryFactory, AssortmentDictionaryFactory>();
         services.AddScoped<IChemicalProcessFactory, ChemicalProcessFactory>();
-        
+
         return services;
     }
 }

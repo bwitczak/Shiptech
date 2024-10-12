@@ -22,9 +22,4 @@ public class ShipService : IShipService
     {
         return await _ships.AnyAsync(x => x.Code == code);
     }
-
-    public async Task<bool> ExistsByOrderer(string orderer)
-    {
-        return await _ships.AnyAsync(x => x.Orderer == orderer);
-    }
 }

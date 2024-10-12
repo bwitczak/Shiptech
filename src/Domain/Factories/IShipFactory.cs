@@ -4,5 +4,5 @@ namespace Shiptech.Domain.Factories;
 
 public interface IShipFactory
 {
-    Ship Create(Ulid id, string code, string orderer);
+    Ship Create(Ulid id, string code, Shipowner shipowner);
 }

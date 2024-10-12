@@ -62,7 +62,7 @@ export class DrawingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shipOrderer = this.route.snapshot.params['shipOrderer'];
+    this.shipOrderer = this.route.snapshot.params['shipCode'];
     this.navigation = [
       { icon: 'pi pi-home', route: '/' },
       { label: `Rysunek(${this.shipOrderer})` },
@@ -71,7 +71,7 @@ export class DrawingsComponent implements OnInit {
     this.http
       .get<DrawingWithNoRelationsDto[]>('/api/Drawings/GetAll', {
         params: {
-          ShipOrderer: this.shipOrderer,
+          ShipCode: this.shipOrderer,
         },
       })
       .subscribe({
