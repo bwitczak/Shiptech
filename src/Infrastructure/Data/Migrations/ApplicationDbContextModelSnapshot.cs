@@ -234,8 +234,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<char>("Revision")
-                        .HasColumnType("char(1)")
+                    b.Property<string>("Revision")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
                         .HasColumnName("Revision");
 
                     b.Property<string[]>("Section")

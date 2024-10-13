@@ -9,7 +9,7 @@ using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application.Drawings.Commands.UpdateDrawing;
 
-public record UpdateDrawingCommand(Ulid Id, string Number, string Name, char DrawingRevision, string? Lot, string? Block, List<string>? Section, string? Stage, Ulid ShipId) : IRequest
+public record UpdateDrawingCommand(Ulid Id, string Number, string Name, string DrawingRevision, string? Lot, string? Block, List<string>? Section, string? Stage, Ulid ShipId) : IRequest
 {
 }
 
@@ -43,7 +43,7 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
             .NotEmpty()
             .WithErrorCode("UPDATE_DRAWING_400_REVISION")
             .WithMessage("Nazwa rewizji nie może być pusta!")
-            .Must(char.IsLetterOrDigit)
+            .Length(1)
             .WithErrorCode("UPDATE_DRAWING_400_REVISION")
             .WithMessage(x => $"Niepoprawna rewizja {x.DrawingRevision}! Wymagany 1 znak");
 

@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.Data;
 namespace Shiptech.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241012110133_Init")]
+    [Migration("20241013120716_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -237,8 +237,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<char>("Revision")
-                        .HasColumnType("char(1)")
+                    b.Property<string>("Revision")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
                         .HasColumnName("Revision");
 
                     b.Property<string[]>("Section")

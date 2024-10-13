@@ -12,7 +12,7 @@ namespace Shiptech.Application.Drawings.Commands.CreateDrawing;
 public record CreateDrawingCommand(
     string Number,
     string Name,
-    char Revision,
+    string Revision,
     string? Lot,
     string? Block,
     List<string>? Section,
@@ -46,7 +46,7 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
             .NotEmpty()
             .WithErrorCode("CREATE_DRAWING_400_REVISION")
             .WithMessage("Nazwa rewizji nie może być pusta!")
-            .Must(char.IsLetterOrDigit)
+            .Length(1)
             .WithErrorCode("CREATE_DRAWING_400_REVISION")
             .WithMessage(x => $"Niepoprawna rewizja {x.Revision}! Wymagany 1 znak");
 
@@ -123,7 +123,7 @@ public class CreateDrawingCommandHandler : IRequestHandler<CreateDrawingCommand>
 
     public async Task Handle(CreateDrawingCommand request, CancellationToken cancellationToken)
     {
-        (string number, string name, char revision, string? lot, string? block, List<string>? section, string? stage,
+        (string number, string name, string revision, string? lot, string? block, List<string>? section, string? stage,
             string shipCode) = request;
 
         Ship ship = await _context.Ships.FirstAsync(x => x.Code == shipCode, cancellationToken);

@@ -85,7 +85,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                     Id = table.Column<string>(type: "varchar(26)", nullable: false),
                     Number = table.Column<string>(type: "varchar", nullable: false),
                     Name = table.Column<string>(type: "varchar", nullable: false),
-                    Revision = table.Column<char>(type: "char(1)", nullable: false),
+                    Revision = table.Column<string>(type: "varchar(1)", nullable: false),
                     Lot = table.Column<string>(type: "char(3)", nullable: true),
                     Block = table.Column<string>(type: "char(3)", nullable: true),
                     Section = table.Column<string[]>(type: "text[]", nullable: true),
