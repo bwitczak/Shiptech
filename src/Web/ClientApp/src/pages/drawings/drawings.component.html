@@ -151,8 +151,13 @@
         pInputText
       />
       @if (drawingForm.get('section')?.errors?.['serverError']) {
-        <small id="section-error" class="text-red-500">
+        <small id="section-error-server" class="text-red-500">
           {{ drawingForm.get('section')?.errors?.['serverError'] }}
+        </small>
+      } @else if (drawingForm.get('section')?.hasError('pattern')) {
+        <small id="section-error-regex" class="text-red-500">
+          Nieprawidłowy format. Wartość powinna składać się z liczb całkowitych
+          oddzielonych przecinkiem i spacją (np. 142, 770, 381)
         </small>
       }
     </div>

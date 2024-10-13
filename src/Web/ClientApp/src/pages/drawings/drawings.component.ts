@@ -8,7 +8,12 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
 import { Select } from 'primeng/select';
 
@@ -49,7 +54,7 @@ export class DrawingsComponent implements OnInit {
     revision: new FormControl(''),
     lot: new FormControl(''),
     block: new FormControl(''),
-    section: new FormControl(''),
+    section: new FormControl('', Validators.pattern(/^\d+(?:,\s\d+)*$/)),
     stage: new FormControl(''),
   });
 
@@ -82,11 +87,7 @@ export class DrawingsComponent implements OnInit {
   }
 
   addNewDrawing() {
-    console.log({
-      ...this.drawingForm.value,
-      section: [this.drawingForm.value.section],
-      shipCode: this.shipCode,
-    });
+    console.log(this.drawingForm.get('section')?.errors);
     this.http
       .post('/api/Drawings/Create', {
         ...this.drawingForm.value,
