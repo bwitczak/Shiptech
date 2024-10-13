@@ -13,12 +13,14 @@ public class DrawingWithNoRelationsDto
     public List<string>? Section { get; init; }
     public string? Stage { get; init; }
     public required string CreatedBy { get; init; }
-    
+
     private class Mapping : Profile
     {
         public Mapping()
         {
-            CreateMap<Domain.Entities.Drawing, DrawingWithNoRelationsDto>();
+            CreateMap<Domain.Entities.Drawing, DrawingWithNoRelationsDto>()
+                .ForMember(x => x.DrawingRevision, opt => opt.MapFrom(src => src.Revision));
+            ;
         }
     }
 }
