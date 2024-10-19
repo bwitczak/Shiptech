@@ -19,6 +19,7 @@ import {
 } from '@angular/forms';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
 import { Select } from 'primeng/select';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-drawings',
@@ -30,6 +31,7 @@ import { Select } from 'primeng/select';
     DialogModule,
     ReactiveFormsModule,
     Select,
+    InputTextModule,
   ],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',

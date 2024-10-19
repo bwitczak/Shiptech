@@ -9,7 +9,7 @@
 
 <p-dialog
   [(visible)]="visible"
-  [style]="{ width: '25rem' }"
+  [style]="{ width: '35rem' }"
   header="Dodaj rysunek"
 >
   <form
@@ -29,6 +29,7 @@
         formControlName="number"
         id="number"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('number')?.errors?.['serverError']) {
         <small id="number-error" class="text-red-500">
@@ -49,6 +50,7 @@
         formControlName="name"
         id="name"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('name')?.errors?.['serverError']) {
         <small id="name-error" class="text-red-500">
@@ -69,6 +71,7 @@
         formControlName="revision"
         id="revision"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('revision')?.errors?.['serverError']) {
         <small id="revision-error" class="text-red-500">
@@ -89,6 +92,7 @@
         aria-describedby="stage-error"
         formControlName="stage"
         id="stage"
+        variant="filled"
       />
       @if (drawingForm.get('stage')?.errors?.['serverError']) {
         <small id="stage-error" class="text-red-500">
@@ -109,6 +113,7 @@
         formControlName="lot"
         id="lot"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('lot')?.errors?.['serverError']) {
         <small id="lot-error" class="text-red-500">
@@ -129,6 +134,7 @@
         formControlName="block"
         id="block"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('block')?.errors?.['serverError']) {
         <small id="block-error" class="text-red-500">
@@ -149,6 +155,7 @@
         formControlName="section"
         id="section"
         pInputText
+        variant="filled"
       />
       @if (drawingForm.get('section')?.errors?.['serverError']) {
         <small id="section-error-server" class="text-red-500">
