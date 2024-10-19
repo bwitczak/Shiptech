@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DrawingWithNoRelationsDto } from '../../app/web-api-client';
-import { HttpClient } from '@angular/common/http';
+import {
+  CreateDrawingCommand,
+  DrawingsClient,
+  DrawingWithNoRelationsDto,
+} from '../../app/web-api-client';
 import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
@@ -60,7 +63,7 @@ export class DrawingsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient,
+    private drawingHttp: DrawingsClient,
     private errorHandlingService: ErrorHandlingService
   ) {
     this.actionButtonRedirect = this.actionButtonRedirect.bind(this);
@@ -73,33 +76,25 @@ export class DrawingsComponent implements OnInit {
       { label: `Rysunek(${this.shipCode})` },
     ];
 
-    this.http
-      .get<DrawingWithNoRelationsDto[]>('/api/Drawings/GetAll', {
-        params: {
-          ShipCode: this.shipCode,
-        },
-      })
-      .subscribe({
-        next: (x) => {
-          this.drawings = x;
-        },
-      });
+    this.drawingHttp.getAllDrawings(this.shipCode).subscribe({
+      next: (x) => {
+        this.drawings = x;
+      },
+    });
   }
 
   addNewDrawing() {
-    console.log(this.drawingForm.get('section')?.errors);
-    this.http
-      .post('/api/Drawings/Create', {
-        ...this.drawingForm.value,
-        section: [this.drawingForm.value.section],
-        shipCode: this.shipCode,
-      })
-      .subscribe({
-        error: (error) => {
-          console.log(error);
-          this.errorHandlingService.handleApiErrors(error, this.drawingForm);
-        },
-      });
+    const drawing: CreateDrawingCommand = {
+      ...this.drawingForm.value,
+      section: [this.drawingForm.value.section],
+      shipCode: this.shipCode,
+    } as CreateDrawingCommand;
+
+    this.drawingHttp.createDrawing(drawing).subscribe({
+      error: (error) => {
+        this.errorHandlingService.handleApiErrors(error, this.drawingForm);
+      },
+    });
   }
 
   actionButtonRedirect(number: string) {

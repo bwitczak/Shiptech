@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IsoDto } from '../../app/web-api-client';
-import { HttpClient } from '@angular/common/http';
+import { IsoDto, IsosClient } from '../../app/web-api-client';
 import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
 import { MenuItem } from 'primeng/api';
@@ -36,7 +35,7 @@ export class IsosComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private isoHttp: IsosClient
   ) {}
 
   ngOnInit() {
@@ -48,16 +47,10 @@ export class IsosComponent implements OnInit {
       { label: `Iso(${drawingNumber})` },
     ];
 
-    this.http
-      .get<IsoDto[]>('/api/Isos/GetAll', {
-        params: {
-          DrawingNumber: drawingNumber,
-        },
-      })
-      .subscribe({
-        next: (x) => {
-          this.isos = x;
-        },
-      });
+    this.isoHttp.getAllIsos(drawingNumber).subscribe({
+      next: (x) => {
+        this.isos = x;
+      },
+    });
   }
 }
