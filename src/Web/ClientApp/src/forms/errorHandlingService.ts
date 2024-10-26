@@ -14,7 +14,7 @@ export class ErrorHandlingService {
       const formControl = this.getFormControl(form, key);
       if (formControl) {
         formControl.setErrors({
-          serverError: errors[key][0],
+          businessLogicError: errors[key][0],
         });
       }
     });

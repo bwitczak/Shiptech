@@ -1,0 +1,21 @@
+<label class="font-semibold self-center" for="{{ formPropertyName }}">{{
+  label
+}}</label>
+<div>
+  <p-select
+    [class]="
+      formGroup.get('{{formPropertyName}}')?.errors?.['businessLogicError']
+        ? 'border border-red-500 w-full'
+        : 'w-full'
+    "
+    [options]="options"
+    formControlName="{{ formPropertyName }}"
+    id="{{ formPropertyName }}"
+    variant="filled"
+  />
+  @if (formGroup.get(formPropertyName)?.errors?.['businessLogicError']) {
+    <small id="{{ formPropertyName }}-error" class="text-red-500">
+      {{ formGroup.get(formPropertyName)?.errors?.['businessLogicError'] }}
+    </small>
+  }
+</div>

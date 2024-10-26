@@ -11,15 +11,13 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
 import { Select } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputComponent } from '../../components/input/input.component';
+import { sectionFormatValidator } from '../../shared/customValidators';
+import { SelectComponent } from '../../components/select/select.component';
 
 @Component({
   selector: 'app-drawings',
@@ -32,6 +30,8 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule,
     Select,
     InputTextModule,
+    InputComponent,
+    SelectComponent,
   ],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',
@@ -59,9 +59,16 @@ export class DrawingsComponent implements OnInit {
     revision: new FormControl(''),
     lot: new FormControl(''),
     block: new FormControl(''),
-    section: new FormControl('', Validators.pattern(/^\d+(?:,\s\d+)*$/)),
+    section: new FormControl(
+      '',
+      sectionFormatValidator(
+        'Nieprawidłowy format. Wartość powinna składać się z liczb całkowitych\n' +
+          '          oddzielonych przecinkiem i spacją (np. 142, 770, 381)'
+      )
+    ),
     stage: new FormControl(''),
   });
+  stageOptions: string[] = ['ODP', 'ODS', 'ODI'];
 
   constructor(
     private route: ActivatedRoute,

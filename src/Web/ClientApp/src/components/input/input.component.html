@@ -1,0 +1,21 @@
+<label class="font-semibold self-center" for="{{ formPropertyName }}">{{
+  label
+}}</label>
+<div>
+  <input
+    [class]="
+      formGroup.get(formPropertyName)?.errors?.['serverError']
+        ? 'border border-red-500 w-full px-3 py-2'
+        : 'w-full px-3 py-2'
+    "
+    [formControlName]="formPropertyName"
+    id="{{ formPropertyName }}"
+    pInputText
+    variant="filled"
+  />
+  @if (formGroup.get(formPropertyName)?.errors?.['businessLogicError']) {
+    <small id="{{ formPropertyName }}-error" class="text-red-500">
+      {{ formGroup.get(formPropertyName)?.errors?.['businessLogicError'] }}
+    </small>
+  }
+</div>

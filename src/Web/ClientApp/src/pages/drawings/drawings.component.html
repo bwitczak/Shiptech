@@ -15,159 +15,40 @@
   <form
     (ngSubmit)="addNewDrawing()"
     [formGroup]="drawingForm"
-    class="grid grid-cols-[auto_1fr] gap-4 mt-3"
+    class="grid gap-4 mt-3"
   >
-    <label class="font-semibold self-center" for="number">Numer</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('number')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="number-error"
-        formControlName="number"
-        id="number"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('number')?.errors?.['serverError']) {
-        <small id="number-error" class="text-red-500">
-          {{ drawingForm.get('number')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="name">Nazwa</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('name')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="name-error"
-        formControlName="name"
-        id="name"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('name')?.errors?.['serverError']) {
-        <small id="name-error" class="text-red-500">
-          {{ drawingForm.get('name')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="revision">Rewizja</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('revision')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="revision-error"
-        formControlName="revision"
-        id="revision"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('revision')?.errors?.['serverError']) {
-        <small id="revision-error" class="text-red-500">
-          {{ drawingForm.get('revision')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="stage">Etap</label>
-    <div>
-      <p-select
-        [class]="
-          drawingForm.get('stage')?.errors?.['serverError']
-            ? 'border border-red-500 w-full'
-            : 'w-full'
-        "
-        [options]="['ODP', 'ODS', 'ODI']"
-        aria-describedby="stage-error"
-        formControlName="stage"
-        id="stage"
-        variant="filled"
-      />
-      @if (drawingForm.get('stage')?.errors?.['serverError']) {
-        <small id="stage-error" class="text-red-500">
-          {{ drawingForm.get('stage')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="lot">Lot</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('lot')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="lot-error"
-        formControlName="lot"
-        id="lot"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('lot')?.errors?.['serverError']) {
-        <small id="lot-error" class="text-red-500">
-          {{ drawingForm.get('lot')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="block">Blok</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('block')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="block-error"
-        formControlName="block"
-        id="block"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('block')?.errors?.['serverError']) {
-        <small id="block-error" class="text-red-500">
-          {{ drawingForm.get('block')?.errors?.['serverError'] }}
-        </small>
-      }
-    </div>
-
-    <label class="font-semibold self-center" for="section">Sekcja</label>
-    <div>
-      <input
-        [class]="
-          drawingForm.get('section')?.errors?.['serverError']
-            ? 'border border-red-500 w-full px-3 py-2'
-            : 'w-full px-3 py-2'
-        "
-        aria-describedby="section-error"
-        formControlName="section"
-        id="section"
-        pInputText
-        variant="filled"
-      />
-      @if (drawingForm.get('section')?.errors?.['serverError']) {
-        <small id="section-error-server" class="text-red-500">
-          {{ drawingForm.get('section')?.errors?.['serverError'] }}
-        </small>
-      } @else if (drawingForm.get('section')?.hasError('pattern')) {
-        <small id="section-error-regex" class="text-red-500">
-          Nieprawidłowy format. Wartość powinna składać się z liczb całkowitych
-          oddzielonych przecinkiem i spacją (np. 142, 770, 381)
-        </small>
-      }
-    </div>
+    <app-input
+      [formGroup]="drawingForm"
+      formPropertyName="number"
+      label="Numer"
+    />
+    <app-input
+      [formGroup]="drawingForm"
+      formPropertyName="name"
+      label="Nazwa"
+    />
+    <app-input
+      [formGroup]="drawingForm"
+      formPropertyName="revision"
+      label="Rewizja"
+    />
+    <app-select
+      [formGroup]="drawingForm"
+      [options]="stageOptions"
+      formPropertyName="stage"
+      label="Etap"
+    />
+    <app-input [formGroup]="drawingForm" formPropertyName="lot" label="Lot" />
+    <app-input
+      [formGroup]="drawingForm"
+      formPropertyName="block"
+      label="Blok"
+    />
+    <app-input
+      [formGroup]="drawingForm"
+      formPropertyName="section"
+      label="Sekcja"
+    />
   </form>
   <ng-template pTemplate="footer">
     <p-button
