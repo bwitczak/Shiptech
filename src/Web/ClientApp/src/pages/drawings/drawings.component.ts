@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   CreateDrawingCommand,
@@ -7,7 +14,6 @@ import {
 } from '../../app/web-api-client';
 import { Column } from '../../shared/types';
 import { TableComponent } from '../../components/table/table.component';
-import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -18,13 +24,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputComponent } from '../../components/input/input.component';
 import { sectionFormatValidator } from '../../shared/customValidators';
 import { SelectComponent } from '../../components/select/select.component';
+import { TopBarService } from '../../services/topBarService';
+import { House, LucideAngularModule, Plus } from 'lucide-angular';
 
 @Component({
   selector: 'app-drawings',
   standalone: true,
   imports: [
     TableComponent,
-    BreadcrumbComponent,
     ButtonModule,
     DialogModule,
     ReactiveFormsModule,
@@ -32,11 +39,12 @@ import { SelectComponent } from '../../components/select/select.component';
     InputTextModule,
     InputComponent,
     SelectComponent,
+    LucideAngularModule,
   ],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',
 })
-export class DrawingsComponent implements OnInit {
+export class DrawingsComponent implements OnInit, AfterViewInit, OnDestroy {
   drawings: DrawingWithNoRelationsDto[];
   cols: Column[] = [
     { field: 'number', header: 'Numer' },
@@ -69,27 +77,41 @@ export class DrawingsComponent implements OnInit {
     stage: new FormControl(''),
   });
   stageOptions: string[] = ['ODP', 'ODS', 'ODI'];
+  // TODO: Check is could be not any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
+  readonly Plus = Plus;
 
   constructor(
     private route: ActivatedRoute,
     private drawingHttp: DrawingsClient,
-    private errorHandlingService: ErrorHandlingService
+    private errorHandlingService: ErrorHandlingService,
+    private topBarService: TopBarService
   ) {
     this.actionButtonRedirect = this.actionButtonRedirect.bind(this);
   }
 
   ngOnInit() {
     this.shipCode = this.route.snapshot.params['shipCode'];
-    this.navigation = [
-      { icon: 'pi pi-home', route: '/' },
+
+    this.topBarService.setBreadcrumbItems([
+      { label: '', icon: House, link: '/' },
       { label: `Rysunek(${this.shipCode})` },
-    ];
+    ]);
 
     this.drawingHttp.getAllDrawings(this.shipCode).subscribe({
       next: (x) => {
         this.drawings = x;
       },
     });
+  }
+
+  ngAfterViewInit() {
+    this.topBarService.setContent(this.topBarContent);
+  }
+
+  ngOnDestroy() {
+    this.topBarService.clearContent();
   }
 
   addNewDrawing() {

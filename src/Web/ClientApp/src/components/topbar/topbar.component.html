@@ -1,0 +1,25 @@
+<div class="flex justify-between items-center">
+  <app-sidebar />
+
+  <div class="flex gap-1 items-center p-3">
+    @for (breadcrumbItem of breadcrumbItems(); track breadcrumbItem.label) {
+      @if (breadcrumbItem.icon) {
+        <a [routerLink]="breadcrumbItem.link" class="p-menuitem-link">
+          <i-lucide [img]="breadcrumbItem.icon" />
+        </a>
+        <i-lucide [img]="ChevronRight" />
+      } @else if (breadcrumbItem.label && breadcrumbItem.link) {
+        <a [routerLink]="breadcrumbItem.link" class="p-menuitem-link">
+          <span class="text-primary font-semibold">{{
+            breadcrumbItem.label
+          }}</span>
+        </a>
+        <i-lucide [img]="ChevronRight" />
+      } @else {
+        <span class="text-color">{{ breadcrumbItem.label }}</span>
+      }
+    }
+  </div>
+
+  <ng-container *ngTemplateOutlet="topBarButton() || null" />
+</div>

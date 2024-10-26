@@ -41,6 +41,9 @@ importers:
       express:
         specifier: ^4.21.1
         version: 4.21.1
+      lucide-angular:
+        specifier: ^0.453.0
+        version: 0.453.0(@angular/common@18.2.8(@angular/core@18.2.8(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@18.2.8(rxjs@7.8.1)(zone.js@0.15.0))
       rxjs:
         specifier: ~7.8.1
         version: 7.8.1
@@ -3414,6 +3417,12 @@ packages:
 
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
+
+  lucide-angular@0.453.0:
+    resolution: {integrity: sha512-mQ2G5NFOC11+DLtYL/K6TVVQqmCW7TzM4FQmPhf7MNuvRxRXlXs9tTdik6zF4R93t2kl6wVlIunX+J+a4Ky3Dw==}
+    peerDependencies:
+      '@angular/common': 13.x - 18.x
+      '@angular/core': 13.x - 18.x
 
   magic-string@0.30.11:
     resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
@@ -8542,6 +8551,12 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-angular@0.453.0(@angular/common@18.2.8(@angular/core@18.2.8(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@18.2.8(rxjs@7.8.1)(zone.js@0.15.0)):
+    dependencies:
+      '@angular/common': 18.2.8(@angular/core@18.2.8(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1)
+      '@angular/core': 18.2.8(rxjs@7.8.1)(zone.js@0.15.0)
+      tslib: 2.7.0
 
   magic-string@0.30.11:
     dependencies:

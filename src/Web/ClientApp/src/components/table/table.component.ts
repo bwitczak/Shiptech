@@ -3,11 +3,12 @@ import { Column } from '../../shared/types';
 import { TableModule } from 'primeng/table';
 import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
+import { ListCollapse, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, Ripple, ButtonModule],
+  imports: [TableModule, Ripple, ButtonModule, LucideAngularModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
@@ -16,4 +17,6 @@ export class TableComponent<T> {
   @Input() data: T[];
   @Input() filterFields: string[];
   @Input() action?: (number: string) => string;
+
+  readonly ListCollapse = ListCollapse;
 }

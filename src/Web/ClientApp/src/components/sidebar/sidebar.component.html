@@ -6,12 +6,13 @@
         <span>
           <p-button
             (click)="closeCallback($event)"
-            icon="pi pi-times"
             outlined="true"
             rounded="true"
             styleClass="h-8 w-8"
             type="button"
-          ></p-button>
+          >
+            <i-lucide [img]="X" />
+          </p-button>
         </span>
       </div>
       <div class="overflow-y-auto">
@@ -28,7 +29,7 @@
                 class="flex items-center cursor-pointer p-4 rounded-border text-surface-700 dark:text-surface-100 hover:bg-surface-100 dark:hover:bg-surface-700 duration-150 transition-colors p-ripple"
               >
                 <span class="font-medium">{{ shipowner.orderer }}</span>
-                <i class="pi pi-chevron-down ml-auto"></i>
+                <i-lucide [img]="ChevronDown" class="ml-auto" />
               </a>
               <ul
                 class="list-none py-0 pl-4 pr-0 m-0 hidden overflow-y-hidden transition-all duration-[400ms] ease-in-out"
@@ -65,4 +66,6 @@
     </div>
   </ng-template>
 </p-drawer>
-<p-button (click)="visible = true" class="flex h-10" icon="pi pi-bars" />
+<p-button (click)="visible = true" class="flex h-10">
+  <i-lucide [img]="Menu" />
+</p-button>
