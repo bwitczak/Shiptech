@@ -1,0 +1,22 @@
+<p-dialog
+  (visibleChange)="visibleChange.emit($event)"
+  [(visible)]="visible"
+  [style]="styles"
+  header="Dodaj rysunek"
+>
+  <ng-content />
+  <ng-template pTemplate="footer">
+    <p-button
+      (onClick)="handleConfirm()"
+      label="Dodaj"
+      severity="primary"
+      type="submit"
+    />
+    <p-button
+      (click)="handleClose()"
+      [text]="true"
+      label="Anuluj"
+      severity="secondary"
+    />
+  </ng-template>
+</p-dialog>

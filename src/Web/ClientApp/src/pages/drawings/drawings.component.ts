@@ -26,6 +26,7 @@ import { sectionFormatValidator } from '../../shared/customValidators';
 import { SelectComponent } from '../../components/select/select.component';
 import { TopBarService } from '../../services/topBarService';
 import { House, LucideAngularModule, Plus } from 'lucide-angular';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'app-drawings',
@@ -40,6 +41,7 @@ import { House, LucideAngularModule, Plus } from 'lucide-angular';
     InputComponent,
     SelectComponent,
     LucideAngularModule,
+    DialogComponent,
   ],
   templateUrl: './drawings.component.html',
   styleUrl: './drawings.component.scss',

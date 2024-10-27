@@ -6,9 +6,10 @@
 
 <app-table [action]="actionButtonRedirect" [cols]="cols" [data]="drawings" />
 
-<p-dialog
-  [(visible)]="visible"
-  [style]="{ width: '35rem' }"
+<app-dialog
+  (confirm)="addNewDrawing()"
+  [styles]="{ width: '35rem' }"
+  [visible]="visible"
   header="Dodaj rysunek"
 >
   <form
@@ -49,18 +50,4 @@
       label="Sekcja"
     />
   </form>
-  <ng-template pTemplate="footer">
-    <p-button
-      (onClick)="addNewDrawing()"
-      label="Dodaj"
-      severity="primary"
-      type="submit"
-    />
-    <p-button
-      (click)="visible = false"
-      [text]="true"
-      label="Anuluj"
-      severity="secondary"
-    />
-  </ng-template>
-</p-dialog>
+</app-dialog>
