@@ -14,49 +14,49 @@ public class IsoConfiguration : IEntityTypeConfiguration<Iso>
             .HasColumnType("varchar(26)")
             .HasConversion<UlidToStringConverter>()
             .IsRequired();
-        
+
         builder.Property(x => x.Number)
             .HasColumnName("Number")
             .HasColumnType("varchar")
             .IsRequired();
-        
+
         builder.Property(x => x.Revision)
             .HasColumnName("Revision")
-            .HasColumnType("char(1)")
+            .HasColumnType("varchar(2)")
             .IsRequired();
-        
+
         builder.Property(x => x.System)
             .HasColumnName("System")
             .HasColumnType("varchar")
             .IsRequired();
-        
+
         builder.Property(x => x.Class)
             .HasColumnName("Class")
             .HasColumnType("char(6)")
             .IsRequired();
-        
+
         builder.Property(x => x.Atest)
             .HasColumnName("Atest")
             .HasColumnType("varchar");
-        
+
         builder.Property(x => x.KzmNumber)
             .HasColumnName("KzmNumber")
             .HasColumnType("char(6)");
-        
+
         builder.Property(x => x.KzmDate)
             .HasColumnName("KzmDate")
             .HasColumnType("date");
-        
+
         builder.Property(x => x.Created)
             .HasColumnName("CreationDate")
             .HasColumnType("timestamp")
             .IsRequired();
-        
+
         builder.Property(x => x.CreatedBy)
             .HasColumnName("Author")
             .HasColumnType("varchar")
             .IsRequired();
-        
+
         builder.ToTable("Isos");
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.Assortments)

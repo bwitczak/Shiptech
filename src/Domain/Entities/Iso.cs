@@ -6,7 +6,7 @@ public class Iso : BaseAuditableEntity
 {
     public required string Number { get; set; }
     public required string Nameplate  { get; set; }
-    public char Revision { get; set; }
+    public required string Revision { get; set; }
     public required string System { get; set; }
     public required string Class { get; set; }
     public string? Atest { get; set; }

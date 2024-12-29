@@ -46,9 +46,9 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
             .NotEmpty()
             .WithErrorCode("CREATE_DRAWING_400_REVISION")
             .WithMessage("Nazwa rewizji nie może być pusta!")
-            .Length(1)
+            .Length(2)
             .WithErrorCode("CREATE_DRAWING_400_REVISION")
-            .WithMessage(x => $"Niepoprawna rewizja {x.Revision}! Wymagany 1 znak");
+            .WithMessage(x => $"Niepoprawna rewizja {x.Revision}! Wymagane 2 znaki");
 
         When(x => x.Lot is not null, () =>
         {

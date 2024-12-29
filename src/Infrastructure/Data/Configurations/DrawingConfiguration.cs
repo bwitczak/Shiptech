@@ -27,7 +27,7 @@ public class DrawingConfiguration : IEntityTypeConfiguration<Drawing>
 
         builder.Property(x => x.Revision)
             .HasColumnName("Revision")
-            .HasColumnType("varchar(1)")
+            .HasColumnType("varchar(2)")
             .IsRequired();
 
         builder.Property(x => x.Lot)

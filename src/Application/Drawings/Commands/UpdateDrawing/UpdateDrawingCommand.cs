@@ -1,15 +1,24 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shiptech.Application.Common.Interfaces;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
 using Shiptech.Domain.Constants;
+using Shiptech.Domain.Entities;
 using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application.Drawings.Commands.UpdateDrawing;
 
-public record UpdateDrawingCommand(Ulid Id, string Number, string Name, string DrawingRevision, string? Lot, string? Block, List<string>? Section, string? Stage, Ulid ShipId) : IRequest
+public record UpdateDrawingCommand(
+    Ulid Id,
+    string Number,
+    string Name,
+    string DrawingRevision,
+    string? Lot,
+    string? Block,
+    List<string>? Section,
+    string? Stage,
+    Ulid ShipId) : IRequest
 {
 }
 
@@ -17,7 +26,7 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
 {
     public UpdateDrawingCommandValidator(IDrawingService drawingService, IShipService shipService)
     {
-         RuleFor(x => x.Id)
+        RuleFor(x => x.Id)
             .NotNull()
             .NotEmpty()
             .WithErrorCode("UPDATE_DRAWING_400_ID")
@@ -25,38 +34,38 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
             .MustAsync(async (x, _) => await drawingService.ExistsById(x))
             .WithMessage(x => $"{x.Id} nie istnieje w bazie!")
             .WithErrorCode("UPDATE_DRAWING_404_ID");
-         
-         RuleFor(x => x.Number)
-             .NotNull()
-             .NotEmpty()
-             .WithErrorCode("CREATE_DRAWING_400_NUMBER")
-             .WithMessage("Numer rysunku nie może być pusty!");
 
-           RuleFor(x => x.Name)
+        RuleFor(x => x.Number)
+            .NotNull()
+            .NotEmpty()
+            .WithErrorCode("CREATE_DRAWING_400_NUMBER")
+            .WithMessage("Numer rysunku nie może być pusty!");
+
+        RuleFor(x => x.Name)
             .NotNull()
             .NotEmpty()
             .WithErrorCode("UPDATE_DRAWING_400_NAME")
             .WithMessage("Nazwa rysunku nie może być pusta!");
-        
+
         RuleFor(x => x.DrawingRevision)
             .NotNull()
             .NotEmpty()
             .WithErrorCode("UPDATE_DRAWING_400_REVISION")
             .WithMessage("Nazwa rewizji nie może być pusta!")
-            .Length(1)
+            .Length(2)
             .WithErrorCode("UPDATE_DRAWING_400_REVISION")
-            .WithMessage(x => $"Niepoprawna rewizja {x.DrawingRevision}! Wymagany 1 znak");
+            .WithMessage(x => $"Niepoprawna rewizja {x.DrawingRevision}! Wymagane 2 znaki");
 
         When(x => x.Lot is not null, () =>
         {
             RuleFor(x => x.Lot)
                 .Must(x =>
                 {
-                    if (!int.TryParse(x, out var number))
+                    if (!int.TryParse(x, out int number))
                     {
                         return false;
                     }
-                
+
                     return number is >= 100 and <= 999;
                 })
                 .WithErrorCode("UPDATE_DRAWING_400_LOT")
@@ -76,7 +85,7 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
             RuleForEach(x => x.Section)
                 .Must(x =>
                 {
-                    if (!int.TryParse(x, out var number))
+                    if (!int.TryParse(x, out int number))
                     {
                         return false;
                     }
@@ -94,7 +103,7 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
                 .WithErrorCode("UPDATE_DRAWING_400_STAGE")
                 .WithMessage(x => $"Niepoprawna sekcja {x.Stage}! Wymagane ODP/ODS/ODI/Puste");
         });
-        
+
         RuleFor(x => x.ShipId)
             .NotNull()
             .NotEmpty()
@@ -119,11 +128,12 @@ public class UpdateDrawingCommandHandler : IRequestHandler<UpdateDrawingCommand>
 
     public async Task Handle(UpdateDrawingCommand request, CancellationToken cancellationToken)
     {
-        var (id, number, name, revision, lot, block, section, stage, shipId) = request;
+        (Ulid id, string number, string name, string revision, string? lot, string? block, List<string>? section,
+            string? stage, Ulid shipId) = request;
 
-        var ship = await _context.Ships.FirstAsync(x => x.Id == shipId, cancellationToken: cancellationToken);
-        var updated = _factory.Create(id, number, name, revision, lot, block, section, stage, ship);
-        
+        Ship ship = await _context.Ships.FirstAsync(x => x.Id == shipId, cancellationToken);
+        Drawing updated = _factory.Create(id, number, name, revision, lot, block, section, stage, ship);
+
         _context.Drawings.Update(updated);
         await _context.SaveChangesAsync(cancellationToken);
     }
