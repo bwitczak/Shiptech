@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Shiptech.Application.Common.Interfaces.Database;
+using Shiptech.Domain.Entities;
 using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application.ChemicalProcesses.Commands.CreateChemicalProcess;
@@ -40,10 +41,10 @@ public class CreateChemicalProcessCommandHandler : IRequestHandler<CreateChemica
 
     public async Task Handle(CreateChemicalProcessCommand request, CancellationToken cancellationToken)
     {
-        var (code, name) = request;
-        
-        var chemicalProcess = _factory.Create(Ulid.NewUlid(), code, name);
-        
+        (string? code, string? name) = request;
+
+        ChemicalProcess? chemicalProcess = _factory.Create(Ulid.NewUlid(), code, name);
+
         await _context.ChemicalProcesses.AddAsync(chemicalProcess, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }

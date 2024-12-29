@@ -1,8 +1,7 @@
-﻿using Shiptech.Application.Common.Interfaces;
-using Shiptech.Domain.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Shiptech.Domain.Common;
 
 namespace Shiptech.Infrastructure.Data.Interceptors;
 
@@ -33,13 +32,16 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 
     public void UpdateEntities(DbContext? context)
     {
-        if (context == null) return;
+        if (context == null)
+        {
+            return;
+        }
 
-        foreach (var entry in context.ChangeTracker.Entries<BaseAuditableEntity>())
+        foreach (EntityEntry<BaseAuditableEntity>? entry in context.ChangeTracker.Entries<BaseAuditableEntity>())
         {
             if (entry.State is EntityState.Added or EntityState.Modified || entry.HasChangedOwnedEntities())
             {
-                var utcNow = DateTime.Now;
+                DateTime utcNow = DateTime.Now;
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedBy = "Anonymous";
@@ -55,9 +57,11 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 
 public static class Extensions
 {
-    public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
-        entry.References.Any(r =>
+    public static bool HasChangedOwnedEntities(this EntityEntry entry)
+    {
+        return entry.References.Any(r =>
             r.TargetEntry != null &&
             r.TargetEntry.Metadata.IsOwned() &&
             (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
+    }
 }

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 
 namespace Shiptech.Application.ChemicalProcesses.Commands.DeleteChemicalProcess;
 
@@ -36,8 +37,8 @@ public class DeleteChemicalProcessCommandHandler : IRequestHandler<DeleteChemica
 
     public async Task Handle(DeleteChemicalProcessCommand request, CancellationToken cancellationToken)
     {
-        var chemicalProcess = await _context.ChemicalProcesses.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        ChemicalProcess? chemicalProcess = await _context.ChemicalProcesses.AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.ChemicalProcesses.Remove(chemicalProcess);
         await _context.SaveChangesAsync(cancellationToken);

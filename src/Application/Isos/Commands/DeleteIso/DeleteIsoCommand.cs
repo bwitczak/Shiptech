@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 
 namespace Shiptech.Application.Isos.Commands.DeleteIso;
 
@@ -36,8 +37,8 @@ public class DeleteIsoCommandHandler : IRequestHandler<DeleteIsoCommand>
 
     public async Task Handle(DeleteIsoCommand request, CancellationToken cancellationToken)
     {
-        var iso = await _context.Isos.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        Iso? iso = await _context.Isos.AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.Isos.Remove(iso);
         await _context.SaveChangesAsync(cancellationToken);

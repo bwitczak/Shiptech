@@ -1,5 +1,4 @@
-﻿using Shiptech.Application.Common.Interfaces;
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
 namespace Shiptech.Application.Common.Behaviours;
@@ -15,11 +14,11 @@ public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where T
 
     public Task Process(TRequest request, CancellationToken cancellationToken)
     {
-        var requestName = typeof(TRequest).Name;
+        string? requestName = typeof(TRequest).Name;
 
         _logger.LogInformation("Shiptech Request: {Name} {@Request}",
             requestName, request);
-        
+
         return Task.CompletedTask;
     }
 }

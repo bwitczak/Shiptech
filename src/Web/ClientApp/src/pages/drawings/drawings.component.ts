@@ -19,7 +19,6 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
-import { Select } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputComponent } from '../../components/input/input.component';
 import { sectionFormatValidator } from '../../shared/customValidators';
@@ -36,7 +35,6 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
     ButtonModule,
     DialogModule,
     ReactiveFormsModule,
-    Select,
     InputTextModule,
     InputComponent,
     SelectComponent,

@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shiptech.Application.Common.Interfaces;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 
 namespace Shiptech.Application.Drawings.Commands.DeleteDrawing;
 
@@ -37,8 +37,8 @@ public class DeleteDrawingCommandHandler : IRequestHandler<DeleteDrawingCommand>
 
     public async Task Handle(DeleteDrawingCommand request, CancellationToken cancellationToken)
     {
-        var drawing = await _context.Drawings.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        Drawing? drawing = await _context.Drawings.AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.Drawings.Remove(drawing);
         await _context.SaveChangesAsync(cancellationToken);

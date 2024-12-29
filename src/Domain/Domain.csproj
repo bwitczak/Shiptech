@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <RootNamespace>Shiptech.Domain</RootNamespace>
-        <AssemblyName>Shiptech.Domain</AssemblyName>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Shiptech.Domain</RootNamespace>
+    <AssemblyName>Shiptech.Domain</AssemblyName>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="MediatR"/>
-        <PackageReference Include="Ulid" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR"/>
+    <PackageReference Include="Ulid"/>
+  </ItemGroup>
 </Project>

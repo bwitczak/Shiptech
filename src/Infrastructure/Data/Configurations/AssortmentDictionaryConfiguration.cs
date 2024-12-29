@@ -14,22 +14,22 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
             .HasColumnType("varchar(26)")
             .HasConversion<UlidToStringConverter>()
             .IsRequired();
-        
+
         builder.Property(x => x.Number)
             .HasColumnName("Number")
             .HasColumnType("varchar")
             .IsRequired();
-        
+
         builder.Property(x => x.Name)
             .HasColumnName("Name")
             .HasColumnType("varchar")
             .IsRequired();
-        
+
         builder.Property(x => x.Distinguishing)
             .HasColumnName("Distinguishing")
             .HasColumnType("char(22)")
             .IsRequired();
-        
+
         builder.Property(x => x.Unit)
             .HasColumnName("Unit")
             .HasColumnType("char(4)")
@@ -46,23 +46,23 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
         builder.Property(x => x.Material)
             .HasColumnName("Material")
             .HasColumnType("varchar");
-        
+
         builder.Property(x => x.Kind)
             .HasColumnName("Kind")
             .HasColumnType("varchar");
-        
+
         builder.Property(x => x.DN1)
             .HasColumnName("DN1")
             .HasColumnType("varchar");
-        
+
         builder.Property(x => x.DN2)
             .HasColumnName("DN2")
             .HasColumnType("varchar");
-        
+
         builder.Property(x => x.Length)
             .HasColumnName("Length")
             .HasColumnType("smallint");
-        
+
         builder.Property(x => x.RO)
             .HasColumnName("RO")
             .HasColumnType("varchar")
@@ -71,7 +71,7 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
         builder.Property(x => x.Comment)
             .HasColumnName("Comment")
             .HasColumnType("varchar");
-        
+
         builder.ToTable("AssortmentDictionary");
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.Assortments)

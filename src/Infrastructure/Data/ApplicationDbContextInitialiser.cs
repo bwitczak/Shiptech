@@ -9,9 +9,10 @@ public static class InitialiserExtensions
 {
     public static async Task InitialiseDatabaseAsync(this WebApplication app)
     {
-        using var scope = app.Services.CreateScope();
+        using IServiceScope? scope = app.Services.CreateScope();
 
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        ApplicationDbContextInitialiser? initialiser =
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
 
         await initialiser.InitialiseAsync();
     }
@@ -19,8 +20,8 @@ public static class InitialiserExtensions
 
 public class ApplicationDbContextInitialiser
 {
-    private readonly ILogger<ApplicationDbContextInitialiser> _logger;
     private readonly ApplicationDbContext _context;
+    private readonly ILogger<ApplicationDbContextInitialiser> _logger;
 
     public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger,
         ApplicationDbContext context)

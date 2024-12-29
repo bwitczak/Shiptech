@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 
 namespace Shiptech.Application.Ships.Commands.DeleteShip;
 
@@ -21,7 +22,7 @@ public class DeleteShipCommandValidator : AbstractValidator<DeleteShipCommand>
             .WithMessage("Identyfikator statku nie może być pusty!")
             .MustAsync(async (x, _) => await service.ExistsById(x))
             .WithErrorCode("DELETE_SHIP_404_ID")
-            .WithMessage(x =>$"{x.Id} nie istnieje w bazie!");
+            .WithMessage(x => $"{x.Id} nie istnieje w bazie!");
     }
 }
 
@@ -36,8 +37,8 @@ public class DeleteShipCommandHandler : IRequestHandler<DeleteShipCommand>
 
     public async Task Handle(DeleteShipCommand request, CancellationToken cancellationToken)
     {
-        var ship = await _context.Ships.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        Ship? ship = await _context.Ships.AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.Ships.Remove(ship);
         await _context.SaveChangesAsync(cancellationToken);

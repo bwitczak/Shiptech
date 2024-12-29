@@ -2,6 +2,7 @@
 using MediatR;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 using Shiptech.Domain.Factories;
 
 namespace Shiptech.Application.ChemicalProcesses.Commands.UpdateChemicalProcess;
@@ -50,10 +51,10 @@ public class UpdateChemicalProcessCommandHandler : IRequestHandler<UpdateChemica
 
     public async Task Handle(UpdateChemicalProcessCommand request, CancellationToken cancellationToken)
     {
-        var (id, code, name) = request;
+        (Ulid id, string? code, string? name) = request;
 
-        var updated = _factory.Create(id, code, name);
-        
+        ChemicalProcess? updated = _factory.Create(id, code, name);
+
         _context.ChemicalProcesses.Update(updated);
         await _context.SaveChangesAsync(cancellationToken);
     }

@@ -6,7 +6,7 @@ public class AssortmentDictionary : BaseEntity
 {
     public required string Number { get; set; }
     public required string Name { get; set; }
-    public required string Distinguishing {get; set; }
+    public required string Distinguishing { get; set; }
     public required string Unit { get; set; }
     public double? Amount { get; set; }
     public double? Weight { get; set; }

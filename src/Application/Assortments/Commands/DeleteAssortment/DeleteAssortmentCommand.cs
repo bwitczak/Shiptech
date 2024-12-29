@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
+using Shiptech.Domain.Entities;
 
 namespace Shiptech.Application.Assortments.Commands.DeleteAssortment;
 
@@ -36,8 +37,8 @@ public class DeleteAssortmentCommandHandler : IRequestHandler<DeleteAssortmentCo
 
     public async Task Handle(DeleteAssortmentCommand request, CancellationToken cancellationToken)
     {
-        var assortment = await _context.Assortments.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        Assortment? assortment = await _context.Assortments.AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.Assortments.Remove(assortment);
         await _context.SaveChangesAsync(cancellationToken);

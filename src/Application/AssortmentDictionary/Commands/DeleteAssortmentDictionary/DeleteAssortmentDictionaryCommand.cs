@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shiptech.Application.Common.Interfaces;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Interfaces.Services;
 
@@ -37,8 +36,9 @@ public class DeleteAssortmentDictionaryCommandHandler : IRequestHandler<DeleteAs
 
     public async Task Handle(DeleteAssortmentDictionaryCommand request, CancellationToken cancellationToken)
     {
-        var assortmentDictionary = await _context.AssortmentDictionaries.AsNoTracking()
-            .SingleAsync(x => x.Id == request.Id, cancellationToken: cancellationToken);
+        Domain.Entities.AssortmentDictionary? assortmentDictionary = await _context.AssortmentDictionaries
+            .AsNoTracking()
+            .SingleAsync(x => x.Id == request.Id, cancellationToken);
 
         _context.AssortmentDictionaries.Remove(assortmentDictionary);
         await _context.SaveChangesAsync(cancellationToken);

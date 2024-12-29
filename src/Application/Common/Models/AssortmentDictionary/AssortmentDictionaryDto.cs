@@ -1,5 +1,4 @@
 using AutoMapper;
-using Shiptech.Application.Common.Models.Drawing;
 
 namespace Shiptech.Application.Common.Models.AssortmentDictionary;
 
@@ -19,7 +18,7 @@ public class AssortmentDictionaryDto
     public double? Length { get; set; }
     public required string RO { get; set; }
     public string? Comment { get; set; }
-    
+
     private class Mapping : Profile
     {
         public Mapping()

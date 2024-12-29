@@ -4,7 +4,7 @@ namespace Shiptech.Infrastructure.Data.Converters;
 
 public class UlidToStringConverter : ValueConverter<Ulid, string>
 {
-    private static readonly ConverterMappingHints defaultHints = new ConverterMappingHints(size: 26);
+    private static readonly ConverterMappingHints defaultHints = new(26);
 
     public UlidToStringConverter() : this(null)
     {
@@ -12,9 +12,9 @@ public class UlidToStringConverter : ValueConverter<Ulid, string>
 
     public UlidToStringConverter(ConverterMappingHints? mappingHints = null)
         : base(
-            convertToProviderExpression: x => x.ToString(),
-            convertFromProviderExpression: x => Ulid.Parse(x),
-            mappingHints: defaultHints.With(mappingHints))
+            x => x.ToString(),
+            x => Ulid.Parse(x),
+            defaultHints.With(mappingHints))
     {
     }
 }

@@ -1,6 +1,5 @@
 using AutoMapper;
 using Shiptech.Application.Common.Models.AssortmentDictionary;
-using Shiptech.Application.Common.Models.Drawing;
 
 namespace Shiptech.Application.Common.Models.Assortment;
 
@@ -25,7 +24,7 @@ public class AssortmentDto
     public ushort AssemblyLength { get; set; }
     public double AssemblyWeight { get; set; }
     public AssortmentDictionaryDto? AssortmentDictionaryDto { get; set; }
-    
+
     private class Mapping : Profile
     {
         public Mapping()

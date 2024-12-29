@@ -1,7 +1,7 @@
-﻿using Shiptech.Domain.Common;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Shiptech.Domain.Common;
 
 namespace Shiptech.Infrastructure.Data.Interceptors;
 
@@ -31,20 +31,25 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 
     public async Task DispatchDomainEvents(DbContext? context)
     {
-        if (context == null) return;
+        if (context == null)
+        {
+            return;
+        }
 
-        var entities = context.ChangeTracker
+        List<BaseEntity>? entities = context.ChangeTracker
             .Entries<BaseEntity>()
             .Where(e => e.Entity.DomainEvents.Any())
             .Select(e => e.Entity).ToList();
 
-        var domainEvents = entities
+        List<BaseEvent>? domainEvents = entities
             .SelectMany(e => e.DomainEvents)
             .ToList();
 
         entities.ToList().ForEach(e => e.ClearDomainEvents());
 
-        foreach (var domainEvent in domainEvents)
+        foreach (BaseEvent? domainEvent in domainEvents)
+        {
             await _mediator.Publish(domainEvent);
+        }
     }
 }

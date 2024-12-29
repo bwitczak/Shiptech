@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Column } from '../../shared/types';
 import { TableModule } from 'primeng/table';
-import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { ListCollapse, LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [TableModule, Ripple, ButtonModule, LucideAngularModule],
+  imports: [TableModule, ButtonModule, LucideAngularModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })

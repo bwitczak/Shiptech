@@ -13,7 +13,7 @@ public class IsoService : IIsoService
     {
         _isos = context.Isos;
     }
-    
+
     public async Task<bool> ExistsById(Ulid id)
     {
         return await _isos.AnyAsync(x => x.Id == id);
