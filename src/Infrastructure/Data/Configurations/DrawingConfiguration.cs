@@ -32,11 +32,11 @@ public class DrawingConfiguration : IEntityTypeConfiguration<Drawing>
 
         builder.Property(x => x.Lot)
             .HasColumnName("Lot")
-            .HasColumnType("char(3)");
+            .HasColumnType("varchar(3)");
 
         builder.Property(x => x.Block)
             .HasColumnName("Block")
-            .HasColumnType("char(3)");
+            .HasColumnType("varchar(3)");
 
         builder.Property(x => x.Section)
             .HasColumnName("Section")
@@ -44,7 +44,7 @@ public class DrawingConfiguration : IEntityTypeConfiguration<Drawing>
 
         builder.Property(x => x.Stage)
             .HasColumnName("Stage")
-            .HasColumnType("char(3)");
+            .HasColumnType("varchar(3)");
 
         builder.Property(x => x.Created)
             .HasColumnName("CreationDate")

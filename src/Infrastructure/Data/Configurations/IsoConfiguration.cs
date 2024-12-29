@@ -20,6 +20,11 @@ public class IsoConfiguration : IEntityTypeConfiguration<Iso>
             .HasColumnType("varchar")
             .IsRequired();
 
+        builder.Property(x => x.Nameplate)
+            .HasColumnName("Nameplate")
+            .HasColumnType("varchar")
+            .IsRequired();
+
         builder.Property(x => x.Revision)
             .HasColumnName("Revision")
             .HasColumnType("varchar(2)")
@@ -32,7 +37,7 @@ public class IsoConfiguration : IEntityTypeConfiguration<Iso>
 
         builder.Property(x => x.Class)
             .HasColumnName("Class")
-            .HasColumnType("char(6)")
+            .HasColumnType("varchar(6)")
             .IsRequired();
 
         builder.Property(x => x.Atest)
@@ -41,7 +46,7 @@ public class IsoConfiguration : IEntityTypeConfiguration<Iso>
 
         builder.Property(x => x.KzmNumber)
             .HasColumnName("KzmNumber")
-            .HasColumnType("char(6)");
+            .HasColumnType("varchar(6)");
 
         builder.Property(x => x.KzmDate)
             .HasColumnName("KzmDate")

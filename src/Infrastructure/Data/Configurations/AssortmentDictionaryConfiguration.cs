@@ -27,21 +27,20 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
 
         builder.Property(x => x.Distinguishing)
             .HasColumnName("Distinguishing")
-            .HasColumnType("char(22)")
-            .IsRequired();
+            .HasColumnType("varchar");
 
         builder.Property(x => x.Unit)
             .HasColumnName("Unit")
-            .HasColumnType("char(4)")
+            .HasColumnType("varchar(4)")
             .IsRequired();
 
         builder.Property(x => x.Amount)
             .HasColumnName("Amount")
-            .HasColumnType("decimal(5,3)");
+            .HasColumnType("decimal(8,3)");
 
         builder.Property(x => x.Weight)
             .HasColumnName("Weight")
-            .HasColumnType("decimal(5,3)");
+            .HasColumnType("decimal(8,3)");
 
         builder.Property(x => x.Material)
             .HasColumnName("Material")
@@ -65,8 +64,11 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
 
         builder.Property(x => x.RO)
             .HasColumnName("RO")
-            .HasColumnType("varchar")
-            .IsRequired();
+            .HasColumnType("varchar");
+
+        builder.Property(x => x.NS)
+            .HasColumnName("NS")
+            .HasColumnType("varchar");
 
         builder.Property(x => x.Comment)
             .HasColumnName("Comment")

@@ -11,6 +11,7 @@
 *.userosscache
 *.sln.docstates
 /src/Web/wwwroot/api/specification.json
+/src/Infrastructure/Data/Scripts
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

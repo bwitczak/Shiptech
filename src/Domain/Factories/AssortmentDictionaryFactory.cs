@@ -4,10 +4,9 @@ namespace Shiptech.Domain.Factories;
 
 public class AssortmentDictionaryFactory : IAssortmentDictionaryFactory
 {
-    public AssortmentDictionary Create(Ulid id, string number, string name, string distinguishing, string unit,
-        double? amount,
-        double? weight, string? material, string? kind, ushort? dn1, ushort? dn2, ushort? length, string ro,
-        string? comment)
+    public AssortmentDictionary Create(Ulid id, string number, string name, string? distinguishing, string unit,
+        double? amount, double? weight, string? material, string? kind, string? dn1, string? dn2, ushort? length,
+        string? ro, string? ns, string? comment)
     {
         return new AssortmentDictionary
         {
@@ -24,6 +23,7 @@ public class AssortmentDictionaryFactory : IAssortmentDictionaryFactory
             DN2 = dn2,
             Length = length,
             RO = ro,
+            NS = ns,
             Comment = comment
         };
     }

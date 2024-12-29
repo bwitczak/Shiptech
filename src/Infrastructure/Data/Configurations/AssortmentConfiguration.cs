@@ -17,7 +17,7 @@ public class AssortmentConfiguration : IEntityTypeConfiguration<Assortment>
 
         builder.Property(x => x.Position)
             .HasColumnName("Position")
-            .HasColumnType("char(1)")
+            .HasColumnType("varchar(1)")
             .IsRequired();
 
         builder.Property(x => x.PrefabricationQuantity)
@@ -32,7 +32,7 @@ public class AssortmentConfiguration : IEntityTypeConfiguration<Assortment>
 
         builder.Property(x => x.PrefabricationWeight)
             .HasColumnName("PrefabricationWeight")
-            .HasColumnType("decimal(5,3)")
+            .HasColumnType("decimal(8,3)")
             .IsRequired();
 
         builder.Property(x => x.AssemblyQuantity)
@@ -47,12 +47,12 @@ public class AssortmentConfiguration : IEntityTypeConfiguration<Assortment>
 
         builder.Property(x => x.AssemblyWeight)
             .HasColumnName("AssemblyWeight")
-            .HasColumnType("decimal(5,3)")
+            .HasColumnType("decimal(8,3)")
             .IsRequired();
 
         builder.Property(x => x.PG)
             .HasColumnName("PG")
-            .HasColumnType("char(1)")
+            .HasColumnType("varchar(1)")
             .IsRequired();
 
         builder.Property(x => x.ValveNumber)

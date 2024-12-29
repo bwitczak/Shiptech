@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "src\Web\Web.csproj", "{3B002877-F49E-43C9-90AD-BA14BB12B65C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker", "Faker\Faker.csproj", "{C5EB01AB-E064-4BF0-A275-0E368053CDBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{3B002877-F49E-43C9-90AD-BA14BB12B65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B002877-F49E-43C9-90AD-BA14BB12B65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B002877-F49E-43C9-90AD-BA14BB12B65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5EB01AB-E064-4BF0-A275-0E368053CDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5EB01AB-E064-4BF0-A275-0E368053CDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5EB01AB-E064-4BF0-A275-0E368053CDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5EB01AB-E064-4BF0-A275-0E368053CDBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

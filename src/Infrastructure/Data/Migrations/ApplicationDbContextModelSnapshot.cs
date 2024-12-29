@@ -28,10 +28,6 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar(26)")
                         .HasColumnName("Id");
 
-                    b.Property<short?>("Addition")
-                        .HasColumnType("smallint")
-                        .HasColumnName("Addition");
-
                     b.Property<short>("AssemblyLength")
                         .HasColumnType("smallint")
                         .HasColumnName("AssemblyLength");
@@ -41,7 +37,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("AssemblyQuantity");
 
                     b.Property<double>("AssemblyWeight")
-                        .HasColumnType("decimal(5,3)")
+                        .HasColumnType("decimal(8,3)")
                         .HasColumnName("AssemblyWeight");
 
                     b.Property<string>("AssortmentDictionaryId")
@@ -51,36 +47,30 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Comment");
 
-                    b.Property<short?>("D15I")
-                        .HasColumnType("smallint")
-                        .HasColumnName("D15I");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreationDate");
 
-                    b.Property<short?>("D15II")
-                        .HasColumnType("smallint")
-                        .HasColumnName("D15II");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasColumnName("Author");
 
-                    b.Property<short?>("D1I")
-                        .HasColumnType("smallint")
-                        .HasColumnName("D1I");
-
-                    b.Property<short?>("D1II")
-                        .HasColumnType("smallint")
-                        .HasColumnName("D1II");
-
-                    b.Property<short?>("DrawingLength")
-                        .HasColumnType("smallint")
-                        .HasColumnName("DrawingLength");
+                    b.Property<string>("CutAngle")
+                        .HasColumnType("varchar")
+                        .HasColumnName("CutAngle");
 
                     b.Property<string>("IsoId")
                         .HasColumnType("varchar(26)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("PG")
                         .IsRequired()
-                        .HasColumnType("varchar")
-                        .HasColumnName("Name");
+                        .HasColumnType("varchar(1)")
+                        .HasColumnName("PG");
 
-                    b.Property<char>("Position")
-                        .HasColumnType("char(1)")
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasColumnType("varchar(1)")
                         .HasColumnName("Position");
 
                     b.Property<short>("PrefabricationLength")
@@ -92,16 +82,12 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("PrefabricationQuantity");
 
                     b.Property<double>("PrefabricationWeight")
-                        .HasColumnType("decimal(5,3)")
+                        .HasColumnType("decimal(8,3)")
                         .HasColumnName("PrefabricationWeight");
 
-                    b.Property<char?>("Stage")
-                        .HasColumnType("char(1)")
-                        .HasColumnName("Stage");
-
-                    b.Property<short?>("TechnologicalAddition")
-                        .HasColumnType("smallint")
-                        .HasColumnName("TechnologicalAddition");
+                    b.Property<string>("ValveNumber")
+                        .HasColumnType("varchar")
+                        .HasColumnName("ValveNumber");
 
                     b.HasKey("Id");
 
@@ -119,7 +105,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Id");
 
                     b.Property<double?>("Amount")
-                        .HasColumnType("decimal(5,3)")
+                        .HasColumnType("decimal(8,3)")
                         .HasColumnName("Amount");
 
                     b.Property<string>("Comment")
@@ -135,8 +121,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("DN2");
 
                     b.Property<string>("Distinguishing")
-                        .IsRequired()
-                        .HasColumnType("char(22)")
+                        .HasColumnType("varchar")
                         .HasColumnName("Distinguishing");
 
                     b.Property<string>("Kind")
@@ -151,6 +136,10 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Material");
 
+                    b.Property<string>("NS")
+                        .HasColumnType("varchar")
+                        .HasColumnName("NS");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar")
@@ -162,17 +151,16 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Number");
 
                     b.Property<string>("RO")
-                        .IsRequired()
                         .HasColumnType("varchar")
                         .HasColumnName("RO");
 
                     b.Property<string>("Unit")
                         .IsRequired()
-                        .HasColumnType("char(4)")
+                        .HasColumnType("varchar(4)")
                         .HasColumnName("Unit");
 
                     b.Property<double?>("Weight")
-                        .HasColumnType("decimal(5,3)")
+                        .HasColumnType("decimal(8,3)")
                         .HasColumnName("Weight");
 
                     b.HasKey("Id");
@@ -208,7 +196,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Id");
 
                     b.Property<string>("Block")
-                        .HasColumnType("char(3)")
+                        .HasColumnType("varchar(3)")
                         .HasColumnName("Block");
 
                     b.Property<DateTime>("Created")
@@ -221,7 +209,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Author");
 
                     b.Property<string>("Lot")
-                        .HasColumnType("char(3)")
+                        .HasColumnType("varchar(3)")
                         .HasColumnName("Lot");
 
                     b.Property<string>("Name")
@@ -236,7 +224,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
 
                     b.Property<string>("Revision")
                         .IsRequired()
-                        .HasColumnType("varchar(1)")
+                        .HasColumnType("varchar(2)")
                         .HasColumnName("Revision");
 
                     b.Property<string[]>("Section")
@@ -247,7 +235,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar(26)");
 
                     b.Property<string>("Stage")
-                        .HasColumnType("char(3)")
+                        .HasColumnType("varchar(3)")
                         .HasColumnName("Stage");
 
                     b.HasKey("Id");
@@ -272,7 +260,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
 
                     b.Property<string>("Class")
                         .IsRequired()
-                        .HasColumnType("char(6)")
+                        .HasColumnType("varchar(6)")
                         .HasColumnName("Class");
 
                     b.Property<DateTime>("Created")
@@ -292,20 +280,22 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("KzmDate");
 
                     b.Property<string>("KzmNumber")
-                        .HasColumnType("char(6)")
+                        .HasColumnType("varchar(6)")
                         .HasColumnName("KzmNumber");
 
                     b.Property<string>("Nameplate")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("varchar")
+                        .HasColumnName("Nameplate");
 
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<char>("Revision")
-                        .HasColumnType("char(1)")
+                    b.Property<string>("Revision")
+                        .IsRequired()
+                        .HasColumnType("varchar(2)")
                         .HasColumnName("Revision");
 
                     b.Property<string>("System")

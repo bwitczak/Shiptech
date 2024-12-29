@@ -12,16 +12,17 @@ public record UpdateAssortmentDictionaryCommand(
     Ulid Id,
     string Number,
     string Name,
-    string Distinguishing,
+    string? Distinguishing,
     string Unit,
     double? Amount,
     double? Weight,
     string? Material,
     string? Kind,
-    ushort? DN1,
-    ushort? DN2,
+    string? DN1,
+    string? DN2,
     ushort? Length,
-    string RO,
+    string? RO,
+    string? NS,
     string? Comment) : IRequest
 {
 }
@@ -51,11 +52,14 @@ public class UpdateAssortmentDictionaryCommandValidator : AbstractValidator<Upda
             .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_NAME")
             .WithMessage("Nazwa asortymentu nie może być pusta!");
 
-        RuleFor(x => x.Distinguishing)
-            .NotNull()
-            .NotEmpty()
-            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_DISTINGUISHING")
-            .WithMessage("Wyróżnik nie może być pusty!");
+        When(x => x.Distinguishing is not null, () =>
+        {
+            RuleFor(x => x.Distinguishing)
+                .NotNull()
+                .NotEmpty()
+                .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_DISTINGUISHING")
+                .WithMessage("Wyróżnik nie może być pusty!");
+        });
 
         RuleFor(x => x.Unit)
             .NotNull()
@@ -111,7 +115,15 @@ public class UpdateAssortmentDictionaryCommandValidator : AbstractValidator<Upda
         When(x => x.DN1 is not null, () =>
         {
             RuleFor(x => x.DN1)
-                .Must(x => x > 0.0 && x <= 1000)
+                .Must(x =>
+                {
+                    if (!double.TryParse(x, out double number))
+                    {
+                        return false;
+                    }
+
+                    return number is > 0 and <= 1000;
+                })
                 .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_DN1")
                 .WithMessage(x => "DN1 jest < 0 lub powyżej 1000!");
         });
@@ -119,7 +131,15 @@ public class UpdateAssortmentDictionaryCommandValidator : AbstractValidator<Upda
         When(x => x.DN2 is not null, () =>
         {
             RuleFor(x => x.DN2)
-                .Must(x => x > 0.0 && x <= 1000)
+                .Must(x =>
+                {
+                    if (!double.TryParse(x, out double number))
+                    {
+                        return false;
+                    }
+
+                    return number is > 0 and <= 1000;
+                })
                 .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_DN1")
                 .WithMessage(x => "DN2 jest < 0 lub powyżej 1000!");
         });
@@ -136,10 +156,31 @@ public class UpdateAssortmentDictionaryCommandValidator : AbstractValidator<Upda
                 .WithMessage(x => $"Długość {x.Length}{x.Unit} jest < 0!");
         });
 
-        RuleFor(x => x.RO)
-            .Must(x => x is RO.PIPE or RO.ARMATURE)
-            .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_RO")
-            .WithMessage(x => "RO musi mieć wartość Rura lub Armatura!");
+        When(x => x.RO is not null, () =>
+        {
+            RuleFor(x => x.RO)
+                .Must(x => x is RO.PIPE or RO.ARMATURE)
+                .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_RO")
+                .WithMessage(x => "RO musi mieć wartość Rura lub Armatura!");
+        });
+
+        When(x => x.NS is not null, () =>
+        {
+            RuleFor(x => x.NS)
+                .NotNull()
+                .NotEmpty()
+                .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_NS")
+                .WithMessage("NS nie może być puste!");
+        });
+
+        When(x => x.Comment is not null, () =>
+        {
+            RuleFor(x => x.Comment)
+                .NotNull()
+                .NotEmpty()
+                .WithErrorCode("UPDATE_ASSORTMENT_DICTIONARY_400_COMMENT")
+                .WithMessage("Komentarz nie może być pusty!");
+        });
     }
 }
 
@@ -157,12 +198,12 @@ public class UpdateAssortmentDictionaryCommandHandler : IRequestHandler<UpdateAs
     public async Task Handle(UpdateAssortmentDictionaryCommand request, CancellationToken cancellationToken)
     {
         (Ulid id, string? number, string? name, string? distinguishing, string? unit, double? amount, double? weight,
-                string? material, string? kind, ushort? dn1, ushort? dn2, ushort? length, string? ro, string? comment) =
+                string? material, string? kind, string? dn1, string? dn2, ushort? length, string? ro, string? ns,
+                string? comment) =
             request;
 
         Domain.Entities.AssortmentDictionary? updated = _factory.Create(id, number, name, distinguishing, unit, amount,
-            weight, material, kind,
-            dn1, dn2, length, ro, comment);
+            weight, material, kind, dn1, dn2, length, ro, ns, comment);
 
         _context.AssortmentDictionaries.Update(updated);
         await _context.SaveChangesAsync(cancellationToken);
