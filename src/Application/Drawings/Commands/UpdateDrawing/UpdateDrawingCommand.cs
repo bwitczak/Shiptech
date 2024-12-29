@@ -90,7 +90,7 @@ public class UpdateDrawingCommandValidator : AbstractValidator<UpdateDrawingComm
                         return false;
                     }
 
-                    return number is >= 100 and <= 999;
+                    return number is >= 1000 and <= 9999;
                 })
                 .WithErrorCode("UPDATE_DRAWING_400_SECTION")
                 .WithMessage(x => $"Niepoprawna sekcja {x.Section}! Wymagane > 999 oraz < 10000");

@@ -53,7 +53,7 @@ public class CreateIsoCommandValidator : AbstractValidator<CreateIsoCommand>
             .NotEmpty()
             .WithErrorCode("CREATE_ISO_400_SYSTEM")
             .WithMessage("Nazwa systemu nie może być pusta!")
-            .Must(x => x.Split("-").Length == 1 && x.Split("-").Length == 2)
+            .Must(x => x.Split("-").Length == 1 || x.Split("-").Length == 2)
             .WithErrorCode("CREATE_ISO_400_SYSTEM")
             .WithMessage(x => $"Niepoprawny format systemu izometryka {x.System}! Wymagany format XXX lub XXX-XXX");
 

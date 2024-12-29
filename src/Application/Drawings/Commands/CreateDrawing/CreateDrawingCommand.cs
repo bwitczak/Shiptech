@@ -85,10 +85,10 @@ public class CreateDrawingCommandValidator : AbstractValidator<CreateDrawingComm
                         return false;
                     }
 
-                    return number is >= 100 and <= 999;
+                    return number is >= 1000 and <= 9999;
                 })
                 .WithErrorCode("CREATE_DRAWING_400_SECTION")
-                .WithMessage(_ => "Niepoprawna sekcja! Wymagane > 100 oraz < 999");
+                .WithMessage(_ => "Niepoprawna sekcja! Wymagane > 999 oraz < 10000");
         });
 
         When(x => x.Stage is not null, () =>
