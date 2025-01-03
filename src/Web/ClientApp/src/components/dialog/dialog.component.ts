@@ -28,7 +28,11 @@ export class DialogComponent {
     this.confirm.emit();
   }
 
-  handleClose() {
+  handleCancel() {
     this.visibleChange.emit(false);
+  }
+
+  toggleVisibility(visible: boolean) {
+    this.visibleChange.emit(visible);
   }
 }

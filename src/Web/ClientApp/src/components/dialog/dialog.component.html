@@ -1,8 +1,8 @@
 <p-dialog
-  (visibleChange)="visibleChange.emit($event)"
+  (visibleChange)="toggleVisibility($event)"
   [(visible)]="visible"
+  [header]="header"
   [style]="styles"
-  header="Dodaj rysunek"
 >
   <ng-content />
   <ng-template pTemplate="footer">
@@ -12,11 +12,6 @@
       severity="primary"
       type="submit"
     />
-    <p-button
-      (click)="handleClose()"
-      [text]="true"
-      label="Anuluj"
-      severity="secondary"
-    />
+    <p-button (click)="handleCancel()" label="Anuluj" severity="secondary" />
   </ng-template>
 </p-dialog>

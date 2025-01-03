@@ -8,8 +8,8 @@
 
 <app-dialog
   (confirm)="addNewDrawing()"
+  [(visible)]="visible"
   [styles]="{ width: '35rem' }"
-  [visible]="visible"
   header="Dodaj rysunek"
 >
   <form
