@@ -9,7 +9,7 @@ public class IsoDto
     public Ulid Id { get; set; }
     public required string Number { get; set; }
     public required string Nameplate { get; set; }
-    public char IsoRevision { get; set; }
+    public required string IsoRevision { get; set; }
     public required string System { get; set; }
     public required string Class { get; set; }
     public string? Atest { get; set; }
@@ -22,7 +22,8 @@ public class IsoDto
     {
         public Mapping()
         {
-            CreateMap<Domain.Entities.Iso, IsoDto>();
+            CreateMap<Domain.Entities.Iso, IsoDto>()
+                .ForMember(x => x.IsoRevision, opt => opt.MapFrom(src => src.Revision));
         }
     }
 }
