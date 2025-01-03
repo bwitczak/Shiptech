@@ -18,4 +18,9 @@ public class IsoService : IIsoService
     {
         return await _isos.AnyAsync(x => x.Id == id);
     }
+
+    public async Task<bool> ExistsByNumber(string number)
+    {
+        return await _isos.AnyAsync(x => x.Number == number);
+    }
 }

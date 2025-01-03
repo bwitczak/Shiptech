@@ -64,6 +64,7 @@ export class IsosComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   navigation: MenuItem[];
   drawingNumber = '';
+  shipCode = '';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
   visible: boolean;
@@ -120,10 +121,13 @@ export class IsosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.drawingNumber = this.route.snapshot.params['drawingNumber'];
-    const shipCode: string = this.route.snapshot.queryParams['shipCode'];
+    this.shipCode = this.route.snapshot.queryParams['shipCode'];
     this.topBarService.setBreadcrumbItems([
       { label: '', icon: House, link: '/' },
-      { label: `Rysunek(${shipCode})`, link: `/drawings/${shipCode}` },
+      {
+        label: `Rysunek(${this.shipCode})`,
+        link: `/drawings/${this.shipCode}`,
+      },
       { label: `Iso(${this.drawingNumber})` },
     ]);
 
@@ -150,14 +154,17 @@ export class IsosComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.isoHttp.createIso(iso).subscribe({
       error: (error) => {
-        console.log(error);
         this.errorHandlingService.handleApiErrors(error, this.isoForm);
       },
     });
   }
 
-  actionButtonRedirect(number: string) {
-    return `/assortments/${number}?drawingNumber=${this.drawingNumber}`;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  actionButtonRedirect(number: string, params?: any) {
+    const baseUrl = `/assortments/${number}`;
+    const queryParams = new URLSearchParams(params).toString();
+
+    return `${baseUrl}?${queryParams}`;
   }
 
   toggleAddIsoDialog() {

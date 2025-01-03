@@ -128,8 +128,12 @@ export class DrawingsComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  actionButtonRedirect(number: string) {
-    return `/isos/${number}?shipCode=${this.shipCode}`;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  actionButtonRedirect(number: string, params?: any) {
+    const baseUrl = `/isos/${number}`;
+    const queryParams = new URLSearchParams(params).toString();
+
+    return `${baseUrl}?${queryParams}`;
   }
 
   toggleAddDrawingDialog() {

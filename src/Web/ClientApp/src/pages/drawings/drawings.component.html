@@ -4,7 +4,12 @@
   </p-button>
 </ng-template>
 
-<app-table [action]="actionButtonRedirect" [cols]="cols" [data]="drawings" />
+<app-table
+  [actionParams]="{ shipCode }"
+  [action]="actionButtonRedirect"
+  [cols]="cols"
+  [data]="drawings"
+/>
 
 <app-dialog
   (confirm)="addNewDrawing()"

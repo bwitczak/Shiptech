@@ -48,7 +48,7 @@
       }
       @if (action) {
         <td>
-          <a href="{{ action(rowData.number) }}">
+          <a href="{{ action(rowData.number, actionParams) }}">
             <p-button type="button">
               <i-lucide [img]="ListCollapse" />
             </p-button>

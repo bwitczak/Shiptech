@@ -1,1 +1,7 @@
-<p>assortments works!</p>
+<ng-template #topBarContent>
+  <p-button (onClick)="toggleAddAssortmentDialog()" label="Dodaj">
+    <i-lucide [img]="Plus" />
+  </p-button>
+</ng-template>
+
+<app-table [cols]="cols" [data]="assortments" />

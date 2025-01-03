@@ -4,7 +4,12 @@
   </p-button>
 </ng-template>
 
-<app-table [action]="actionButtonRedirect" [cols]="cols" [data]="isos" />
+<app-table
+  [actionParams]="{ shipCode, drawingNumber }"
+  [action]="actionButtonRedirect"
+  [cols]="cols"
+  [data]="isos"
+/>
 
 <app-dialog
   (confirm)="addNewIso()"

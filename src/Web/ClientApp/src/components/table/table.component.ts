@@ -15,7 +15,10 @@ export class TableComponent<T> {
   @Input() cols: Column[];
   @Input() data: T[];
   @Input() filterFields: string[];
-  @Input() action?: (number: string) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() action?: (number: string, params?: any) => string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() actionParams?: any;
 
   readonly ListCollapse = ListCollapse;
 }
