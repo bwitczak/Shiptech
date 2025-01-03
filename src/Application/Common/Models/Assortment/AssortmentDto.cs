@@ -5,25 +5,19 @@ namespace Shiptech.Application.Common.Models.Assortment;
 
 public class AssortmentDto
 {
-    public Ulid Id { get; set; }
-    public required string Name { get; set; }
-    public char Position { get; set; }
-    public ushort? DrawingLength { get; set; }
-    public ushort? Addition { get; set; }
-    public ushort? TechnologicalAddition { get; set; }
-    public string? Stage { get; set; }
-    public string? Comment { get; set; }
-    public ushort? D15I { get; set; }
-    public ushort? D15II { get; set; }
-    public ushort? D1I { get; set; }
-    public ushort? D1II { get; set; }
-    public ushort PrefabricationQuantity { get; set; }
-    public ushort PrefabricationLength { get; set; }
-    public double PrefabricationWeight { get; set; }
-    public ushort AssemblyQuantity { get; set; }
-    public ushort AssemblyLength { get; set; }
-    public double AssemblyWeight { get; set; }
-    public AssortmentDictionaryDto? AssortmentDictionaryDto { get; set; }
+    public Ulid Id { get; init; }
+    public char Position { get; init; }
+    public ushort PrefabricationQuantity { get; init; }
+    public ushort PrefabricationLength { get; init; }
+    public double PrefabricationWeight { get; init; }
+    public ushort AssemblyQuantity { get; init; }
+    public ushort AssemblyLength { get; init; }
+    public double AssemblyWeight { get; init; }
+    public char PG { get; init; }
+    public string? ValveNumber { get; init; }
+    public string? CutAngle { get; init; }
+    public string? Comment { get; init; }
+    public AssortmentDictionaryDto? AssortmentDictionaryDto { get; init; }
 
     private class Mapping : Profile
     {

@@ -7,7 +7,7 @@ public class ShipownerDto
 {
     public Ulid Id { get; init; }
     public required string Orderer { get; init; }
-    public IList<ShipWithNoRelationsDto> Ships { get; set; } = new List<ShipWithNoRelationsDto>();
+    public IList<ShipWithNoRelationsDto> Ships { get; init; } = new List<ShipWithNoRelationsDto>();
 
     private class Mapping : Profile
     {

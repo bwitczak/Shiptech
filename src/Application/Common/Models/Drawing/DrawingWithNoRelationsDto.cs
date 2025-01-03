@@ -12,6 +12,7 @@ public class DrawingWithNoRelationsDto
     public string? Block { get; init; }
     public List<string>? Section { get; init; }
     public string? Stage { get; init; }
+    public DateTime CreationDate { get; init; }
     public required string CreatedBy { get; init; }
 
     private class Mapping : Profile

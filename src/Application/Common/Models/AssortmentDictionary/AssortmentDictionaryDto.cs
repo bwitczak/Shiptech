@@ -4,20 +4,21 @@ namespace Shiptech.Application.Common.Models.AssortmentDictionary;
 
 public class AssortmentDictionaryDto
 {
-    public Ulid Id { get; set; }
-    public required string Number { get; set; }
-    public required string Name { get; set; }
-    public string? Distinguishing { get; set; }
-    public required string Unit { get; set; }
-    public double? Amount { get; set; }
-    public double? Weight { get; set; }
-    public string? Material { get; set; }
-    public string? Kind { get; set; }
-    public string? DN1 { get; set; }
-    public string? DN2 { get; set; }
-    public double? Length { get; set; }
-    public string? RO { get; set; }
-    public string? Comment { get; set; }
+    public Ulid Id { get; init; }
+    public required string Number { get; init; }
+    public required string Name { get; init; }
+    public string? Distinguishing { get; init; }
+    public required string Unit { get; init; }
+    public double? Amount { get; init; }
+    public double? Weight { get; init; }
+    public string? Material { get; init; }
+    public string? Kind { get; init; }
+    public string? DN1 { get; init; }
+    public string? DN2 { get; init; }
+    public double? Length { get; init; }
+    public string? RO { get; init; }
+    public string? NS { get; init; }
+    public string? Comment { get; init; }
 
     private class Mapping : Profile
     {

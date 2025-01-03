@@ -6,17 +6,17 @@ namespace Shiptech.Application.Common.Models.Iso;
 
 public class IsoDto
 {
-    public Ulid Id { get; set; }
-    public required string Number { get; set; }
-    public required string Nameplate { get; set; }
-    public required string IsoRevision { get; set; }
-    public required string System { get; set; }
-    public required string Class { get; set; }
-    public string? Atest { get; set; }
-    public string? KzmNumber { get; set; }
-    public DateOnly? KzmDate { get; set; }
-    public ChemicalProcessDto? ChemicalProcess { get; set; }
-    public IList<AssortmentDto> Assortments { get; set; } = new List<AssortmentDto>();
+    public Ulid Id { get; init; }
+    public required string Number { get; init; }
+    public required string Nameplate { get; init; }
+    public required string IsoRevision { get; init; }
+    public required string System { get; init; }
+    public required string Class { get; init; }
+    public string? Atest { get; init; }
+    public string? KzmNumber { get; init; }
+    public string? KzmDate { get; init; }
+    public ChemicalProcessDto? ChemicalProcess { get; init; }
+    public IList<AssortmentDto> Assortments { get; init; } = new List<AssortmentDto>();
 
     private class Mapping : Profile
     {
