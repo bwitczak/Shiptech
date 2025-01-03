@@ -6,11 +6,12 @@ import {
   FormGroupDirective,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { IftaLabel } from 'primeng/iftalabel';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [InputTextModule, ReactiveFormsModule],
+  imports: [InputTextModule, ReactiveFormsModule, IftaLabel],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   viewProviders: [

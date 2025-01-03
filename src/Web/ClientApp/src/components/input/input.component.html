@@ -1,21 +1,19 @@
-<label class="font-semibold self-center" for="{{ formPropertyName }}">{{
-  label
-}}</label>
-<div>
+<p-iftalabel>
   <input
     [class]="
-      formGroup.get(formPropertyName)?.errors?.['serverError']
-        ? 'border border-red-500 w-full px-3 py-2'
-        : 'w-full px-3 py-2'
+      formGroup.get(formPropertyName)?.errors?.['businessLogicError']
+        ? 'ng-dirty ng-invalid w-full'
+        : 'w-full'
     "
     [formControlName]="formPropertyName"
+    autocomplete="off"
     id="{{ formPropertyName }}"
     pInputText
-    variant="filled"
   />
+  <label for="{{ formPropertyName }}">{{ label }}</label>
   @if (formGroup.get(formPropertyName)?.errors?.['businessLogicError']) {
     <small id="{{ formPropertyName }}-error" class="text-red-500">
       {{ formGroup.get(formPropertyName)?.errors?.['businessLogicError'] }}
     </small>
   }
-</div>
+</p-iftalabel>

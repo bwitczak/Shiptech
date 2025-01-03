@@ -7,11 +7,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Select } from 'primeng/select';
+import { IftaLabel } from 'primeng/iftalabel';
 
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [InputTextModule, ReactiveFormsModule, Select],
+  imports: [InputTextModule, ReactiveFormsModule, Select, IftaLabel],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   viewProviders: [

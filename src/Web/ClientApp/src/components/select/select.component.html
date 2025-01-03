@@ -1,11 +1,8 @@
-<label class="font-semibold self-center" for="{{ formPropertyName }}">{{
-  label
-}}</label>
-<div>
+<p-iftalabel>
   <p-select
     [class]="
-      formGroup.get('{{formPropertyName}}')?.errors?.['businessLogicError']
-        ? 'border border-red-500 w-full'
+      formGroup.get(formPropertyName)?.errors?.['businessLogicError']
+        ? 'ng-dirty ng-invalid w-full'
         : 'w-full'
     "
     [options]="options"
@@ -13,9 +10,10 @@
     id="{{ formPropertyName }}"
     variant="filled"
   />
+  <label for="{{ formPropertyName }}">{{ label }}</label>
   @if (formGroup.get(formPropertyName)?.errors?.['businessLogicError']) {
     <small id="{{ formPropertyName }}-error" class="text-red-500">
       {{ formGroup.get(formPropertyName)?.errors?.['businessLogicError'] }}
     </small>
   }
-</div>
+</p-iftalabel>
