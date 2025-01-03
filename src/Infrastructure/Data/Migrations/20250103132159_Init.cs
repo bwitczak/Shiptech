@@ -185,6 +185,18 @@ namespace Shiptech.Infrastructure.Data.Migrations
                 column: "IsoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChemicalProcesses_ChemicalProcessName",
+                table: "ChemicalProcesses",
+                column: "ChemicalProcessName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Drawings_Number",
+                table: "Drawings",
+                column: "Number",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Drawings_ShipId",
                 table: "Drawings",
                 column: "ShipId");

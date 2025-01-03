@@ -12,7 +12,7 @@ using Shiptech.Infrastructure.Data;
 namespace Shiptech.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250101180302_Init")]
+    [Migration("20250103132159_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -189,6 +189,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("ChemicalProcesses", (string)null);
                 });
 
@@ -242,6 +245,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Stage");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Number")
+                        .IsUnique();
 
                     b.HasIndex("ShipId");
 

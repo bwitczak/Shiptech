@@ -27,6 +27,7 @@ public class ChemicalProcessConfiguration : IEntityTypeConfiguration<ChemicalPro
 
         builder.ToTable("ChemicalProcesses");
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Name).IsUnique();
         builder.HasMany(x => x.Isos)
             .WithOne(x => x.ChemicalProcess);
     }

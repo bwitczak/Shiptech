@@ -58,6 +58,7 @@ public class DrawingConfiguration : IEntityTypeConfiguration<Drawing>
 
         builder.ToTable("Drawings");
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Number).IsUnique();
         builder.HasMany(x => x.Isos)
             .WithOne(x => x.Drawing);
     }

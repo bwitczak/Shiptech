@@ -5,3 +5,48 @@
 </ng-template>
 
 <app-table [cols]="cols" [data]="isos" />
+
+<app-dialog
+  (confirm)="addNewIso()"
+  [(visible)]="visible"
+  [styles]="{ width: '35rem' }"
+  header="Dodaj ISO"
+>
+  <form (ngSubmit)="addNewIso()" [formGroup]="isoForm" class="grid gap-4 mt-3">
+    <app-input [formGroup]="isoForm" formPropertyName="number" label="Numer" />
+    <app-input
+      [formGroup]="isoForm"
+      formPropertyName="nameplate"
+      label="Tabliczka znamionowa"
+    />
+    <app-input
+      [formGroup]="isoForm"
+      formPropertyName="revision"
+      label="Rewizja"
+    />
+    <app-input [formGroup]="isoForm" formPropertyName="system" label="System" />
+    <app-input [formGroup]="isoForm" formPropertyName="class" label="Klasa" />
+    <app-select
+      [formGroup]="isoForm"
+      [options]="chemicalProcessesOptions"
+      formPropertyName="chemicalProcessName"
+      label="Obróbka chemiczna"
+    />
+    <app-select
+      [formGroup]="isoForm"
+      [options]="atestOptions"
+      formPropertyName="atest"
+      label="Atest"
+    />
+    <app-input
+      [formGroup]="isoForm"
+      formPropertyName="kzmNumber"
+      label="Numer KZM"
+    />
+    <app-input
+      [formGroup]="isoForm"
+      formPropertyName="kzmDate"
+      label="Data KZM"
+    />
+  </form>
+</app-dialog>

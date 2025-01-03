@@ -18,4 +18,9 @@ public class ChemicalProcessService : IChemicalProcessService
     {
         return await _chemicalProcesses.AnyAsync(x => x.Id == id);
     }
+
+    public async Task<bool> ExistsByName(string name)
+    {
+        return await _chemicalProcesses.AnyAsync(x => x.Name == name);
+    }
 }
