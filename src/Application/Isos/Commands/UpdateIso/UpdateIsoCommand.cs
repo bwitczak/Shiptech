@@ -18,7 +18,7 @@ public record UpdateIsoCommand(
     string Class,
     string? Atest,
     string? KzmNumber,
-    DateOnly? KzmDate,
+    string? KzmDate,
     Ulid DrawingId,
     Ulid ChemicalProcessId) : IRequest
 {
@@ -99,7 +99,11 @@ public class UpdateIsoCommandValidator : AbstractValidator<UpdateIsoCommand>
                 .NotNull()
                 .NotEmpty()
                 .WithErrorCode("UPDATE_ISO_400_KZM_DATE")
-                .WithMessage("Data KZM nie może być pusta!");
+                .WithMessage("Data KZM nie może być pusta!")
+                .Must(x => DateOnly.TryParse(x, out _))
+                .WithErrorCode("CREATE_ISO_400_KZM_DATE")
+                .WithMessage("Błędny format daty! (YYYY-MM-DD)");
+            ;
         });
 
         RuleFor(x => x.DrawingId)
@@ -136,14 +140,15 @@ public class UpdateIsoCommandHandler : IRequestHandler<UpdateIsoCommand>
     public async Task Handle(UpdateIsoCommand request, CancellationToken cancellationToken)
     {
         (Ulid id, string number, string nameplate, string revision, string system, string @class, string? atest,
-            string? kzmNumber, DateOnly? kzmDate, Ulid drawingId, Ulid chemicalProcessId) = request;
+            string? kzmNumber, string? kzmDate, Ulid drawingId, Ulid chemicalProcessId) = request;
 
         Drawing drawing = await _context.Drawings.FirstAsync(x => x.Id == drawingId, cancellationToken);
         ChemicalProcess chemicalProcess =
             await _context.ChemicalProcesses.FirstAsync(x => x.Id == chemicalProcessId, cancellationToken);
 
-        Iso updated = _factory.Create(id, number, nameplate, revision, system, @class, atest, kzmNumber, kzmDate,
-            drawing, chemicalProcess);
+        DateOnly kzmDateToDateOnly = DateOnly.Parse(kzmDate!);
+        Iso updated = _factory.Create(id, number, nameplate, revision, system, @class, atest, kzmNumber,
+            kzmDateToDateOnly, drawing, chemicalProcess);
 
         _context.Isos.Update(updated);
         await _context.SaveChangesAsync(cancellationToken);
