@@ -4,7 +4,7 @@
   </p-button>
 </ng-template>
 
-<app-table [cols]="cols" [data]="isos" />
+<app-table [action]="actionButtonRedirect" [cols]="cols" [data]="isos" />
 
 <app-dialog
   (confirm)="addNewIso()"

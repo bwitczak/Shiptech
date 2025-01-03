@@ -156,6 +156,10 @@ export class IsosComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  actionButtonRedirect(number: string) {
+    return `/assortments/${number}?drawingNumber=${this.drawingNumber}`;
+  }
+
   toggleAddIsoDialog() {
     this.visible = true;
   }
