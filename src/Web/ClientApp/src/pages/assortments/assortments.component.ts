@@ -14,11 +14,29 @@ import { AssortmentClient, AssortmentDto } from '../../app/web-api-client';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
 import { TopBarService } from '../../services/topBarService';
+import { DialogComponent } from '../../components/dialog/dialog.component';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { InputComponent } from '../../components/input/input.component';
+import { SelectComponent } from '../../components/select/select.component';
 
 @Component({
   selector: 'app-assortments',
   standalone: true,
-  imports: [Button, LucideAngularModule, TableComponent],
+  imports: [
+    Button,
+    LucideAngularModule,
+    TableComponent,
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    InputComponent,
+    SelectComponent,
+  ],
   templateUrl: './assortments.component.html',
   styleUrl: './assortments.component.scss',
 })
@@ -41,9 +59,38 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
   drawingNumber = '';
   isoNumber = '';
 
+  // TODO: Fetch from API
+  cutAngleOptions: string[] = [
+    '0° - 1°',
+    '1° - 1°',
+    '0° - 1,5°',
+    '1,5° - 1,5°',
+    '0° - 2°',
+    '2° - 2°',
+    '0° - 2,5°',
+    '2,5° - 2,5°',
+    '0° - 30°',
+    '30° - 30°',
+    '0° - 45°',
+    '45° - 45°',
+  ];
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
   visible: boolean;
+  assortmentForm = new FormGroup({
+    position: new FormControl(''),
+    prefabricationQuantity: new FormControl(''),
+    prefabricationLength: new FormControl(''),
+    prefabricationWeight: new FormControl(''),
+    assemblyQuantity: new FormControl(''),
+    assemblyLength: new FormControl(''),
+    assemblyWeight: new FormControl(''),
+    pg: new FormControl(''),
+    valveNumber: new FormControl(''),
+    cutAngle: new FormControl(''),
+    comment: new FormControl(''),
+  });
 
   // TODO: Check is could be not any type
   protected readonly Plus = Plus;
@@ -86,6 +133,10 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.topBarService.clearContent();
+  }
+
+  addNewAssortment() {
+    return null;
   }
 
   toggleAddAssortmentDialog() {

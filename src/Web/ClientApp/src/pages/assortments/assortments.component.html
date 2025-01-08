@@ -5,3 +5,78 @@
 </ng-template>
 
 <app-table [cols]="cols" [data]="assortments" />
+
+<app-dialog
+  (confirm)="addNewAssortment()"
+  [(visible)]="visible"
+  header="Dodaj asortyment"
+>
+  <form
+    (ngSubmit)="addNewAssortment()"
+    [formGroup]="assortmentForm"
+    class="grid gap-4 mt-3"
+  >
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="position"
+      label="Pozycja"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="prefabricationQuantity"
+      label="Ilość (prefabrykacja)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="prefabricationLength"
+      label="Długość (prefabrykacja)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="prefabricationWeight"
+      label="Waga (prefabrykacja)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="assemblyQuantity"
+      label="Ilość (montaż)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="assemblyLength"
+      label="Długość (montaż)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="assemblyWeight"
+      label="Waga (montaż)"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="assemblyWeight"
+      label="Waga (montaż)"
+    />
+    <app-select
+      [formGroup]="assortmentForm"
+      [options]="['P', 'G']"
+      formPropertyName="pg"
+      label="P/G"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="valveNumber"
+      label="Numer zaworu"
+    />
+    <app-select
+      [formGroup]="assortmentForm"
+      [options]="cutAngleOptions"
+      formPropertyName="cutAngle"
+      label="Kąt cięcia"
+    />
+    <app-input
+      [formGroup]="assortmentForm"
+      formPropertyName="comment"
+      label="Komentarz"
+    />
+  </form>
+</app-dialog>
