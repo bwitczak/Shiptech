@@ -75,10 +75,18 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
     '45° - 45°',
   ];
 
+  // TODO: Fetch from API
+  assortmentDictionaries: { number: string }[] = [
+    { number: 'RS8845' },
+    { number: 'RS8840' },
+    { number: 'KOS33291' },
+  ];
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
   visible: boolean;
   assortmentForm = new FormGroup({
+    standardNumber: new FormControl(''),
     position: new FormControl(''),
     prefabricationQuantity: new FormControl(''),
     prefabricationLength: new FormControl(''),

@@ -1,10 +1,12 @@
 <p-iftalabel>
   <p-select
+    [(ngModel)]="selected"
     [class]="
       formGroup.get(formPropertyName)?.errors?.['businessLogicError']
         ? 'ng-dirty ng-invalid w-full'
         : 'w-full'
     "
+    [optionLabel]="optionLabel"
     [options]="options"
     formControlName="{{ formPropertyName }}"
     id="{{ formPropertyName }}"

@@ -9,6 +9,7 @@
 <app-dialog
   (confirm)="addNewAssortment()"
   [(visible)]="visible"
+  [styles]="{ width: '35rem' }"
   header="Dodaj asortyment"
 >
   <form
@@ -16,6 +17,13 @@
     [formGroup]="assortmentForm"
     class="grid gap-4 mt-3"
   >
+    <app-select
+      [formGroup]="assortmentForm"
+      [optionLabel]="'number'"
+      [options]="assortmentDictionaries"
+      formPropertyName="standardNumber"
+      label="Nr standardu"
+    />
     <app-input
       [formGroup]="assortmentForm"
       formPropertyName="position"
