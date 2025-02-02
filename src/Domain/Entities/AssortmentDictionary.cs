@@ -1,3 +1,4 @@
+using NpgsqlTypes;
 using Shiptech.Domain.Common;
 
 namespace Shiptech.Domain.Entities;
@@ -18,5 +19,7 @@ public class AssortmentDictionary : BaseEntity
     public string? RO { get; set; }
     public string? NS { get; set; }
     public string? Comment { get; set; }
+
+    public NpgsqlTsVector SearchVector { get; init; } = null!;
     public IList<Assortment> Assortments { get; set; } = new List<Assortment>();
 }

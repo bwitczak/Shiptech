@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR"/>
     <PackageReference Include="Ulid"/>
   </ItemGroup>

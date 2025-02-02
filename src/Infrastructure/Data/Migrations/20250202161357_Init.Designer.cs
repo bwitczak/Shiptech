@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+using NpgsqlTypes;
 using Shiptech.Infrastructure.Data;
 
 #nullable disable
@@ -12,7 +13,7 @@ using Shiptech.Infrastructure.Data;
 namespace Shiptech.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250103132159_Init")]
+    [Migration("20250202161357_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -157,6 +158,13 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("RO");
 
+                    b.Property<NpgsqlTsVector>("SearchVector")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("tsvector")
+                        .HasAnnotation("Npgsql:TsVectorConfig", "english")
+                        .HasAnnotation("Npgsql:TsVectorProperties", new[] { "Number", "Name" });
+
                     b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("varchar(4)")
@@ -167,6 +175,10 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnName("Weight");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SearchVector");
+
+                    NpgsqlIndexBuilderExtensions.HasMethod(b.HasIndex("SearchVector"), "GIN");
 
                     b.ToTable("AssortmentDictionary", (string)null);
                 });

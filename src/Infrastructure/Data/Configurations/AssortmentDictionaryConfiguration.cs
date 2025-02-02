@@ -78,5 +78,9 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
         builder.HasKey(x => x.Id);
         builder.HasMany(x => x.Assortments)
             .WithOne(x => x.AssortmentDictionary);
+
+        builder.HasGeneratedTsVectorColumn(x => x.SearchVector, "english", x => new { x.Number, x.Name })
+            .HasIndex(x => x.SearchVector)
+            .HasMethod("GIN");
     }
 }

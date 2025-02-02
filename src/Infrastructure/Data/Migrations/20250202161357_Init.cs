@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using NpgsqlTypes;
 
 #nullable disable
 
@@ -29,7 +30,10 @@ namespace Shiptech.Infrastructure.Data.Migrations
                     Length = table.Column<short>(type: "smallint", nullable: true),
                     RO = table.Column<string>(type: "varchar", nullable: true),
                     NS = table.Column<string>(type: "varchar", nullable: true),
-                    Comment = table.Column<string>(type: "varchar", nullable: true)
+                    Comment = table.Column<string>(type: "varchar", nullable: true),
+                    SearchVector = table.Column<NpgsqlTsVector>(type: "tsvector", nullable: false)
+                        .Annotation("Npgsql:TsVectorConfig", "english")
+                        .Annotation("Npgsql:TsVectorProperties", new[] { "Number", "Name" })
                 },
                 constraints: table =>
                 {
@@ -173,6 +177,12 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         principalTable: "Isos",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AssortmentDictionary_SearchVector",
+                table: "AssortmentDictionary",
+                column: "SearchVector")
+                .Annotation("Npgsql:IndexMethod", "GIN");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Assortments_AssortmentDictionaryId",
