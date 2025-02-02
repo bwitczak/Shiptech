@@ -10,7 +10,11 @@ import { Button } from 'primeng/button';
 import { House, LucideAngularModule, Plus } from 'lucide-angular';
 import { TableComponent } from '../../components/table/table.component';
 import { Column } from '../../shared/types';
-import { AssortmentClient, AssortmentDto } from '../../app/web-api-client';
+import {
+  AssortmentClient,
+  AssortmentDictionariesClient,
+  AssortmentDto,
+} from '../../app/web-api-client';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
 import { TopBarService } from '../../services/topBarService';
@@ -23,6 +27,7 @@ import {
 } from '@angular/forms';
 import { InputComponent } from '../../components/input/input.component';
 import { SelectComponent } from '../../components/select/select.component';
+import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
 
 @Component({
   selector: 'app-assortments',
@@ -36,6 +41,7 @@ import { SelectComponent } from '../../components/select/select.component';
     ReactiveFormsModule,
     InputComponent,
     SelectComponent,
+    AutocompleteComponent,
   ],
   templateUrl: './assortments.component.html',
   styleUrl: './assortments.component.scss',
@@ -75,13 +81,6 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
     '45° - 45°',
   ];
 
-  // TODO: Fetch from API
-  assortmentDictionaries: { number: string }[] = [
-    { number: 'RS8845' },
-    { number: 'RS8840' },
-    { number: 'KOS33291' },
-  ];
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
   visible: boolean;
@@ -106,6 +105,7 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private assortmentClient: AssortmentClient,
+    private assortmentDictionaryClient: AssortmentDictionariesClient,
     private errorHandlingService: ErrorHandlingService,
     private topBarService: TopBarService
   ) {}
@@ -149,5 +149,13 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleAddAssortmentDialog() {
     this.visible = true;
+  }
+
+  assortmentDictionarySearch() {
+    return (query: string) => {
+      return this.assortmentDictionaryClient.searchAssortmentDictionaries(
+        query
+      );
+    };
   }
 }

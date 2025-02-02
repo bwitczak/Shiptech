@@ -1,0 +1,17 @@
+<p-iftalabel [formGroup]="formGroup">
+  <p-autoComplete
+    (completeMethod)="onSearch($event)"
+    [(ngModel)]="value"
+    [formControlName]="formPropertyName"
+    [optionLabel]="optionLabel"
+    [suggestions]="items"
+    class="w-full"
+    inputId="{{ formPropertyName }}"
+  />
+  <label for="{{ formPropertyName }}">{{ label }}</label>
+  @if (formGroup.get(formPropertyName)?.errors?.['businessLogicError']) {
+    <small id="{{ formPropertyName }}-error" class="text-red-500">
+      {{ formGroup.get(formPropertyName)?.errors?.['businessLogicError'] }}
+    </small>
+  }
+</p-iftalabel>

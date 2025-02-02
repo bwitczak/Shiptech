@@ -17,12 +17,12 @@
     [formGroup]="assortmentForm"
     class="grid gap-4 mt-3"
   >
-    <app-select
+    <app-autocomplete
       [formGroup]="assortmentForm"
       [optionLabel]="'number'"
-      [options]="assortmentDictionaries"
+      [searchFunction]="assortmentDictionarySearch()"
       formPropertyName="standardNumber"
-      label="Nr standardu"
+      label="Nr standardu / Nazwa"
     />
     <app-input
       [formGroup]="assortmentForm"
