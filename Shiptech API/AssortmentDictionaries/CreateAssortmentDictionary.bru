@@ -1,0 +1,30 @@
+meta {
+  name: CreateAssortmentDictionary
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/AssortmentDictionaries/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "number": "",
+    "name": "",
+    "distinguishing": "",
+    "unit": "",
+    "amount": "",
+    "weight": "",
+    "material": "",
+    "kind": "",
+    "dN1": "",
+    "dN2": "",
+    "length": "",
+    "ro": "",
+    "ns": "",
+    "comment": ""
+  }
+}

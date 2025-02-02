@@ -1,0 +1,24 @@
+meta {
+  name: DeleteDrawing
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{baseUrl}}/api/Drawings/Delete/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

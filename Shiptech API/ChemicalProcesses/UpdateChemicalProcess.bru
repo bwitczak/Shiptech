@@ -1,0 +1,26 @@
+meta {
+  name: UpdateChemicalProcess
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/ChemicalProcesses/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "code": "",
+    "name": ""
+  }
+}

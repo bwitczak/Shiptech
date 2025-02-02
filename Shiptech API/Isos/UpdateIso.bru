@@ -1,0 +1,34 @@
+meta {
+  name: UpdateIso
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/Isos/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "number": "",
+    "nameplate": "",
+    "revision": "",
+    "system": "",
+    "class": "",
+    "atest": "",
+    "kzmNumber": "",
+    "kzmDate": "",
+    "drawingNumber": "",
+    "chemicalProcessName": ""
+  }
+}

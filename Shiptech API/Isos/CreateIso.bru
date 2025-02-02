@@ -1,0 +1,26 @@
+meta {
+  name: CreateIso
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/Isos/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "number": "",
+    "nameplate": "",
+    "revision": "",
+    "system": "",
+    "class": "",
+    "atest": "",
+    "kzmNumber": "",
+    "kzmDate": "",
+    "drawingNumber": "",
+    "chemicalProcessName": ""
+  }
+}

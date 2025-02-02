@@ -1,0 +1,35 @@
+meta {
+  name: CreateAssortment
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/Assortment/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "position": "",
+    "prefabricationQuantity": "",
+    "prefabricationLength": "",
+    "prefabricationWeight": "",
+    "assemblyQuantity": "",
+    "assemblyLength": "",
+    "assemblyWeight": "",
+    "pg": "",
+    "valveNumber": "",
+    "cutAngle": "",
+    "comment": "",
+    "isoId": {
+      "random": "",
+      "time": ""
+    },
+    "assortmentDictionaryId": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

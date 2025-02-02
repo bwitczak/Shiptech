@@ -1,0 +1,38 @@
+meta {
+  name: UpdateAssortmentDictionary
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/AssortmentDictionaries/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "number": "",
+    "name": "",
+    "distinguishing": "",
+    "unit": "",
+    "amount": "",
+    "weight": "",
+    "material": "",
+    "kind": "",
+    "dN1": "",
+    "dN2": "",
+    "length": "",
+    "ro": "",
+    "ns": "",
+    "comment": ""
+  }
+}

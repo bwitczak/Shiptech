@@ -1,0 +1,25 @@
+meta {
+  name: UpdateShipowner
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/Shipowners/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "orderer": ""
+  }
+}

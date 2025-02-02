@@ -1,0 +1,35 @@
+meta {
+  name: UpdateDrawing
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/Drawings/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "number": "",
+    "name": "",
+    "drawingRevision": "",
+    "lot": "",
+    "block": "",
+    "section": [],
+    "stage": "",
+    "shipId": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

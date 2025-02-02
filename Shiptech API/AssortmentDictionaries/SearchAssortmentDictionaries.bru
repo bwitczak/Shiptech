@@ -1,0 +1,15 @@
+meta {
+  name: SearchAssortmentDictionaries
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/AssortmentDictionaries/Search
+  body: none
+  auth: none
+}
+
+params:query {
+  SearchString: 
+}

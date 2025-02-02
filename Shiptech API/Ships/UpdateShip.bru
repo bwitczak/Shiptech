@@ -1,0 +1,29 @@
+meta {
+  name: UpdateShip
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/Ships/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "code": "",
+    "shipownerId": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

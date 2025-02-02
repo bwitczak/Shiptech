@@ -1,0 +1,24 @@
+meta {
+  name: CreateDrawing
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/Drawings/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "number": "",
+    "name": "",
+    "revision": "",
+    "lot": "",
+    "block": "",
+    "section": [],
+    "stage": "",
+    "shipCode": ""
+  }
+}

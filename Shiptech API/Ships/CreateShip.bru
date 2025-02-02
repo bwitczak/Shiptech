@@ -1,0 +1,21 @@
+meta {
+  name: CreateShip
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/Ships/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "",
+    "shipownerId": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

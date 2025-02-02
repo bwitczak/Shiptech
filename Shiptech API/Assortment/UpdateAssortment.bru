@@ -1,0 +1,43 @@
+meta {
+  name: UpdateAssortment
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/api/Assortment/Update/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    },
+    "position": "",
+    "prefabricationQuantity": "",
+    "prefabricationLength": "",
+    "prefabricationWeight": "",
+    "assemblyQuantity": "",
+    "assemblyLength": "",
+    "assemblyWeight": "",
+    "pg": "",
+    "valveNumber": "",
+    "cutAngle": "",
+    "comment": "",
+    "isoId": {
+      "random": "",
+      "time": ""
+    },
+    "assortmentDictionaryId": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

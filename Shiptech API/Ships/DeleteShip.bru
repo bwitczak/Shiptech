@@ -1,0 +1,24 @@
+meta {
+  name: DeleteShip
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/api/Ships/Delete/:id
+  body: json
+  auth: none
+}
+
+params:path {
+  id: 
+}
+
+body:json {
+  {
+    "id": {
+      "random": "",
+      "time": ""
+    }
+  }
+}

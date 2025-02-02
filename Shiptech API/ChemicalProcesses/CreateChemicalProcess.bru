@@ -1,0 +1,18 @@
+meta {
+  name: CreateChemicalProcess
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/ChemicalProcesses/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "",
+    "name": ""
+  }
+}

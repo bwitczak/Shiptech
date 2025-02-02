@@ -1,0 +1,17 @@
+meta {
+  name: CreateShipowner
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/Shipowners/Create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "orderer": ""
+  }
+}
