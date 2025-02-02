@@ -4,7 +4,7 @@ using Shiptech.Application.Common.Models.Shipowner;
 using Shiptech.Application.Shipowners.Commands.CreateShip;
 using Shiptech.Application.Shipowners.Commands.DeleteShip;
 using Shiptech.Application.Shipowners.Commands.UpdateShip;
-using Shiptech.Application.Shipowners.Queries.GetAllShips;
+using Shiptech.Application.Shipowners.Queries.GetAllShipowners;
 using Shiptech.Web.Infrastructure;
 
 namespace Shiptech.Web.Endpoints;

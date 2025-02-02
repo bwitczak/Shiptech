@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Shiptech.Application.Common.Interfaces.Database;
 using Shiptech.Application.Common.Models.Shipowner;
 
-namespace Shiptech.Application.Shipowners.Queries.GetAllShips;
+namespace Shiptech.Application.Shipowners.Queries.GetAllShipowners;
 
 public record GetAllShipownersQuery : IRequest<IEnumerable<ShipownerDto>>
 {
