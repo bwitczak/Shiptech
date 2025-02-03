@@ -22,4 +22,5 @@ export class InputComponent {
   @Input() label: string;
   @Input() formGroup: FormGroup;
   @Input() formPropertyName: string;
+  @Input() value: string | number | undefined;
 }

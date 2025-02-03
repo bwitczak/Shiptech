@@ -9,7 +9,6 @@
 <app-dialog
   (confirm)="addNewAssortment()"
   [(visible)]="visible"
-  [styles]="{ width: '35rem' }"
   header="Dodaj asortyment"
 >
   <form
@@ -17,74 +16,123 @@
     [formGroup]="assortmentForm"
     class="grid gap-4 mt-3"
   >
-    <app-autocomplete
-      [formGroup]="assortmentForm"
-      [optionLabel]="'number'"
-      [searchFunction]="assortmentDictionarySearch()"
-      formPropertyName="standardNumber"
-      label="Nr standardu / Nazwa"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="position"
-      label="Pozycja"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="prefabricationQuantity"
-      label="Ilość (prefabrykacja)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="prefabricationLength"
-      label="Długość (prefabrykacja)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="prefabricationWeight"
-      label="Waga (prefabrykacja)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="assemblyQuantity"
-      label="Ilość (montaż)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="assemblyLength"
-      label="Długość (montaż)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="assemblyWeight"
-      label="Waga (montaż)"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="assemblyWeight"
-      label="Waga (montaż)"
-    />
-    <app-select
-      [formGroup]="assortmentForm"
-      [options]="['P', 'G']"
-      formPropertyName="pg"
-      label="P/G"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="valveNumber"
-      label="Numer zaworu"
-    />
-    <app-select
-      [formGroup]="assortmentForm"
-      [options]="cutAngleOptions"
-      formPropertyName="cutAngle"
-      label="Kąt cięcia"
-    />
-    <app-input
-      [formGroup]="assortmentForm"
-      formPropertyName="comment"
-      label="Komentarz"
-    />
+    <div class="grid justify-items-center gap-2">
+      <app-autocomplete
+        [formGroup]="assortmentForm"
+        [optionLabel]="'number'"
+        [searchFunction]="assortmentDictionarySearch()"
+        formPropertyName="standardNumber"
+        label="Nr standardu / Nazwa"
+      />
+      <div class="grid grid-cols-3 gap-2 w-full">
+        <div class="flex gap-2">
+          <span class="block font-bold">Nr standardu</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.number
+          }}</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">Nazwa</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.name
+          }}</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">Wyróżnik</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.distinguishing
+          }}</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">DN</span>
+          <span class="block"
+            >DN1: {{ assortmentForm.value.standardNumber?.dN1 }} DN2:
+            {{ assortmentForm.value.standardNumber?.dN2 }}</span
+          >
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">j.m.</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.unit
+          }}</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">Materiał</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.material
+          }}</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="block font-bold">R/O</span>
+          <span class="block">{{
+            assortmentForm.value.standardNumber?.ro
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-2">
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="position"
+        label="Pozycja"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="prefabricationQuantity"
+        label="Ilość (prefabrykacja)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="prefabricationLength"
+        label="Długość (prefabrykacja)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="prefabricationWeight"
+        label="Waga (prefabrykacja)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="assemblyQuantity"
+        label="Ilość (montaż)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="assemblyLength"
+        label="Długość (montaż)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="assemblyWeight"
+        label="Waga (montaż)"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="assemblyWeight"
+        label="Waga (montaż)"
+      />
+      <app-select
+        [formGroup]="assortmentForm"
+        [options]="['P', 'G']"
+        formPropertyName="pg"
+        label="P/G"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="valveNumber"
+        label="Numer zaworu"
+      />
+      <app-select
+        [formGroup]="assortmentForm"
+        [options]="cutAngleOptions"
+        formPropertyName="cutAngle"
+        label="Kąt cięcia"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="comment"
+        label="Komentarz"
+      />
+    </div>
   </form>
 </app-dialog>
