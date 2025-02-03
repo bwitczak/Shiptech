@@ -14,6 +14,7 @@ import {
   AssortmentClient,
   AssortmentDictionariesClient,
   AssortmentDto,
+  IAssortmentDictionaryDto,
 } from '../../app/web-api-client';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorHandlingService } from '../../forms/errorHandlingService';
@@ -28,6 +29,21 @@ import {
 import { InputComponent } from '../../components/input/input.component';
 import { SelectComponent } from '../../components/select/select.component';
 import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
+
+interface AssortmentForm {
+  standardNumber: FormControl<IAssortmentDictionaryDto | null>;
+  position: FormControl<string>;
+  prefabricationQuantity: FormControl<number>;
+  prefabricationLength: FormControl<number>;
+  prefabricationWeight: FormControl<number>;
+  assemblyQuantity: FormControl<number>;
+  assemblyLength: FormControl<number>;
+  assemblyWeight: FormControl<number>;
+  pg: FormControl<string>;
+  valveNumber?: FormControl<string | undefined>;
+  cutAngle?: FormControl<string | undefined>;
+  comment?: FormControl<string | undefined>;
+}
 
 @Component({
   selector: 'app-assortments',
@@ -84,19 +100,19 @@ export class AssortmentsComponent implements OnInit, AfterViewInit, OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @ViewChild('topBarContent') topBarContent!: TemplateRef<any>;
   visible: boolean;
-  assortmentForm = new FormGroup({
-    standardNumber: new FormControl(''),
-    position: new FormControl(''),
-    prefabricationQuantity: new FormControl(''),
-    prefabricationLength: new FormControl(''),
-    prefabricationWeight: new FormControl(''),
-    assemblyQuantity: new FormControl(''),
-    assemblyLength: new FormControl(''),
-    assemblyWeight: new FormControl(''),
-    pg: new FormControl(''),
-    valveNumber: new FormControl(''),
-    cutAngle: new FormControl(''),
-    comment: new FormControl(''),
+  assortmentForm = new FormGroup<AssortmentForm>({
+    standardNumber: new FormControl(null),
+    position: new FormControl('', { nonNullable: true }),
+    prefabricationQuantity: new FormControl(0, { nonNullable: true }),
+    prefabricationLength: new FormControl(0, { nonNullable: true }),
+    prefabricationWeight: new FormControl(0, { nonNullable: true }),
+    assemblyQuantity: new FormControl(0, { nonNullable: true }),
+    assemblyLength: new FormControl(0, { nonNullable: true }),
+    assemblyWeight: new FormControl(0, { nonNullable: true }),
+    pg: new FormControl('', { nonNullable: true }),
+    valveNumber: new FormControl('', { nonNullable: true }),
+    cutAngle: new FormControl('', { nonNullable: true }),
+    comment: new FormControl('', { nonNullable: true }),
   });
 
   // TODO: Check is could be not any type
