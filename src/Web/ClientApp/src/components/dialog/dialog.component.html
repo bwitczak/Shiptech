@@ -6,12 +6,14 @@
 >
   <ng-content />
   <ng-template pTemplate="footer">
-    <p-button
-      (onClick)="handleConfirm()"
-      label="Dodaj"
-      severity="primary"
-      type="submit"
-    />
-    <p-button (click)="handleCancel()" label="Anuluj" severity="secondary" />
+    <div class="flex gap-2 pt-4">
+      <p-button
+        (onClick)="handleConfirm()"
+        label="Dodaj"
+        severity="primary"
+        type="submit"
+      />
+      <p-button (click)="handleCancel()" label="Anuluj" severity="secondary" />
+    </div>
   </ng-template>
 </p-dialog>
