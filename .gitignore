@@ -12,6 +12,8 @@
 *.sln.docstates
 /src/Web/wwwroot/api/specification.json
 /src/Infrastructure/Data/Scripts
+nix*
+/.direnv
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
