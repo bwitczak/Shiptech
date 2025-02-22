@@ -17,7 +17,7 @@
   [styles]="{ width: '35rem' }"
   header="Dodaj ISO"
 >
-  <form (ngSubmit)="addNewIso()" [formGroup]="isoForm" class="grid gap-4 mt-3">
+  <form (ngSubmit)="addNewIso()" [formGroup]="isoForm" class="mt-3 grid gap-4">
     <app-input [formGroup]="isoForm" formPropertyName="number" label="Numer" />
     <app-input
       [formGroup]="isoForm"

@@ -1,7 +1,7 @@
-<div class="flex justify-between items-center">
+<div class="flex items-center justify-between">
   <app-sidebar />
 
-  <div class="flex gap-1 items-center p-3">
+  <div class="flex items-center gap-1 p-3">
     @for (breadcrumbItem of breadcrumbItems(); track breadcrumbItem.label) {
       @if (breadcrumbItem.icon) {
         <a [routerLink]="breadcrumbItem.link" class="p-menuitem-link">
@@ -10,7 +10,7 @@
         <i-lucide [img]="ChevronRight" />
       } @else if (breadcrumbItem.label && breadcrumbItem.link) {
         <a [routerLink]="breadcrumbItem.link" class="p-menuitem-link">
-          <span class="text-primary font-semibold">{{
+          <span class="font-semibold text-primary">{{
             breadcrumbItem.label
           }}</span>
         </a>

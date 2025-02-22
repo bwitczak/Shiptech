@@ -15,7 +15,7 @@
   <form
     (ngSubmit)="addNewAssortment()"
     [formGroup]="assortmentForm"
-    class="grid gap-4 mt-3"
+    class="mt-3 grid gap-4"
   >
     <div class="grid justify-items-center gap-2">
       <app-autocomplete
@@ -25,7 +25,7 @@
         formPropertyName="standardNumber"
         label="Nr standardu / Nazwa"
       />
-      <div class="grid grid-cols-3 gap-2 w-full">
+      <div class="grid w-full grid-cols-3 gap-2">
         <div class="flex gap-2">
           <span class="block font-bold">Nr standardu</span>
           <span class="block">{{

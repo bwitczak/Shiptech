@@ -1,5 +1,4 @@
 <p-table
-  #tableRef
   [columns]="cols"
   [globalFilterFields]="filterFields"
   [paginator]="true"
@@ -7,6 +6,7 @@
   [rows]="25"
   [scrollable]="true"
   [value]="data"
+  #tableRef
   currentPageReportTemplate="{first} do {last} z {totalRecords} wierszy"
   paginatorPosition="top"
   scrollHeight="calc(100vh - 180px)"
@@ -24,8 +24,8 @@
         >
           {{ col.header }}
           <p-columnFilter
-            type="text"
             [field]="col.subfield ? col.field + '.' + col.subfield : col.field"
+            type="text"
             display="menu"
           />
         </th>
