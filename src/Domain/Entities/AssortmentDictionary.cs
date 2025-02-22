@@ -16,7 +16,7 @@ public class AssortmentDictionary : BaseEntity
     public string? DN1 { get; set; }
     public string? DN2 { get; set; }
     public ushort? Length { get; set; }
-    public string? RO { get; set; }
+    public string? RA { get; set; }
     public string? NS { get; set; }
     public string? Comment { get; set; }
 

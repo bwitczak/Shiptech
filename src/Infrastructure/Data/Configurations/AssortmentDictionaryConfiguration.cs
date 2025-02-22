@@ -62,8 +62,8 @@ public class AssortmentDictionaryConfiguration : IEntityTypeConfiguration<Assort
             .HasColumnName("Length")
             .HasColumnType("smallint");
 
-        builder.Property(x => x.RO)
-            .HasColumnName("RO")
+        builder.Property(x => x.RA)
+            .HasColumnName("RA")
             .HasColumnType("varchar");
 
         builder.Property(x => x.NS)

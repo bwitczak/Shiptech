@@ -16,7 +16,7 @@ public class AssortmentDictionaryDto
     public string? DN1 { get; init; }
     public string? DN2 { get; init; }
     public ushort? Length { get; init; }
-    public string? RO { get; init; }
+    public string? RA { get; init; }
     public string? NS { get; init; }
     public string? Comment { get; init; }
 

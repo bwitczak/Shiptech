@@ -151,9 +151,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<string>("RO")
+                    b.Property<string>("RA")
                         .HasColumnType("varchar")
-                        .HasColumnName("RO");
+                        .HasColumnName("RA");
 
                     b.Property<NpgsqlTsVector>("SearchVector")
                         .IsRequired()

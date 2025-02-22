@@ -28,7 +28,7 @@ namespace Shiptech.Infrastructure.Data.Migrations
                     DN1 = table.Column<string>(type: "varchar", nullable: true),
                     DN2 = table.Column<string>(type: "varchar", nullable: true),
                     Length = table.Column<short>(type: "smallint", nullable: true),
-                    RO = table.Column<string>(type: "varchar", nullable: true),
+                    RA = table.Column<string>(type: "varchar", nullable: true),
                     NS = table.Column<string>(type: "varchar", nullable: true),
                     Comment = table.Column<string>(type: "varchar", nullable: true),
                     SearchVector = table.Column<NpgsqlTsVector>(type: "tsvector", nullable: false)

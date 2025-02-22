@@ -13,7 +13,7 @@ using Shiptech.Infrastructure.Data;
 namespace Shiptech.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250202161357_Init")]
+    [Migration("20250222181136_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -154,9 +154,9 @@ namespace Shiptech.Infrastructure.Data.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("Number");
 
-                    b.Property<string>("RO")
+                    b.Property<string>("RA")
                         .HasColumnType("varchar")
-                        .HasColumnName("RO");
+                        .HasColumnName("RA");
 
                     b.Property<NpgsqlTsVector>("SearchVector")
                         .IsRequired()

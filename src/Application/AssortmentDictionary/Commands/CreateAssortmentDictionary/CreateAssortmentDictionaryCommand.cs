@@ -19,7 +19,7 @@ public record CreateAssortmentDictionaryCommand(
     string? DN1,
     string? DN2,
     ushort? Length,
-    string? RO,
+    string? RA,
     string? NS,
     string? Comment) : IRequest
 {
@@ -145,12 +145,12 @@ public class CreateAssortmentDictionaryCommandValidator : AbstractValidator<Crea
                 .WithMessage(x => $"Długość {x.Length}{x.Unit} jest < 0!");
         });
 
-        When(x => x.RO is not null, () =>
+        When(x => x.RA is not null, () =>
         {
-            RuleFor(x => x.RO)
-                .Must(x => x is RO.PIPE or RO.ARMATURE)
+            RuleFor(x => x.RA)
+                .Must(x => x is RA.PIPE or RA.ARMATURE)
                 .WithErrorCode("CREATE_ASSORTMENT_DICTIONARY_400_RO")
-                .WithMessage(x => "RO musi mieć wartość Rura lub Armatura!");
+                .WithMessage(x => "RA musi mieć wartość Rura lub Armatura!");
         });
 
         When(x => x.NS is not null, () =>
@@ -187,13 +187,13 @@ public class CreateAssortmentDictionaryCommandHandler : IRequestHandler<CreateAs
     public async Task Handle(CreateAssortmentDictionaryCommand request, CancellationToken cancellationToken)
     {
         (string? number, string? name, string? distinguishing, string? unit, double? amount, double? weight,
-                string? material, string? kind, string? dn1, string? dn2, ushort? length, string? ro, string? ns,
+                string? material, string? kind, string? dn1, string? dn2, ushort? length, string? ra, string? ns,
                 string? comment) =
             request;
 
         Domain.Entities.AssortmentDictionary? assortmentDictionary = _factory.Create(Ulid.NewUlid(), number, name,
             distinguishing, unit, amount, weight, material, kind,
-            dn1, dn2, length, ro, ns, comment);
+            dn1, dn2, length, ra, ns, comment);
 
         await _context.AssortmentDictionaries.AddAsync(assortmentDictionary, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
