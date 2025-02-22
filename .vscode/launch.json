@@ -1,0 +1,21 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C#: Shiptech Web (Development)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "Ensure Nix Shell",
+      "program": "${workspaceFolder}/src/Web/bin/Debug/net8.0/Shiptech.Web.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Web",
+      "env": {
+        "DOTNET_ROOT": "${workspaceFolder}/.direnv/nix-profile",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  ]
+}

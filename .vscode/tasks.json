@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Ensure Nix Shell",
+      "type": "shell",
+      "command": "direnv allow && direnv exec . dotnet build",
+      "problemMatcher": []
+    }
+  ]
+}
