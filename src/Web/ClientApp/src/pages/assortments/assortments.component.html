@@ -76,6 +76,23 @@
         formPropertyName="position"
         label="Pozycja"
       />
+      <app-select
+        [formGroup]="assortmentForm"
+        [options]="cutAngleOptions"
+        formPropertyName="cutAngle"
+        label="Kąt cięcia"
+      />
+      <app-select
+        [formGroup]="assortmentForm"
+        [options]="['P', 'G']"
+        formPropertyName="pg"
+        label="P/G"
+      />
+      <app-input
+        [formGroup]="assortmentForm"
+        formPropertyName="valveNumber"
+        label="Numer zaworu"
+      />
       <app-input
         [formGroup]="assortmentForm"
         formPropertyName="prefabricationQuantity"
@@ -110,23 +127,6 @@
         [formGroup]="assortmentForm"
         formPropertyName="assemblyWeight"
         label="Waga (montaż)"
-      />
-      <app-select
-        [formGroup]="assortmentForm"
-        [options]="['P', 'G']"
-        formPropertyName="pg"
-        label="P/G"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="valveNumber"
-        label="Numer zaworu"
-      />
-      <app-select
-        [formGroup]="assortmentForm"
-        [options]="cutAngleOptions"
-        formPropertyName="cutAngle"
-        label="Kąt cięcia"
       />
       <app-input
         [formGroup]="assortmentForm"
