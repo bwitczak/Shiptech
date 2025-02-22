@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -6,29 +7,29 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { Button } from 'primeng/button';
-import { House, LucideAngularModule, Plus } from 'lucide-angular';
-import { TableComponent } from '../../components/table/table.component';
-import { Column } from '../../shared/types';
-import {
-  AssortmentClient,
-  AssortmentDictionariesClient,
-  AssortmentDto,
-  IAssortmentDictionaryDto,
-} from '../../app/web-api-client';
-import { ActivatedRoute } from '@angular/router';
-import { ErrorHandlingService } from '../../forms/errorHandlingService';
-import { TopBarService } from '../../services/topBarService';
-import { DialogComponent } from '../../components/dialog/dialog.component';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { House, LucideAngularModule, Plus } from 'lucide-angular';
+import { Button } from 'primeng/button';
+import {
+  AssortmentClient,
+  AssortmentDictionariesClient,
+  AssortmentDto,
+  IAssortmentDictionaryDto,
+} from '../../app/web-api-client';
+import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 import { InputComponent } from '../../components/input/input.component';
 import { SelectComponent } from '../../components/select/select.component';
-import { AutocompleteComponent } from '../../components/autocomplete/autocomplete.component';
+import { TableComponent } from '../../components/table/table.component';
+import { ErrorHandlingService } from '../../forms/errorHandlingService';
+import { TopBarService } from '../../services/topBarService';
+import { Column } from '../../shared/types';
 
 interface AssortmentForm {
   standardNumber: FormControl<IAssortmentDictionaryDto | null>;
@@ -58,6 +59,7 @@ interface AssortmentForm {
     InputComponent,
     SelectComponent,
     AutocompleteComponent,
+    CommonModule,
   ],
   templateUrl: './assortments.component.html',
   styleUrl: './assortments.component.scss',

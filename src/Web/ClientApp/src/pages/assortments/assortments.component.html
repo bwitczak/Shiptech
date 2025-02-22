@@ -72,68 +72,75 @@
       </div>
     </div>
     <div class="grid grid-cols-3 gap-2">
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="position"
-        label="Pozycja"
-      />
-      <app-select
-        [formGroup]="assortmentForm"
-        [options]="cutAngleOptions"
-        formPropertyName="cutAngle"
-        label="Kąt cięcia"
-      />
-      <app-select
-        [formGroup]="assortmentForm"
-        [options]="['P', 'G']"
-        formPropertyName="pg"
-        label="P/G"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="valveNumber"
-        label="Numer zaworu"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="prefabricationQuantity"
-        label="Ilość (prefabrykacja)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="prefabricationLength"
-        label="Długość (prefabrykacja)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="prefabricationWeight"
-        label="Waga (prefabrykacja)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="assemblyQuantity"
-        label="Ilość (montaż)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="assemblyLength"
-        label="Długość (montaż)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="assemblyWeight"
-        label="Waga (montaż)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="assemblyWeight"
-        label="Waga (montaż)"
-      />
-      <app-input
-        [formGroup]="assortmentForm"
-        formPropertyName="comment"
-        label="Komentarz"
-      />
+      <ng-container [ngSwitch]="assortmentForm.value.standardNumber?.ra">
+        <ng-container *ngSwitchCase="'rura'">
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="position"
+            label="Pozycja"
+          />
+          <app-select
+            [formGroup]="assortmentForm"
+            [options]="cutAngleOptions"
+            formPropertyName="cutAngle"
+            label="Kąt cięcia"
+          />
+          <app-select
+            [formGroup]="assortmentForm"
+            [options]="['P', 'G']"
+            formPropertyName="pg"
+            label="P/G"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="valveNumber"
+            label="Numer zaworu"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="prefabricationQuantity"
+            label="Ilość (prefabrykacja)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="prefabricationLength"
+            label="Długość (prefabrykacja)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="prefabricationWeight"
+            label="Waga (prefabrykacja)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="assemblyQuantity"
+            label="Ilość (montaż)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="assemblyLength"
+            label="Długość (montaż)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="assemblyWeight"
+            label="Waga (montaż)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="assemblyWeight"
+            label="Waga (montaż)"
+          />
+          <app-input
+            [formGroup]="assortmentForm"
+            formPropertyName="comment"
+            label="Komentarz"
+          />
+        </ng-container>
+        <ng-container *ngSwitchCase="'armatura'">
+          <span>Armatura</span>
+        </ng-container>
+      </ng-container>
     </div>
   </form>
 </app-dialog>
