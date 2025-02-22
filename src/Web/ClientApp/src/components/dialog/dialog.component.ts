@@ -5,8 +5,8 @@ import {
   Output,
   WritableSignal,
 } from '@angular/core';
-import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-dialog',
@@ -21,6 +21,7 @@ export class DialogComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() styles: any;
   @Input() header: string;
+  @Input() fullscreen: boolean;
   @Output() confirm = new EventEmitter<void>();
   @Output() visibleChange = new EventEmitter<boolean>();
 
